@@ -1,11 +1,19 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
 import axios from "axios";
 
 function App() {
   const [state, setState] = useState("apple");
+
+  useEffect(() => {
+    console.log("effect");
+  }, []);
+
+  let fetchData = () => {
+    //axios.get...
+  };
 
   return (
     <div className="App">
@@ -18,6 +26,7 @@ function App() {
 
 export default App;
 
+/*
 let obj = {
   userName: "mattwaelder",
   userID: 1,
@@ -33,5 +42,6 @@ let obj = {
     ],
   },
 };
+*/
 
 //git push -u origin master
