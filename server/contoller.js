@@ -19,3 +19,9 @@ module.exports.post = (req, res) => {
     )
     .catch((err) => console.log(err));
 };
+
+// schema
+// owner: String,
+// name: String,
+// weight: Number,
+// created_at: Date,

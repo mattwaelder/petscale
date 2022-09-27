@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://localhost:27017/jsmeetup";
+const mongoURI = "mongodb://localhost:27017/petscaledb";
 
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
