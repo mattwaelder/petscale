@@ -1,11 +1,11 @@
 const model = require("./model.js");
 
-module.exports.get = (req, res) => {
+module.exports.getByUser = (req, res) => {
   console.log("c get all");
   model
-    .getAll(req.body)
+    .getAllByUser(req)
     .exec()
-    .then((data) => console.log(data))
+    .then((data) => res.send(data))
     .catch((err) => console.log(err));
 };
 
@@ -15,13 +15,7 @@ module.exports.post = (req, res) => {
     .create(req.body)
     .then((res) =>
       /*sendStatus(201)*/
-      console.log(res)
+      console.log("db response", res)
     )
     .catch((err) => console.log(err));
 };
-
-// schema
-// owner: String,
-// name: String,
-// weight: Number,
-// created_at: Date,

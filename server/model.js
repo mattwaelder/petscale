@@ -1,9 +1,9 @@
 // const PetData = require("../database/PetData.js");
 const PetData = require("../database");
 
-module.exports.getAll = (req) => {
+module.exports.getAllByUser = (req) => {
   console.log("m get all");
-  return PetData.find({});
+  return PetData.find({ userName: req }).sort({ created_at: 1 });
 };
 
 module.exports.create = (req) => {

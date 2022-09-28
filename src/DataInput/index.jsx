@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./DataInput.css";
 
 const DataInput = () => {
-  return <h2>data input form</h2>;
+  return (
+    <div className="input_form_container">
+      <h2>form</h2>
+    </div>
+  );
 };
 
 export default DataInput;

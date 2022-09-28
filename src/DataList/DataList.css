@@ -1,0 +1,9 @@
+.data_list_container {
+  width: 30vw;
+  background: var(--color-glass-transparency-lighter);
+  margin: 2em;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
