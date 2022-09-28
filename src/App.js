@@ -10,7 +10,7 @@ const API = `http://localhost:5050`;
 
 function App() {
   const [user, setUser] = useState("mattwaelder");
-  const [weightData, setWeightData] = useState({});
+  const [weightData, setWeightData] = useState([]);
 
   console.log(user);
 
@@ -23,13 +23,16 @@ function App() {
     console.log("fetchdata", user);
     axios
       .get(`${API}/users/?user=${user}`)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data.data);
+        setWeightData(data.data);
+      })
       .catch((err) => console.log(err));
   };
 
   return (
     <div className="App">
-      <DataList />
+      <DataList data={weightData} />
       <div className="graph_input_container">
         <Graph />
         <DataInput />

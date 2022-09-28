@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "./DataList.css";
+import ListItem from "./ListItem";
 
-const DataList = () => {
+const DataList = ({ data }) => {
+  console.log("list data", data);
   return (
     <div className="data_list_container">
-      <h2>list of weights</h2>
+      <h2>Past Weigh Ins</h2>
+      {data.length > 0 && data.length
+        ? data.map((entry) => <ListItem data={entry} />)
+        : null}
     </div>
   );
 };
