@@ -1,4 +1,5 @@
-const PetData = require("../database/PetData.js");
+// const PetData = require("../database/PetData.js");
+const PetData = require("../database");
 
 module.exports.getAll = (req) => {
   console.log("m get all");

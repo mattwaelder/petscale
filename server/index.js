@@ -1,9 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
 const path = require("path");
 const controller = require("./controller");
-
-const database = require("./db.js");
 
 const app = express();
 
@@ -23,7 +22,7 @@ app.post("/user", (req, res) => {
 
 //////////////////////////////////////////////
 
-let PORT = process.env.port || 3456;
+let PORT = process.env.PORT || 3456;
 
 app.listen(PORT);
 console.log(`Listening at port: ${PORT}`);

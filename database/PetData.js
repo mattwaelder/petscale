@@ -1,4 +1,8 @@
-const mongoose = require("mongoose");
+//
+//got this to work in the index.js of db (with connection)
+//
+
+// const mongoose = require("mongoose");
 
 // const petSchema = new mongoose.Schema({
 //   petName: {
@@ -14,17 +18,17 @@ const mongoose = require("mongoose");
 //   children: [petSchema],
 // });
 
-const petSchema = new mongoose.Schema({
-  owner: String,
-  name: String,
-  weight: Number,
-  created_at: Date,
-});
+// const petSchema = new mongoose.Schema({
+//   owner: String,
+//   name: String,
+//   weight: Number,
+//   created_at: Date,
+// });
 
 // const PetOwner = mongoose.model("PetOwner", petOwnerSchema);
 
-const PetData = mongoose.model("PetData", petSchema);
+// const PetData = mongoose.model("PetData", petSchema);
 
 // module.exports = PetOwner;
 
-module.exports = PetData;
+// module.exports = PetData;

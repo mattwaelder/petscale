@@ -1,8 +1,6 @@
 const fs = require("fs");
 const { parse } = require("csv-parse");
-const PetData = require("./PetData.js");
-
-var exData = [];
+const PetData = require("./index.js");
 
 // fs.readFile(
 //   "/Users/mattwaelder/hackreactor/mvp/petscale/csv/weighty bois - Sheet1.csv",
@@ -15,6 +13,8 @@ var exData = [];
 //     }
 //   }
 // );
+
+var exData = [];
 
 fs.createReadStream(
   "/Users/mattwaelder/hackreactor/mvp/petscale/csv/weighty bois.csv"
@@ -34,8 +34,30 @@ fs.createReadStream(
       weight: row[2],
       created_at: new Date(row[0]),
     };
+    exData.push(entryC, entryB);
+    // exData.push(entryC);
     // console.log(entryC);
-    PetData.insertMany([entryC, entryB]);
+    // PetData.insertMany([
+    //   {
+    //     owner: "mattwaelder",
+    //     name: "cowpig",
+    //     weight: row[1],
+    //     created_at: new Date(row[0]),
+    //   },
+    //   {
+    //     owner: "mattwaelder",
+    //     name: "bagel",
+    //     weight: row[2],
+    //     created_at: new Date(row[0]),
+    //   },
+    // ]);
+    // PetData.insert(entryC);
+    // PetData.insert(entryB);
+  })
+  .on("end", () => {
+    for (let entry of exData) {
+      PetData.create(entry)
+        .then(() => console.log("added"))
+        .catch((err) => console.log(err));
+    }
   });
-
-console.log(exData);

@@ -1,4 +1,4 @@
-const model = require("/model.js");
+const model = require("./model.js");
 
 module.exports.get = (req, res) => {
   console.log("c get all");
