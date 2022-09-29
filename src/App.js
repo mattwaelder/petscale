@@ -4,6 +4,8 @@ import DataInput from "./DataInput";
 import DataList from "./DataList";
 import Graph from "./Graph";
 import axios from "axios";
+import utils from "./utilities.js";
+import LineChart from "./LineChart";
 // import { API } from "./utilities.js";
 
 const API = `http://localhost:5050`;
@@ -24,7 +26,7 @@ function App() {
     axios
       .get(`${API}/users/?user=${user}`)
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         setWeightData(data.data);
       })
       .catch((err) => console.log(err));
@@ -34,7 +36,32 @@ function App() {
     <div className="App">
       <DataList data={weightData} />
       <div className="graph_input_container">
-        <Graph />
+        {weightData.length && weightData.length > 0 ? (
+          <LineChart
+            cowpig={weightData
+              .map((d) =>
+                d.name === "cowpig"
+                  ? {
+                      x: utils.getFormattedDateGraph(d.created_at),
+                      y: d.weight,
+                    }
+                  : null
+              )
+              .filter((x) => x)
+              .reverse()}
+            bagel={weightData
+              .map((d) =>
+                d.name === "bagel"
+                  ? {
+                      x: utils.getFormattedDateGraph(d.created_at),
+                      y: d.weight,
+                    }
+                  : null
+              )
+              .filter((x) => x)
+              .reverse()}
+          />
+        ) : null}
         <DataInput />
       </div>
     </div>

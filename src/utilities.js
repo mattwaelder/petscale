@@ -18,6 +18,20 @@ const utils = {
     let formattedDate = date.split(", ").slice(1).join(", ");
     return formattedDate;
   },
+
+  getFormattedDateGraph: (messyDate) => {
+    let dateOptions = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      weekday: "long",
+    };
+    //date constructor to apply dateOptions
+    let date = new Date(messyDate).toLocaleDateString("en-US", dateOptions);
+    //removing weekday from date
+    let formattedDate = date.split(", ").slice(1).join(", ");
+    return formattedDate;
+  },
 };
 
 export default utils;

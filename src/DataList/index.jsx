@@ -3,7 +3,6 @@ import "./DataList.css";
 import ListItem from "./ListItem";
 
 const DataList = ({ data }) => {
-  console.log("list data", data);
   return (
     <div className="data_list_container">
       <h2>Past Weigh Ins</h2>

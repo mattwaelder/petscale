@@ -3,7 +3,6 @@ import "./ListItem.css";
 import utils from "../../utilities.js";
 
 const ListItem = ({ data }) => {
-  console.log("item", data);
   return (
     <div className="list_card">
       <div id="card_name">
