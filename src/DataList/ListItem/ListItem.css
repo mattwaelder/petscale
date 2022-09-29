@@ -1,9 +1,6 @@
 .list_card {
+  min-height: 6em;
   width: 90%;
-  height: 200px;
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: space-between; */
   background: var(--color-glass-transparency-lighter);
   margin: 0.5em;
   padding: 20px;
@@ -13,17 +10,17 @@
 }
 
 #card_name {
-  font-size: 1.5em;
-  /* position: absolute;
-  top: 50%;
-  left: 5%; */
+  font-size: 1em;
+  position: absolute;
+  top: 10%;
+  left: 5%;
 }
 
 #card_weight {
   display: flex;
   position: absolute;
   left: 35%;
-  top: 35%;
+  top: 50%;
 }
 
 #weight_val {

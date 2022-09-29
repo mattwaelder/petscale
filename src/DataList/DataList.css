@@ -1,6 +1,5 @@
 .data_list_container {
-  min-width: 40vw;
-  width: 40vw;
+  width: 33vw;
   background: var(--color-glass-transparency-lighter);
   margin: 2em;
   border-radius: 12px;
@@ -10,4 +9,8 @@
   padding: 1em;
   max-height: 100vh;
   overflow-y: auto;
+}
+
+.data_list_container h2 {
+  margin: 0.5em;
 }

@@ -18,11 +18,10 @@ function App() {
   }, [user]);
 
   let fetchData = (user) => {
-    console.log("fetchdata", user);
     axios
       .get(`${utils.API}/users/?user=${user}`)
       .then((data) => {
-        // console.log(data.data);
+        console.log(data.data);
         setWeightData(data.data);
       })
       .catch((err) => console.log(err));

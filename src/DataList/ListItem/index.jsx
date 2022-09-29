@@ -14,6 +14,9 @@ const ListItem = ({ data }) => {
       <div id="card_date">
         <span>{utils.getFormattedDate(data.created_at)}</span>
       </div>
+      <div className="trash">
+        <FontAwesomeIcon icon="fa-solid fa-trash" />
+      </div>
     </div>
   );
 };
