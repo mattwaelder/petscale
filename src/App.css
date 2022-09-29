@@ -32,6 +32,7 @@ html body {
   overflow-x: hidden;
   font-family: "Poppins", sans-serif;
   background: var(--gradient-body);
+  color: rgb(80, 80, 80);
 }
 
 * {
@@ -59,4 +60,6 @@ html body {
   margin: 2em 1em;
   /* background: var(--color-glass-transparency-lighter); */
   border-radius: 12px;
+  align-items: center;
+  justify-content: center;
 }

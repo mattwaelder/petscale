@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import utils from "../utilities.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import "./DataInput.css";
 
 const DataInput = ({ user, fetchData }) => {
@@ -87,6 +89,9 @@ const DataInput = ({ user, fetchData }) => {
           onClick={(e) => handleSubmit(e)}
         ></input>
       </form>
+      <div id="weight_icon_container">
+        <FontAwesomeIcon icon={faWeightHanging} />
+      </div>
     </div>
   );
 };

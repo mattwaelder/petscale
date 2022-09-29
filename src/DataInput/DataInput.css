@@ -1,5 +1,5 @@
 .input_form_container {
-  width: 100%;
+  width: 80%;
   height: 35%;
   text-align: center;
   background: var(--color-glass-transparency-lighter);
@@ -47,6 +47,7 @@ form {
   margin: 1em 0;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .form_submit {
@@ -56,4 +57,22 @@ form {
   padding: 5px;
   margin: 1em 2em;
   border-radius: 8px;
+  cursor: pointer;
+  transition: 200ms;
+  background: var(--color-glass-transparency);
+}
+
+.form_submit:hover {
+  background-color: var(--color-glass-transparency-dark);
+}
+
+#weight_icon_container {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 40%;
+  right: 0;
+  transform: translateX(25%);
+  font-size: 5em;
+  z-index: -1;
 }
