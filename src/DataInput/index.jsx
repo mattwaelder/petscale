@@ -69,6 +69,7 @@ const DataInput = ({ user, fetchData }) => {
           placeholder="pet name"
           minLength="3"
           onChange={(e) => handleChange(e)}
+          autocomplete="off"
           required
         />
         <div id="weight_container">
@@ -78,6 +79,7 @@ const DataInput = ({ user, fetchData }) => {
             className="formtext"
             placeholder="weight"
             onChange={(e) => handleChange(e)}
+            autocomplete="off"
             required
           />
           <select

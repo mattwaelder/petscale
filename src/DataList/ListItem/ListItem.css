@@ -7,6 +7,11 @@
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   position: relative;
+  transition: 200ms ease-in-out;
+}
+
+.list_card:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 #card_name {
@@ -35,7 +40,7 @@
 }
 
 #card_unit {
-  font-size: 0.5em;
+  font-size: 0.6em;
   transform: translateY(-1em);
 }
 
@@ -53,4 +58,9 @@
   bottom: 10px;
   color: rgba(200, 10, 10, 0.7);
   cursor: pointer;
+  transition: 200ms;
+}
+
+.trash:hover {
+  color: red;
 }
