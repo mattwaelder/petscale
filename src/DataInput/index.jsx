@@ -49,32 +49,39 @@ const DataInput = ({ user, fetchData }) => {
 
   return (
     <div className="input_form_container">
+      <span id="form_title">Input New Weight</span>
       <form>
         <input
           type="text"
           id="name"
+          className="formtext"
           placeholder="pet name"
           onChange={(e) => handleChange(e)}
           required
         ></input>
+        <div id="weight_container">
+          <input
+            type="text"
+            id="weight"
+            className="formtext"
+            placeholder="weight"
+            onChange={(e) => handleChange(e)}
+            required
+          ></input>
+          <select
+            name="unit"
+            onChange={(e) => handleChange(e)}
+            id="unit"
+            className="form_select"
+            required
+          >
+            <option value="">--select--</option>
+            <option value="g">g</option>
+            <option value="lbs">lbs</option>
+          </select>
+        </div>
         <input
-          type="text"
-          id="weight"
-          placeholder="weight"
-          onChange={(e) => handleChange(e)}
-          required
-        ></input>
-        <select
-          name="unit"
-          onChange={(e) => handleChange(e)}
-          id="unit"
-          required
-        >
-          <option value="">--select--</option>
-          <option value="g">g</option>
-          <option value="lbs">lbs</option>
-        </select>
-        <input
+          className="form_submit"
           type="submit"
           value="submit"
           onClick={(e) => handleSubmit(e)}

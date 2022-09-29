@@ -1,4 +1,5 @@
 .data_list_container {
+  min-width: 40vw;
   width: 40vw;
   background: var(--color-glass-transparency-lighter);
   margin: 2em;

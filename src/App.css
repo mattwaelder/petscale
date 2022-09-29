@@ -55,9 +55,8 @@ html body {
 .graph_input_container {
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 65vw;
   margin: 2em;
   /* background: var(--color-glass-transparency-lighter); */
-  padding: 1em;
   border-radius: 12px;
 }
