@@ -9,8 +9,10 @@
   padding: 1em;
   max-height: 100vh;
   overflow-y: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .data_list_container h2 {
   margin: 0.5em;
+  color: var(--color-secondary-darker);
 }

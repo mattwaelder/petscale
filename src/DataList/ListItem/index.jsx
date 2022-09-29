@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const ListItem = ({ data, user, fetchData }) => {
+const ListItem = ({ data, user, fetchData, type }) => {
+  console.log(type);
   const handleDel = (e) => {
     let id = e.target.closest(".trash").id;
     axios
@@ -20,7 +21,8 @@ const ListItem = ({ data, user, fetchData }) => {
         <p>{data.name}</p>
       </div>
       <div id="card_weight">
-        <span id="weight_val">{data.weight}</span> grams
+        <span id="weight_val">{data.weight}</span>{" "}
+        <span id="card_unit">grams</span>
       </div>
       <div id="card_date">
         <span>{utils.getFormattedDate(data.created_at)}</span>

@@ -28,6 +28,7 @@ const DataInput = ({ user, fetchData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let weightTrans;
     unit === "lbs"
       ? (weightTrans = Math.floor(Number(weight) * 453.6))
@@ -45,6 +46,14 @@ const DataInput = ({ user, fetchData }) => {
           created_at: Date(),
         })
         .then((res) => fetchData(user))
+        .then(() => {
+          //reset form and states
+          setName("");
+          setWeight("");
+          setUnit("");
+          let form = document.querySelector("#weight_submit_form");
+          form.reset();
+        })
         .catch((err) => console.log(err));
     }
   };
@@ -52,15 +61,16 @@ const DataInput = ({ user, fetchData }) => {
   return (
     <div className="input_form_container">
       <span id="form_title">Input New Weight</span>
-      <form>
+      <form id="weight_submit_form">
         <input
           type="text"
           id="name"
           className="formtext"
           placeholder="pet name"
+          minLength="3"
           onChange={(e) => handleChange(e)}
           required
-        ></input>
+        />
         <div id="weight_container">
           <input
             type="text"
@@ -69,7 +79,7 @@ const DataInput = ({ user, fetchData }) => {
             placeholder="weight"
             onChange={(e) => handleChange(e)}
             required
-          ></input>
+          />
           <select
             name="unit"
             onChange={(e) => handleChange(e)}
@@ -82,12 +92,14 @@ const DataInput = ({ user, fetchData }) => {
             <option value="lbs">lbs</option>
           </select>
         </div>
-        <input
+        <button
           className="form_submit"
           type="submit"
-          value="submit"
+          value="Submit"
           onClick={(e) => handleSubmit(e)}
-        ></input>
+        >
+          ADD
+        </button>
       </form>
       <div id="weight_icon_container">
         <FontAwesomeIcon icon={faWeightHanging} />

@@ -3,13 +3,23 @@ import "./DataList.css";
 import ListItem from "./ListItem";
 
 const DataList = ({ data, user, fetchData }) => {
+  console.log(data);
   return (
     <div className="data_list_container">
       <h2>Past Weigh-Ins</h2>
       {data.length > 0 && data.length
-        ? data.map((entry, i) => (
-            <ListItem key={i} data={entry} user={user} fetchData={fetchData} />
-          ))
+        ? data.map((entry, i) => {
+            console.log(data[i]);
+            return (
+              <ListItem
+                key={i}
+                data={entry}
+                user={user}
+                fetchData={fetchData}
+                // type={wanted to add prop for if weight was good or bad, but this requires some ref to pet as well, not just index. i think to get this going properly in the future im goin to want a full list of weights by pet in state {pet: "cowpig", weights: [{}, {}]}}
+              />
+            );
+          })
         : null}
     </div>
   );

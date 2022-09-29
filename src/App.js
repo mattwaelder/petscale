@@ -66,23 +66,14 @@ export default App;
 
 //want to have glass transparancy for the cards, and for each weight item in th elist have a hue of red or green to show if it was an increase or a decrease from revious weight
 //either that or have red for big drops in weight (or an outline drop shadow etc?) and where would i use green, then?
+//if the delta from one weight to another is greater than x set it red-ish
 
-/*
-let obj = {
-  userName: "mattwaelder",
-  userID: 1,
-  petData: {
-    //nix photos bc time constraint
-    cowpig: [
-      { id: 123, weight: 1250, created_at: Date },
-      { id: 124, weight: 1250, created_at: Date },
-    ],
-    bagel: [
-      { id: 125, weight: 1250, created_at: Date },
-      { id: 126, weight: 1250, created_at: Date },
-    ],
-  },
-};
-*/
+//assign a unique color for every pet (up to so many pets 5?) then use this color multiple times such as name and graph. this would just require more effort on the side of the controller returning a more complex object
 
-//git push -u origin master
+//add modal to make sure you want to delete an entry to avoid accidents
+//add option to select pet or enter new pet in form
+//add api information about basic weight info for given animals?
+
+//add some kind of indication visually in the card list for each pet (image?, color?)
+
+//i dont know why, but the form required attributes are not working when submit

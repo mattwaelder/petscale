@@ -5,6 +5,7 @@
   --color-accent: rgb(253, 255, 143);
   --color-primary-darker: rgb(90, 140, 190);
   --color-secondary-darker: rgb(167, 102, 102);
+  /* --color-secondary-darker: rgb(147, 55, 55); */
   --color-primary-lighter: rgb(188, 217, 247);
   --color-secondary-lighter: rgb(253, 223, 244);
   --color-glass-transparency: rgba(255, 255, 255, 0.5);
