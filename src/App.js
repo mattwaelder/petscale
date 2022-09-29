@@ -6,9 +6,6 @@ import Graph from "./Graph";
 import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
-// import { API } from "./utilities.js";
-
-const API = `http://localhost:5050`;
 
 function App() {
   const [user, setUser] = useState("mattwaelder");
@@ -24,7 +21,7 @@ function App() {
   let fetchData = (user) => {
     console.log("fetchdata", user);
     axios
-      .get(`${API}/users/?user=${user}`)
+      .get(`${utils.API}/users/?user=${user}`)
       .then((data) => {
         // console.log(data.data);
         setWeightData(data.data);
@@ -62,7 +59,7 @@ function App() {
               .reverse()}
           />
         ) : null}
-        <DataInput />
+        <DataInput user={user} fetchData={fetchData} />
       </div>
     </div>
   );

@@ -9,13 +9,10 @@ module.exports.getByUser = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-module.exports.post = (req, res) => {
+module.exports.postByUser = (req, res) => {
   console.log("c create");
   model
     .create(req.body)
-    .then((res) =>
-      /*sendStatus(201)*/
-      console.log("db response", res)
-    )
+    .then(() => res.sendStatus(201))
     .catch((err) => console.log(err));
 };

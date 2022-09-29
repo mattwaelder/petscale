@@ -20,7 +20,8 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  controller.post(req, res);
+  console.log("post");
+  controller.postByUser(req, res);
 });
 
 //////////////////////////////////////////////

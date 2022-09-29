@@ -5,6 +5,8 @@
 // };
 
 const utils = {
+  API: `http://localhost:${5050}`,
+
   getFormattedDate: (messyDate) => {
     let dateOptions = {
       year: "numeric",

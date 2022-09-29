@@ -9,7 +9,9 @@ module.exports.getAllByUser = (req) => {
 module.exports.create = (req) => {
   console.log("m create");
   return PetData.create({
-    name: "abc",
-    petData: { a: 2, b: 3 },
+    owner: req.owner,
+    name: req.name,
+    weight: req.weight,
+    created_at: req.created_at,
   });
 };
