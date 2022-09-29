@@ -1,8 +1,19 @@
 import React from "react";
 import "./ListItem.css";
 import utils from "../../utilities.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-const ListItem = ({ data }) => {
+const ListItem = ({ data, user, fetchData }) => {
+  const handleDel = (e) => {
+    let id = e.target.closest(".trash").id;
+    axios
+      .delete(`${utils.API}/entries/?entry=${id}`)
+      .then(() => fetchData(user))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="list_card">
       <div id="card_name">
@@ -14,8 +25,13 @@ const ListItem = ({ data }) => {
       <div id="card_date">
         <span>{utils.getFormattedDate(data.created_at)}</span>
       </div>
-      <div className="trash">
-        <FontAwesomeIcon icon="fa-solid fa-trash" />
+      <div
+        className="trash"
+        vlaue={data}
+        id={data._id}
+        onClick={(e) => handleDel(e)}
+      >
+        <FontAwesomeIcon icon={faTrash} />
       </div>
     </div>
   );

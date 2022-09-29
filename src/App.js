@@ -10,10 +10,7 @@ function App() {
   const [user, setUser] = useState("mattwaelder");
   const [weightData, setWeightData] = useState([]);
 
-  console.log(user);
-
   useEffect(() => {
-    console.log("effect");
     fetchData(user);
   }, [user]);
 
@@ -21,7 +18,6 @@ function App() {
     axios
       .get(`${utils.API}/users/?user=${user}`)
       .then((data) => {
-        console.log(data.data);
         setWeightData(data.data);
       })
       .catch((err) => console.log(err));
@@ -29,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <DataList data={weightData} />
+      <DataList data={weightData} user={user} fetchData={fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart

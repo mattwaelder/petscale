@@ -5,8 +5,6 @@ import "chartjs-adapter-date-fns";
 import "./LineChart.css";
 
 const LineChart = ({ cowpig, bagel }) => {
-  console.log(bagel);
-
   return (
     <div className="chart_container">
       <Line

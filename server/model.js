@@ -15,3 +15,8 @@ module.exports.create = (req) => {
     created_at: req.created_at,
   });
 };
+
+module.exports.deleteById = (req) => {
+  console.log("m del");
+  return PetData.deleteOne({ _id: req });
+};

@@ -16,3 +16,11 @@ module.exports.postByUser = (req, res) => {
     .then(() => res.sendStatus(201))
     .catch((err) => console.log(err));
 };
+
+module.exports.deleteById = (req, res) => {
+  console.log("c del");
+  model
+    .deleteById(req.query.entry)
+    .then(() => res.sendStatus(200))
+    .catch((err) => console.log(err));
+};

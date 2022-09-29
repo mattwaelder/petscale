@@ -24,6 +24,11 @@ app.post("/users", (req, res) => {
   controller.postByUser(req, res);
 });
 
+app.delete("/entries", (req, res) => {
+  console.log("del");
+  controller.deleteById(req, res);
+});
+
 //////////////////////////////////////////////
 
 let PORT = process.env.PORT || 3456;
