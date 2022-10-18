@@ -77,3 +77,12 @@ export default App;
 //add some kind of indication visually in the card list for each pet (image?, color?)
 
 //i dont know why, but the form required attributes are not working when submit
+
+
+////////////////
+
+//add endpoint to add new user
+//add endpoint to add new pets (limit?)
+//look at authentication
+//handle login screen?
+//usernames unique? or find a way to make it so we can search by user id
