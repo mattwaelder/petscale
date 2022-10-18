@@ -1,5 +1,5 @@
 // const PetData = require("../database/PetData.js");
-const PetData = require("../database");
+const { PetData } = require("../database");
 
 module.exports.getAllByUser = (req) => {
   console.log("m get all");

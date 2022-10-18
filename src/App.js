@@ -86,3 +86,4 @@ export default App;
 //look at authentication
 //handle login screen?
 //usernames unique? or find a way to make it so we can search by user id
+//add new user schema to module.exports

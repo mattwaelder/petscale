@@ -31,4 +31,4 @@ console.log(mongoose.connection.readyState);
 // db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // module.exports = db;
-module.exports = PetData;
+module.exports.PetData = PetData;
