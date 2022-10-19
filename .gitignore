@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/authentication
 
 # testing
 /coverage
@@ -24,5 +25,3 @@ yarn-debug.log*
 yarn-error.log*
 
 csv
-
-src/authentication/firebase.js
