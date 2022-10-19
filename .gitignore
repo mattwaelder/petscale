@@ -25,5 +25,4 @@ yarn-error.log*
 
 csv
 
-./src/authentication/firebase.js
-src/authentication
+src/authentication/firebase.js
