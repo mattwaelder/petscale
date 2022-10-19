@@ -2,24 +2,23 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import{
- GoogleAuthProvider,
- getAuth,
- signInWithPopup,
- signInWithEmailAndPassword,
- createUserWithEmailAndPassword,
- sendPasswordResetEmail,
- signOut,
- } from "firebase/auth";
-import{
- getFirestore,
- query,
- getDocs,
- collection,
- where,
- addDoc,
- } from "firebase/firestore";
-
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "firebase/auth";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -33,14 +32,14 @@ const firebaseConfig = {
   storageBucket: "petscale-54fcc.appspot.com",
   messagingSenderId: "775727941138",
   appId: "1:775727941138:web:41e180dab03844f340bacb",
-  measurementId: "G-H8SDP8L8K9"
+  measurementId: "G-H8SDP8L8K9",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-​​const auth = getAuth(app);
-​​const db = getFirestore(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 //login with google
 const googleProvider = new GoogleAuthProvider();
