@@ -5,6 +5,7 @@ import DataList from "./DataList";
 import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
+import Login from "./authentication/Login";
 
 function App() {
   const [user, setUser] = useState("mattwaelder");
@@ -25,6 +26,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="container-md login_container">
+        <Login />
+      </div>
       <DataList data={weightData} user={user} fetchData={fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
@@ -77,7 +81,6 @@ export default App;
 //add some kind of indication visually in the card list for each pet (image?, color?)
 
 //i dont know why, but the form required attributes are not working when submit
-
 
 ////////////////
 
