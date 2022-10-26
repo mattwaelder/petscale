@@ -6,6 +6,7 @@ import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
 import Login from "./authentication/Login";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState("mattwaelder");
@@ -26,9 +27,11 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container-md login_container">
-        <Login />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+        </Switch>
+      </Router>
       <DataList data={weightData} user={user} fetchData={fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
