@@ -19,21 +19,13 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import firebaseConfig from "../../firebaseOptions.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBxKVi_55RwO4qr6jiqwFHWg7tGwVPx_K8",
-  authDomain: "petscale-54fcc.firebaseapp.com",
-  projectId: "petscale-54fcc",
-  storageBucket: "petscale-54fcc.appspot.com",
-  messagingSenderId: "775727941138",
-  appId: "1:775727941138:web:41e180dab03844f340bacb",
-  measurementId: "G-H8SDP8L8K9",
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
