@@ -28,9 +28,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
+        <Routes>
           <Route exact path="/" component={Login} />
-        </Switch>
+        </Routes>
       </Router>
       <DataList data={weightData} user={user} fetchData={fetchData} />
       <div className="graph_input_container">
