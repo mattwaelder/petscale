@@ -8,6 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -15,52 +16,55 @@ function Login() {
     }
     if (user) navigate("/dashboard");
   }, [user, loading]);
+
   return (
-    <form>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">
-          Email address
-        </label>
-        <input
-          type="email"
-          class="form-control"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        ></input>
-        <div id="emailHelp" class="form-text">
-          We'll never share your email with anyone else.
+    <div className="container">
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail Address"
+          ></input>
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          class="form-control"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        ></input>
-      </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        onClick={() => logInWithEmailAndPassword(email, password)}
-      >
-        Submit
-      </button>
-      <button className="login__btn login__google" onClick={signInWithGoogle}>
-        Login with Google
-      </button>
-      <div>
-        <Link to="/reset">Forgot Password</Link>
-      </div>
-      <div>
-        Don't have an account? <Link to="/register">Register</Link> now.
-      </div>
-    </form>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            class="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          ></input>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          onClick={() => logInWithEmailAndPassword(email, password)}
+        >
+          Submit
+        </button>
+        <button className="login__btn login__google" onClick={signInWithGoogle}>
+          Login with Google
+        </button>
+        <div>
+          <Link to="/reset">Forgot Password</Link>
+        </div>
+        <div>
+          Don't have an account? <Link to="/register">Register</Link> now.
+        </div>
+      </form>
+    </div>
 
     // <div className="login">
     //   <div className="login__container">

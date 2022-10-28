@@ -32,6 +32,7 @@ function App() {
           <Route exact path="/" component={Login} />
         </Routes>
       </Router>
+
       <DataList data={weightData} user={user} fetchData={fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
