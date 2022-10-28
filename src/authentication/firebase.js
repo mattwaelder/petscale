@@ -19,7 +19,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-import firebaseConfig from "../../firebaseOptions.js";
+import firebaseConfig from "../firebaseOptions.js";
 
 console.warn(firebaseConfig);
 
