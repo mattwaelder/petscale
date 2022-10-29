@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import DataInput from "./DataInput";
+import DataList from "./DataList";
+import axios from "axios";
+import utils from "./utilities.js";
+import LineChart from "./LineChart";
+import { please } from "./please.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "./authentication/firebase";
@@ -8,6 +14,7 @@ function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const [weightData, setWeightData] = useState([]);
 
   const fetchUserName = async () => {
     try {
@@ -25,6 +32,12 @@ function Dashboard() {
     if (loading) return;
     if (!user) return navigate("/");
     fetchUserName();
+    //
+    console.log("user: ", user);
+    please
+      .fetchDataByUser(user.displayName.split(" ").join(""))
+      .then((data) => setWeightData(data.data))
+      .catch((err) => console.log(err));
   }, [user, loading]);
 
   return (
@@ -37,7 +50,7 @@ function Dashboard() {
           Logout
         </button>
       </div>
-      <DataList data={weightData} user={user} fetchData={fetchData} />
+      <DataList data={weightData} user={user} fetchData={please.fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart
@@ -65,7 +78,7 @@ function Dashboard() {
               .reverse()}
           />
         ) : null}
-        <DataInput user={user} fetchData={fetchData} />
+        <DataInput user={user} fetchData={please.fetchData} />
       </div>
     </div>
   );

@@ -12,21 +12,13 @@ import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [user, setUser] = useState("mattwaelder");
-  const [weightData, setWeightData] = useState([]);
+  // const [user, setUser] = useState("mattwaelder");
+  // const [weightData, setWeightData] = useState([]);
 
   useEffect(() => {
-    fetchData(user);
-  }, [user]);
-
-  let fetchData = (user) => {
-    axios
-      .get(`${utils.API}/users/?user=${user}`)
-      .then((data) => {
-        setWeightData(data.data);
-      })
-      .catch((err) => console.log(err));
-  };
+    //would fetch data from my db here, i think, or actually in dashboard huh?
+    console.log("application GO");
+  }, []);
 
   return (
     <div className="App">
