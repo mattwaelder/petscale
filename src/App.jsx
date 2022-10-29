@@ -60,3 +60,4 @@ export default App;
 //usernames unique? or find a way to make it so we can search by user id
 //add new user schema to module.exports
 //fix auth issue with username and email
+//find out why bootsrap sucky
