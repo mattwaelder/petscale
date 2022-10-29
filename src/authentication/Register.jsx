@@ -12,7 +12,8 @@ function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  const history = useNavigate();
+  // const history = useNavigate();
+  const navigate = useNavigate();
 
   const register = () => {
     if (!name) alert("Please enter name");
@@ -21,7 +22,7 @@ function Register() {
 
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user) navigate("/dashboard");
   }, [user, loading]);
 
   return (
@@ -53,7 +54,7 @@ function Register() {
         </button>
         <button
           className="btn-primary register__google"
-          onClick={signInWithGoogle}
+          onClick={(e) => signInWithGoogle(e)}
         >
           Register with Google
         </button>

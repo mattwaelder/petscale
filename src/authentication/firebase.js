@@ -37,13 +37,15 @@ const db = getFirestore(app);
 
 //login with google
 const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (e) => {
+  e.preventDefault();
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
     if (docs.docs.length === 0) {
+      console.warn("oi");
       await addDoc(collection(db, "users"), {
         uid: user.uid,
         name: user.displayName,

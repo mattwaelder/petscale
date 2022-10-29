@@ -52,7 +52,7 @@ function Login() {
           ></input>
         </div>
         <button
-          type="submit"
+          // type="submit"
           className="btn btn-primary"
           onClick={() => logInWithEmailAndPassword(email, password)}
         >
