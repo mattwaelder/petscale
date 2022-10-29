@@ -57,7 +57,6 @@ export default App;
 
 //add endpoint to add new user
 //add endpoint to add new pets (limit?)
-//look at authentication
-//handle login screen?
 //usernames unique? or find a way to make it so we can search by user id
 //add new user schema to module.exports
+//fix auth issue with username and email
