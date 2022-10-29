@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "./firebase";
+import {
+  auth,
+  logInWithEmailAndPassword,
+  signInWithGoogle,
+} from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 // import "./Login.css";
 function Login() {
@@ -20,28 +24,28 @@ function Login() {
   return (
     <div className="container">
       <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           ></input>
-          <div id="emailHelp" class="form-text">
+          <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -49,7 +53,7 @@ function Login() {
         </div>
         <button
           type="submit"
-          class="btn btn-primary"
+          className="btn btn-primary"
           onClick={() => logInWithEmailAndPassword(email, password)}
         >
           Submit

@@ -6,6 +6,9 @@ import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
 import Login from "./authentication/Login";
+import Register from "./authentication/Register";
+import Reset from "./authentication/Reset";
+import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -29,40 +32,12 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
-
-      <DataList data={weightData} user={user} fetchData={fetchData} />
-      <div className="graph_input_container">
-        {weightData.length && weightData.length > 0 ? (
-          <LineChart
-            cowpig={weightData
-              .map((d) =>
-                d.name === "cowpig"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-            bagel={weightData
-              .map((d) =>
-                d.name === "bagel"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-          />
-        ) : null}
-        <DataInput user={user} fetchData={fetchData} />
-      </div>
     </div>
   );
 }
