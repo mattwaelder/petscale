@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "./authentication/firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
+import "./App.css";
+
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
