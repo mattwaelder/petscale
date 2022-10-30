@@ -6,62 +6,30 @@ import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
 import Login from "./authentication/Login";
+import Register from "./authentication/Register";
+import Reset from "./authentication/Reset";
+import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [user, setUser] = useState("mattwaelder");
-  const [weightData, setWeightData] = useState([]);
+  // const [user, setUser] = useState("mattwaelder");
+  // const [weightData, setWeightData] = useState([]);
 
   useEffect(() => {
-    fetchData(user);
-  }, [user]);
-
-  let fetchData = (user) => {
-    axios
-      .get(`${utils.API}/users/?user=${user}`)
-      .then((data) => {
-        setWeightData(data.data);
-      })
-      .catch((err) => console.log(err));
-  };
+    //would fetch data from my db here, i think, or actually in dashboard huh?
+    console.log("application GO");
+  }, []);
 
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
-      <DataList data={weightData} user={user} fetchData={fetchData} />
-      <div className="graph_input_container">
-        {weightData.length && weightData.length > 0 ? (
-          <LineChart
-            cowpig={weightData
-              .map((d) =>
-                d.name === "cowpig"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-            bagel={weightData
-              .map((d) =>
-                d.name === "bagel"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-          />
-        ) : null}
-        <DataInput user={user} fetchData={fetchData} />
-      </div>
     </div>
   );
 }
@@ -89,7 +57,13 @@ export default App;
 
 //add endpoint to add new user
 //add endpoint to add new pets (limit?)
-//look at authentication
-//handle login screen?
 //usernames unique? or find a way to make it so we can search by user id
 //add new user schema to module.exports
+//find out why bootsrap sucky
+
+//should add confirm email to make sure its your email
+//cant login with email after login with google?
+
+//receive an array of weight data objects with id, owner, name, weight, created_at
+
+//biggest issue is with the chart. currently it is looking for cowpig or bagel, we need to look for pet names for that user, not cowpig and bagel
