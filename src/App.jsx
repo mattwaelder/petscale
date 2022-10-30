@@ -63,3 +63,7 @@ export default App;
 
 //should add confirm email to make sure its your email
 //cant login with email after login with google?
+
+//receive an array of weight data objects with id, owner, name, weight, created_at
+
+//biggest issue is with the chart. currently it is looking for cowpig or bagel, we need to look for pet names for that user, not cowpig and bagel

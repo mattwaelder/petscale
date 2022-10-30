@@ -40,9 +40,7 @@ function Dashboard() {
       .fetchDataByUser(
         user.displayName ? user.displayName.split(" ").join("") : "anon"
       )
-      .then((data) => {
-        data.data === undefined ? setWeightData([]) : setWeightData(data.data);
-      })
+      .then((data) => setWeightData(data.data))
       .catch((err) => console.log(err));
   }, [user, loading]);
 
