@@ -23,7 +23,7 @@ function Login() {
 
   return (
     <div className="container">
-      <form>
+      <div>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -67,7 +67,7 @@ function Login() {
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
-      </form>
+      </div>
     </div>
 
     // <div className="login">

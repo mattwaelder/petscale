@@ -59,5 +59,7 @@ export default App;
 //add endpoint to add new pets (limit?)
 //usernames unique? or find a way to make it so we can search by user id
 //add new user schema to module.exports
-//fix auth issue with username and email
 //find out why bootsrap sucky
+
+//should add confirm email to make sure its your email
+//cant login with email after login with google?

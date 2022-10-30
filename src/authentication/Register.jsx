@@ -27,7 +27,7 @@ function Register() {
 
   return (
     <div className="container">
-      <form>
+      <div>
         <input
           type="text"
           className="form-control"
@@ -61,7 +61,7 @@ function Register() {
         <div>
           Already have an account? <Link to="/">Login</Link> now.
         </div>
-      </form>
+      </div>
     </div>
 
     // <div className="register">
