@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const ListItem = ({ data, user, fetchData, type }) => {
-  console.log(type);
+const ListItem = ({ data, user, fetchData }) => {
   const handleDel = (e) => {
     let id = e.target.closest(".trash").id;
     axios

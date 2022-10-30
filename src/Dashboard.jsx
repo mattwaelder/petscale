@@ -17,6 +17,9 @@ function Dashboard() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const [weightData, setWeightData] = useState([]);
+  const [petList, setPetList] = useState([]);
+  const [pet1, setPet1] = useState([]);
+  const [pet2, setPet2] = useState([]);
 
   const fetchUserName = async () => {
     try {
@@ -40,7 +43,12 @@ function Dashboard() {
       .fetchDataByUser(
         user.displayName ? user.displayName.split(" ").join("") : "anon"
       )
-      .then((data) => setWeightData(data.data))
+      .then((data) => {
+        setWeightData(data.data);
+        //gets unique pet values from weight data
+        let pets = [...new Set(data.data.map((el) => el.name))];
+        setPetList(pets);
+      })
       .catch((err) => console.log(err));
   }, [user, loading]);
 
@@ -57,30 +65,7 @@ function Dashboard() {
       <DataList data={weightData} user={user} fetchData={please.fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
-          <LineChart
-            cowpig={weightData
-              .map((d) =>
-                d.name === "cowpig"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-            bagel={weightData
-              .map((d) =>
-                d.name === "bagel"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-          />
+          <LineChart pets={petList} data={weightData} />
         ) : null}
         <DataInput user={user} fetchData={please.fetchData} />
       </div>
