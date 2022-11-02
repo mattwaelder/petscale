@@ -10,22 +10,14 @@ const LineChart = ({ pets, data }) => {
     <div className="chart_container">
       <Line
         data={{
-          datasets: {
-            label: `${pets[0]}` || null,
-            data: data
-              .map((d) =>
-                d.name === pets[0]
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse(),
-            borderColor: "rgba(200,0,200,0.8)",
-            backgroundColor: "rgba(200,0,200,0.5)",
-          },
+          datasets: [
+            {
+              label: `${pets[0]}` || null,
+              data: 0,
+              borderColor: "rgba(200,0,200,0.8)",
+              backgroundColor: "rgba(200,0,200,0.5)",
+            },
+          ],
         }}
       />
       {/* <Line

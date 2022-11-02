@@ -20,6 +20,8 @@ function Dashboard() {
   const [petList, setPetList] = useState([]);
   const [pet1, setPet1] = useState([]);
   const [pet2, setPet2] = useState([]);
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
 
   const fetchUserName = async () => {
     try {
@@ -48,6 +50,30 @@ function Dashboard() {
         //gets unique pet values from weight data
         let pets = [...new Set(data.data.map((el) => el.name))];
         setPetList(pets);
+        setPet1(pets[0]);
+
+        //petlist data petnum
+        let d1 = utils.getLineGraphValues(petList, weightData, 0);
+        let d2 = utils.getLineGraphValues(petList, weightData, 1);
+        let d3 = utils.getLineGraphValues(petList, weightData, 2);
+        let d4 = utils.getLineGraphValues(petList, weightData, 3);
+        let d5 = utils.getLineGraphValues(petList, weightData, 4);
+
+        let fullPetData = { datasets: [d1, d2, d3, d4, d5] };
+        console.log(fullPetData);
+
+        // let d1 = weightData
+        //   .map((d) =>
+        //     d.name === petList[0]
+        //       ? {
+        //           x: utils.getFormattedDateGraph(d.created_at),
+        //           y: d.weight,
+        //         }
+        //       : null
+        //   )
+        //   .filter((x) => x)
+        //   .reverse();
+        setData1(d1);
       })
       .catch((err) => console.log(err));
   }, [user, loading]);
