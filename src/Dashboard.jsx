@@ -18,7 +18,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
-  const [fullPetData, setFullPetData] = useState();
+  const [fullPetData, setFullPetData] = useState([]);
 
   const fetchUserName = async () => {
     try {
@@ -32,20 +32,26 @@ function Dashboard() {
     }
   };
 
+  let externalFn = (d) => {
+    console.log("called fn", d);
+    setFullPetData(d);
+  };
+
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
     fetchUserName();
     //
     console.log("user: ", user);
+
     please
       .fetchDataByUser(
         user.displayName ? user.displayName.split(" ").join("") : "anon"
       )
-      .then((data) => {
-        setWeightData(data.data);
+      .then((res) => {
+        setWeightData(res.data);
         //gets unique pet values from weight data
-        let pets = [...new Set(data.data.map((el) => el.name))];
+        let pets = [...new Set(res.data.map((el) => el.name))];
         setPetList(pets);
 
         //get {x,y} values for line graph by pet
@@ -60,15 +66,22 @@ function Dashboard() {
         let prunedData = fullSet
           .map((d) => (d.length > 0 ? d : null))
           .filter((x) => x);
-        let tempFullDataSet = { datasets: prunedData };
-        setFullPetData(tempFullDataSet);
+        // let tempStateData = { datasets: prunedData };
+
+        //array of objects with x/y key value pairs
+        console.warn("", prunedData);
+        let graphDataObj = prunedData.map((d, i) => {
+          return { label: pets[i], data: d };
+        });
+        externalFn(graphDataObj);
+        // setFullPetData(graphDataObj);
       })
       .catch((err) => console.log(err));
   }, [user, loading]);
 
-  // useEffect(()=> {
-  //   console.log("pet data update")
-  // },[fullPetData])
+  // useEffect(() => {
+  //   console.log(fullPetData);
+  // }, [fullPetData]);
 
   return (
     <div className="dashboard">

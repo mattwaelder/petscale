@@ -51,3 +51,17 @@ const utils = {
 };
 
 export default utils;
+
+// getLineGraphValues: (petList, data, petNum) => {
+//   return data
+//     .map((d) =>
+//       d.name === petList[petNum]
+//         ? {
+//             x: utils.getFormattedDateGraph(d.created_at),
+//             y: d.weight,
+//           }
+//         : null
+//     )
+//     .filter((x) => x)
+//     .reverse();
+// },

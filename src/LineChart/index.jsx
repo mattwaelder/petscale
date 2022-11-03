@@ -8,13 +8,18 @@ import "./LineChart.css";
 //MUST create array of objects to pass in for datasets, then merely assign
 
 const LineChart = ({ pets, data }) => {
-  console.log("data given to chart: ", data);
+  // console.log("data given to chart: ", data);
+  // let data1 = data.datasets ? data.datasets[0] : null;
+  // let data2 = data.datasets ? data.datasets[1] : null;
+  // let data3 = data.datasets ? data.datasets[2] : null;
+  // let data4 = data.datasets ? data.datasets[3] : null;
+  // let data5 = data.datasets ? data.datasets[4] : null;
 
   return (
     <div className="chart_container">
       <Line
         data={{
-          datasets: [{ label: pets[0], data: data.datasets[0] }],
+          datasets: data,
           options: {
             maintainAspectRatio: false,
             responseive: true,
