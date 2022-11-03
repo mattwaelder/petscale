@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
 import axios from "axios";
@@ -20,6 +20,8 @@ function Dashboard() {
   const [petList, setPetList] = useState([]);
   const [fullPetData, setFullPetData] = useState([]);
 
+  // const dataRef = useRef();
+
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -32,27 +34,20 @@ function Dashboard() {
     }
   };
 
-  let externalFn = (d) => {
-    console.log("called fn", d);
-    setFullPetData(d);
-  };
-
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
     fetchUserName();
     //
-    console.log("user: ", user);
+    console.log("user:", user);
 
     please
       .fetchDataByUser(
         user.displayName ? user.displayName.split(" ").join("") : "anon"
       )
       .then((res) => {
-        setWeightData(res.data);
         //gets unique pet values from weight data
         let pets = [...new Set(res.data.map((el) => el.name))];
-        setPetList(pets);
 
         //get {x,y} values for line graph by pet
         let d1 = utils.getLineGraphValues(petList, weightData, 0);
@@ -66,21 +61,23 @@ function Dashboard() {
         let prunedData = fullSet
           .map((d) => (d.length > 0 ? d : null))
           .filter((x) => x);
-        // let tempStateData = { datasets: prunedData };
 
-        //array of objects with x/y key value pairs
-        console.warn("", prunedData);
         let graphDataObj = prunedData.map((d, i) => {
           return { label: pets[i], data: d };
         });
-        externalFn(graphDataObj);
-        // setFullPetData(graphDataObj);
+        console.warn(graphDataObj);
+        // dataRef.data = graphDataObj;
+        setFullPetData(graphDataObj);
+        setPetList(pets);
+        setWeightData(res.data);
       })
       .catch((err) => console.log(err));
   }, [user, loading]);
 
   // useEffect(() => {
-  //   console.log(fullPetData);
+  //   console.log(dataRef.data, fullPetData);
+  //   dataRef.data = fullPetData;
+  //   setFullPetData(dataRef.data);
   // }, [fullPetData]);
 
   return (
