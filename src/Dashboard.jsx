@@ -18,10 +18,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
-  const [pet1, setPet1] = useState([]);
-  const [pet2, setPet2] = useState([]);
-  const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState([]);
+  const [fullPetData, setFullPetData] = useState();
 
   const fetchUserName = async () => {
     try {
@@ -50,33 +47,28 @@ function Dashboard() {
         //gets unique pet values from weight data
         let pets = [...new Set(data.data.map((el) => el.name))];
         setPetList(pets);
-        setPet1(pets[0]);
 
-        //petlist data petnum
+        //get {x,y} values for line graph by pet
         let d1 = utils.getLineGraphValues(petList, weightData, 0);
         let d2 = utils.getLineGraphValues(petList, weightData, 1);
         let d3 = utils.getLineGraphValues(petList, weightData, 2);
         let d4 = utils.getLineGraphValues(petList, weightData, 3);
         let d5 = utils.getLineGraphValues(petList, weightData, 4);
 
-        let fullPetData = { datasets: [d1, d2, d3, d4, d5] };
-        console.log(fullPetData);
-
-        // let d1 = weightData
-        //   .map((d) =>
-        //     d.name === petList[0]
-        //       ? {
-        //           x: utils.getFormattedDateGraph(d.created_at),
-        //           y: d.weight,
-        //         }
-        //       : null
-        //   )
-        //   .filter((x) => x)
-        //   .reverse();
-        setData1(d1);
+        let fullSet = [d1, d2, d3, d4, d5];
+        //prune arr to actual number of pets
+        let prunedData = fullSet
+          .map((d) => (d.length > 0 ? d : null))
+          .filter((x) => x);
+        let tempFullDataSet = { datasets: prunedData };
+        setFullPetData(tempFullDataSet);
       })
       .catch((err) => console.log(err));
   }, [user, loading]);
+
+  // useEffect(()=> {
+  //   console.log("pet data update")
+  // },[fullPetData])
 
   return (
     <div className="dashboard">
@@ -91,7 +83,7 @@ function Dashboard() {
       <DataList data={weightData} user={user} fetchData={please.fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
-          <LineChart pets={petList} data={weightData} />
+          <LineChart pets={petList} data={fullPetData} />
         ) : null}
         <DataInput user={user} fetchData={please.fetchData} />
       </div>

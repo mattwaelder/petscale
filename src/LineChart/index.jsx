@@ -5,19 +5,21 @@ import utils from "../utilities.js";
 import "chartjs-adapter-date-fns";
 import "./LineChart.css";
 
+//MUST create array of objects to pass in for datasets, then merely assign
+
 const LineChart = ({ pets, data }) => {
+  console.log("data given to chart: ", data);
+
   return (
     <div className="chart_container">
       <Line
         data={{
-          datasets: [
-            {
-              label: `${pets[0]}` || null,
-              data: 0,
-              borderColor: "rgba(200,0,200,0.8)",
-              backgroundColor: "rgba(200,0,200,0.5)",
-            },
-          ],
+          datasets: [{ label: pets[0], data: data.datasets[0] }],
+          options: {
+            maintainAspectRatio: false,
+            responseive: true,
+            scales: { x: { type: "time" } },
+          },
         }}
       />
       {/* <Line
