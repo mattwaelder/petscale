@@ -18,7 +18,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
-  const [fullPetData, setFullPetData] = useState([]);
+  const [petData, setPetData] = useState([]);
 
   // const dataRef = useRef();
 
@@ -39,8 +39,47 @@ function Dashboard() {
     if (!user) return navigate("/");
     fetchUserName();
     //
-    console.log("user:", user);
+    console.log("user: ", user);
+    console.log("auth effect called");
 
+    // please
+    //   .fetchDataByUser(
+    //     user.displayName ? user.displayName.split(" ").join("") : "anon"
+    //   )
+    //   .then((res) => {
+    //     //gets unique pet values from weight data
+    //     let pets = [...new Set(res.data.map((el) => el.name))];
+
+    //     //get {x,y} values for line graph by pet
+    //     let d1 = utils.getLineGraphValues(petList, weightData, 0);
+    //     let d2 = utils.getLineGraphValues(petList, weightData, 1);
+    //     let d3 = utils.getLineGraphValues(petList, weightData, 2);
+    //     let d4 = utils.getLineGraphValues(petList, weightData, 3);
+    //     let d5 = utils.getLineGraphValues(petList, weightData, 4);
+
+    //     let fullSet = [d1, d2, d3, d4, d5];
+    //     //prune and format arry to be what chart.js expects
+    //     let prunedData = fullSet
+    //       .map((d) => (d.length > 0 ? d : null))
+    //       .filter((x) => x)
+    //       .map((d, i) => {
+    //         return { label: pets[i], data: d };
+    //       });
+
+    //     // let graphDataObj = prunedData.map((d, i) => {
+    //     //   return { label: pets[i], data: d };
+    //     // });
+    //     console.warn(prunedData);
+    //     // dataRef.data = graphDataObj;
+    //     setPetData(prunedData);
+    //     setPetList(pets);
+    //     setWeightData(res.data);
+    //   })
+    //   .catch((err) => console.log(err));
+  }, [user, loading]);
+
+  useEffect(() => {
+    if (!user) return navigate("/");
     please
       .fetchDataByUser(
         user.displayName ? user.displayName.split(" ").join("") : "anon"
@@ -50,35 +89,57 @@ function Dashboard() {
         let pets = [...new Set(res.data.map((el) => el.name))];
 
         //get {x,y} values for line graph by pet
-        let d1 = utils.getLineGraphValues(petList, weightData, 0);
-        let d2 = utils.getLineGraphValues(petList, weightData, 1);
-        let d3 = utils.getLineGraphValues(petList, weightData, 2);
-        let d4 = utils.getLineGraphValues(petList, weightData, 3);
-        let d5 = utils.getLineGraphValues(petList, weightData, 4);
+        // let d1 = utils.getLineGraphValues(petList, weightData, 0);
+        // let d2 = utils.getLineGraphValues(petList, weightData, 1);
+        // let d3 = utils.getLineGraphValues(petList, weightData, 2);
+        // let d4 = utils.getLineGraphValues(petList, weightData, 3);
+        // let d5 = utils.getLineGraphValues(petList, weightData, 4);
 
-        let fullSet = [d1, d2, d3, d4, d5];
-        //prune arr to actual number of pets
-        let prunedData = fullSet
-          .map((d) => (d.length > 0 ? d : null))
-          .filter((x) => x);
+        // let fullSet = [d1, d2, d3, d4, d5];
+        // //prune and format arry to be what chart.js expects
+        // let prunedData = fullSet
+        //   .map((d) => (d.length > 0 ? d : null))
+        //   .filter((x) => x)
+        //   .map((d, i) => {
+        //     return { label: pets[i], data: d };
+        //   });
 
-        let graphDataObj = prunedData.map((d, i) => {
-          return { label: pets[i], data: d };
-        });
-        console.warn(graphDataObj);
+        // let graphDataObj = prunedData.map((d, i) => {
+        //   return { label: pets[i], data: d };
+        // });
         // dataRef.data = graphDataObj;
-        setFullPetData(graphDataObj);
+        // setPetData(prunedData);
+        // console.warn(prunedData, petData);
         setPetList(pets);
         setWeightData(res.data);
+        //   console.log("nomral effect called");
+        //   return prunedData;
+        // })
+        // .then((data) => {
+        //   console.log("/////", data);
+        //   setPetData(data);
       })
       .catch((err) => console.log(err));
-  }, [user, loading]);
+  }, []);
 
-  // useEffect(() => {
-  //   console.log(dataRef.data, fullPetData);
-  //   dataRef.data = fullPetData;
-  //   setFullPetData(dataRef.data);
-  // }, [fullPetData]);
+  useEffect(() => {
+    let d1 = utils.getLineGraphValues(petList, weightData, 0);
+    let d2 = utils.getLineGraphValues(petList, weightData, 1);
+    let d3 = utils.getLineGraphValues(petList, weightData, 2);
+    let d4 = utils.getLineGraphValues(petList, weightData, 3);
+    let d5 = utils.getLineGraphValues(petList, weightData, 4);
+
+    let fullSet = [d1, d2, d3, d4, d5];
+    //prune and format arry to be what chart.js expects
+    let prunedData = fullSet
+      .map((d) => (d.length > 0 ? d : null))
+      .filter((x) => x)
+      .map((d, i) => {
+        return { label: petList[i], data: d };
+      });
+
+    setPetData(prunedData);
+  }, [petList, weightData]);
 
   return (
     <div className="dashboard">
@@ -93,7 +154,7 @@ function Dashboard() {
       <DataList data={weightData} user={user} fetchData={please.fetchData} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
-          <LineChart pets={petList} data={fullPetData} />
+          <LineChart pets={petList} data={petData} />
         ) : null}
         <DataInput user={user} fetchData={please.fetchData} />
       </div>

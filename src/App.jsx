@@ -66,4 +66,4 @@ export default App;
 
 //receive an array of weight data objects with id, owner, name, weight, created_at
 
-//biggest issue is with the chart. currently it is looking for cowpig or bagel, we need to look for pet names for that user, not cowpig and bagel
+//having state issues with the graph. maybe do this in the server and provide the data to the front end formatted? idk...
