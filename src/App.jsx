@@ -51,19 +51,14 @@ export default App;
 
 //add some kind of indication visually in the card list for each pet (image?, color?)
 
-//i dont know why, but the form required attributes are not working when submit
-
-////////////////
+///////////////// post HR
 
 //add endpoint to add new user
 //add endpoint to add new pets (limit?)
 //usernames unique? or find a way to make it so we can search by user id
 //add new user schema to module.exports
-//find out why bootsrap sucky
 
 //should add confirm email to make sure its your email
 //cant login with email after login with google?
 
-//receive an array of weight data objects with id, owner, name, weight, created_at
-
-//having state issues with the graph. maybe do this in the server and provide the data to the front end formatted? idk...
+//btn for just add pet / add weight, then when one is clicked propper form takes that components place
