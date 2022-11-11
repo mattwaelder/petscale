@@ -6,6 +6,7 @@ import {
   signInWithGoogle,
 } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { FcGoogle } from "react-icons/fc";
 // import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,12 +23,10 @@ function Login() {
   }, [user, loading]);
 
   return (
-    <div className="container">
+    <div className="form-signin m-auto text-center">
       <div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
+        <h3 className="mb-3 fw-normal">Please Sign In</h3>
+        <div className="center mb-3">
           <input
             type="email"
             className="form-control"
@@ -35,14 +34,8 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
           ></input>
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
           <input
             type="password"
             className="form-control"
@@ -51,16 +44,25 @@ function Login() {
             placeholder="Password"
           ></input>
         </div>
-        <button
-          // type="submit"
-          className="btn btn-primary"
-          onClick={() => logInWithEmailAndPassword(email, password)}
-        >
-          Submit
-        </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
+        <div className="d-grid gap-2 d-md-block mb-3">
+          <button
+            // type="submit"
+            className="btn btn-primary mb-2"
+            onClick={() => logInWithEmailAndPassword(email, password)}
+          >
+            Sign In
+          </button>
+          {/* <span className="m-2">Or</span> */}
+          <div className="container">
+            <span>or </span>
+            <button
+              className="btn btn-secondary login__btn login__google ms-1"
+              onClick={signInWithGoogle}
+            >
+              <FcGoogle /> Login with Google
+            </button>
+          </div>
+        </div>
         <div>
           <Link to="/reset">Forgot Password</Link>
         </div>
