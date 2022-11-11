@@ -7,6 +7,7 @@ import {
   signInWithGoogle,
 } from "./firebase";
 import { FcGoogle } from "react-icons/fc";
+import { FaGoogle } from "react-icons/fa";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -56,13 +57,13 @@ function Register() {
             Register
           </button>
           <div className="container">
-            <span>or </span>
+            <span className="me-2">or</span>
             <button
-              className="btn btn-secondary login__btn login__google ms-1"
+              className="btn login__btn login__google ms-1 bg-light text-dark position-relative"
               onClick={(e) => signInWithGoogle(e)}
             >
-              <FcGoogle />
-              Register with Google
+              <FcGoogle className="h4 position-absolute top-30 start-0 ms-1" />
+              <span className="ms-4">Register with Google</span>
             </button>
           </div>
         </div>

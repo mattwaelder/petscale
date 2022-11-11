@@ -52,14 +52,14 @@ function Login() {
           >
             Sign In
           </button>
-          {/* <span className="m-2">Or</span> */}
           <div className="container">
-            <span>or </span>
+            <span className="me-2">or</span>
             <button
-              className="btn btn-secondary login__btn login__google ms-1"
+              className="btn login__btn login__google ms-1 bg-light text-dark position-relative"
               onClick={signInWithGoogle}
             >
-              <FcGoogle /> Login with Google
+              <FcGoogle className="h4 position-absolute top-30 start-0 ms-1" />
+              <span className="ms-4">Login with Google</span>
             </button>
           </div>
         </div>
