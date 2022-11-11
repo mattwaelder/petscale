@@ -23,10 +23,10 @@ function Login() {
   }, [user, loading]);
 
   return (
-    <div className="form-signin m-auto text-center">
+    <div className="form-signin m-auto text-center mt-5">
       <div>
-        <h3 className="mb-3 fw-normal">Please Sign In</h3>
-        <div className="center mb-3">
+        <h3 className="mb-3 fw-normal">Sign In</h3>
+        <div className="center mb-2">
           <input
             type="email"
             className="form-control"
