@@ -3,13 +3,11 @@ import "./DataList.css";
 import ListItem from "./ListItem";
 
 const DataList = ({ data, user, fetchData }) => {
-  console.log(data);
   return (
     <div className="data_list_container">
       <h2>Past Weigh-Ins</h2>
       {data.length > 0 && data.length
         ? data.map((entry, i) => {
-            console.log(data[i]);
             return (
               <ListItem
                 key={i}

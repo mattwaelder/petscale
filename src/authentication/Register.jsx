@@ -6,6 +6,7 @@ import {
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "./firebase";
+import { FcGoogle } from "react-icons/fc";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -26,38 +27,45 @@ function Register() {
   }, [user, loading]);
 
   return (
-    <div className="container">
+    <div className="form-signin m-auto text-center mt-5">
+      <h3 className="mb-3 fw-normal">Register</h3>
       <div>
         <input
           type="text"
-          className="form-control"
+          className="form-control mb-2"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          placeholder="Username"
         />
         <input
           type="text"
-          className="form-control"
+          className="form-control mb-2"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="form-control"
+          className="form-control mb-3"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="btn-primary" onClick={register}>
-          Register
-        </button>
-        <button
-          className="btn-primary register__google"
-          onClick={(e) => signInWithGoogle(e)}
-        >
-          Register with Google
-        </button>
+        <div className="d-grid gap-2 d-md-block mb-3">
+          <button className="btn btn-primary mb-2" onClick={register}>
+            Register
+          </button>
+          <div className="container">
+            <span>or </span>
+            <button
+              className="btn btn-secondary login__btn login__google ms-1"
+              onClick={(e) => signInWithGoogle(e)}
+            >
+              <FcGoogle />
+              Register with Google
+            </button>
+          </div>
+        </div>
         <div>
           Already have an account? <Link to="/">Login</Link> now.
         </div>

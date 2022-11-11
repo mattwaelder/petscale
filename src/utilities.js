@@ -34,6 +34,34 @@ const utils = {
     let formattedDate = date.split(", ").slice(1).join(", ");
     return formattedDate;
   },
+
+  getLineGraphValues: (petList, data, petNum) => {
+    return data
+      .map((d) =>
+        d.name === petList[petNum]
+          ? {
+              x: utils.getFormattedDateGraph(d.created_at),
+              y: d.weight,
+            }
+          : null
+      )
+      .filter((x) => x)
+      .reverse();
+  },
 };
 
 export default utils;
+
+// getLineGraphValues: (petList, data, petNum) => {
+//   return data
+//     .map((d) =>
+//       d.name === petList[petNum]
+//         ? {
+//             x: utils.getFormattedDateGraph(d.created_at),
+//             y: d.weight,
+//           }
+//         : null
+//     )
+//     .filter((x) => x)
+//     .reverse();
+// },
