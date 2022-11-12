@@ -10,6 +10,9 @@ const DataInput = ({ user, fetchData }) => {
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
 
+  let [addPet, setAddPet] = useState(false);
+  let [addData, setAddData] = useState(false);
+
   const handleChange = (e) => {
     switch (e.target.id) {
       case "name":
@@ -23,6 +26,24 @@ const DataInput = ({ user, fetchData }) => {
         break;
       default:
         alert("please fill all selections");
+    }
+  };
+
+  const handleSelect = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    //buttons should be replaced with form
+    switch (e.target.value) {
+      case "pet":
+        setAddPet(true);
+        setAddData(true);
+        break;
+      case "data":
+        setAddData(true);
+        setAddPet(true);
+        break;
+      default:
+        alert("Sorry, an error occurred :(");
     }
   };
 
@@ -60,6 +81,37 @@ const DataInput = ({ user, fetchData }) => {
 
   return (
     <div className="input_form_container">
+      {!addData && (
+        <button
+          className="form_submit"
+          value="pet"
+          onClick={(e) => handleSelect(e)}
+        >
+          Add New Pet
+        </button>
+      )}
+      {!addPet && (
+        <button
+          className="form_submit"
+          value="data"
+          onClick={(e) => handleSelect(e)}
+        >
+          Add Weight
+        </button>
+      )}
+      <div id="weight_icon_container">
+        <FontAwesomeIcon icon={faWeightHanging} />
+      </div>
+    </div>
+  );
+};
+
+export default DataInput;
+
+//intend to have a state set for whether we are adding a pet or adding data, if either button is clicked the state goes to true and i should be able to use addPet && xml. either that or i can have modals... which could be easier.
+
+/*
+
       <span id="form_title">Input New Weight</span>
       <form id="weight_submit_form">
         <input
@@ -106,8 +158,5 @@ const DataInput = ({ user, fetchData }) => {
       <div id="weight_icon_container">
         <FontAwesomeIcon icon={faWeightHanging} />
       </div>
-    </div>
-  );
-};
 
-export default DataInput;
+*/
