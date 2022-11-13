@@ -9,14 +9,8 @@ const DataInput = ({ user, pets, fetchData }) => {
   let [name, setName] = useState("");
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
-
-  // let [addPet, setAddPet] = useState(false);
-  // let [addData, setAddData] = useState(false);
-
   let [showForm, setShowForm] = useState(false);
   let [content, setContent] = useState("main");
-
-  console.log(pets);
 
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -59,6 +53,7 @@ const DataInput = ({ user, pets, fetchData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //get weight into grams from lbs, if needed
     let weightTrans;
     unit === "lbs"
       ? (weightTrans = Math.floor(Number(weight) * 453.6))
@@ -66,25 +61,35 @@ const DataInput = ({ user, pets, fetchData }) => {
 
     // console.log(weightTrans, Date());
     //453.592 grams in a lb
-    if (name.length && Number(weight) > 0 && unit) {
-      console.warn("VALID");
-      axios
-        .post(`${utils.API}/users/?user=${user}`, {
-          owner: `${user}`,
-          name: name,
-          weight: weightTrans,
-          created_at: Date(),
-        })
-        .then((res) => fetchData(user))
-        .then(() => {
-          //reset form and states
-          setName("");
-          setWeight("");
-          setUnit("");
-          let form = document.querySelector("#weight_submit_form");
-          form.reset();
-        })
-        .catch((err) => console.log(err));
+    if (e.target.value === "pet") {
+      console.warn(user, name, weight, unit);
+      //validate name (exists, len, etc) / amount of pets
+      //add this pet name to the db for this user
+      //confirm a weight was given (our schema requires it...)
+      //get date (todays or manual?)
+    }
+
+    if (e.target.value === "data") {
+      if (name.length && Number(weight) > 0 && unit) {
+        console.warn("VALID");
+        axios
+          .post(`${utils.API}/users/?user=${user}`, {
+            owner: `${user}`,
+            name: name,
+            weight: weightTrans,
+            created_at: Date(),
+          })
+          .then((res) => fetchData(user))
+          .then(() => {
+            //reset form and states
+            setName("");
+            setWeight("");
+            setUnit("");
+            let form = document.querySelector("#weight_submit_form");
+            form.reset();
+          })
+          .catch((err) => console.log(err));
+      }
     }
   };
 
@@ -92,7 +97,7 @@ const DataInput = ({ user, pets, fetchData }) => {
     <div className="input_form_container">
       {!showForm && content === "main" && (
         <button
-          className="form_submit"
+          className="form_btn"
           value="pet"
           onClick={(e) => handleSelect(e)}
         >
@@ -102,7 +107,7 @@ const DataInput = ({ user, pets, fetchData }) => {
 
       {!showForm && content === "main" && (
         <button
-          className="form_submit"
+          className="form_btn"
           value="data"
           onClick={(e) => handleSelect(e)}
         >
@@ -110,14 +115,54 @@ const DataInput = ({ user, pets, fetchData }) => {
         </button>
       )}
 
-      {showForm && content === "pet" && (
+      {showForm && content === "pet" && pets.length < 5 && (
         <form>
           <button
-            className="form_submit"
+            className="form_btn form_return"
             value="return"
             onClick={(e) => handleSelect(e)}
           >
-            return pet
+            X
+          </button>
+          <input
+            type="text"
+            id="name"
+            className="formtext"
+            placeholder="pet name"
+            minLength="3"
+            onChange={(e) => handleChange(e)}
+            autocomplete="off"
+            required
+          ></input>
+          <div id="weight_container">
+            <input
+              type="text"
+              id="weight"
+              className="formtext"
+              placeholder="weight"
+              onChange={(e) => handleChange(e)}
+              autocomplete="off"
+              required
+            />
+            <select
+              name="unit"
+              onChange={(e) => handleChange(e)}
+              id="unit"
+              className="form_select"
+              required
+            >
+              <option value="">--select--</option>
+              <option value="g">g</option>
+              <option value="lbs">lbs</option>
+            </select>
+          </div>
+          <button
+            className="form_btn"
+            type="submit"
+            value="pet"
+            onClick={(e) => handleSubmit(e)}
+          >
+            ADD
           </button>
         </form>
       )}
@@ -125,11 +170,11 @@ const DataInput = ({ user, pets, fetchData }) => {
       {showForm && content === "data" && (
         <form>
           <button
-            className="form_submit"
+            className="form_btn form_return"
             value="return"
             onClick={(e) => handleSelect(e)}
           >
-            return data
+            X
           </button>
         </form>
       )}

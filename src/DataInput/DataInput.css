@@ -56,7 +56,7 @@ form {
   cursor: pointer;
 }
 
-.form_submit {
+.form_btn {
   height: 2em;
   max-width: 8vw;
   border: none;
@@ -68,8 +68,18 @@ form {
   background: var(--color-glass-transparency);
 }
 
-.form_submit:hover {
+.form_btn:hover {
   background-color: var(--color-glass-transparency-dark);
+}
+
+.form_return {
+  background: rgba(255, 20, 20, 0.4);
+  /* height 2em from form_btn */
+  width: 2em;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 #weight_icon_container {

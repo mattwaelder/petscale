@@ -91,7 +91,7 @@ function Dashboard() {
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} />
         ) : null}
-        <DataInput user={user} pets={petList} fetchData={please.fetchData} />
+        <DataInput user={name} pets={petList} fetchData={please.fetchData} />
       </div>
     </div>
   );
