@@ -62,3 +62,5 @@ export default App;
 //cant login with email after login with google?
 
 //btn for just add pet / add weight, then when one is clicked propper form takes that components place
+
+// FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY

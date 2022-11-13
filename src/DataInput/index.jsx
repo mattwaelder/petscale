@@ -5,13 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import "./DataInput.css";
 
-const DataInput = ({ user, fetchData }) => {
+const DataInput = ({ user, pets, fetchData }) => {
   let [name, setName] = useState("");
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
 
-  let [addPet, setAddPet] = useState(false);
-  let [addData, setAddData] = useState(false);
+  // let [addPet, setAddPet] = useState(false);
+  // let [addData, setAddData] = useState(false);
+
+  let [showForm, setShowForm] = useState(false);
+  let [content, setContent] = useState("main");
+
+  console.log(pets);
 
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -35,12 +40,16 @@ const DataInput = ({ user, fetchData }) => {
     //buttons should be replaced with form
     switch (e.target.value) {
       case "pet":
-        setAddPet(true);
-        setAddData(true);
+        setShowForm(true);
+        setContent("pet");
         break;
       case "data":
-        setAddData(true);
-        setAddPet(true);
+        setShowForm(true);
+        setContent("data");
+        break;
+      case "return":
+        setShowForm(false);
+        setContent("main");
         break;
       default:
         alert("Sorry, an error occurred :(");
@@ -81,7 +90,7 @@ const DataInput = ({ user, fetchData }) => {
 
   return (
     <div className="input_form_container">
-      {!addData && (
+      {!showForm && content === "main" && (
         <button
           className="form_submit"
           value="pet"
@@ -90,7 +99,8 @@ const DataInput = ({ user, fetchData }) => {
           Add New Pet
         </button>
       )}
-      {!addPet && (
+
+      {!showForm && content === "main" && (
         <button
           className="form_submit"
           value="data"
@@ -99,6 +109,31 @@ const DataInput = ({ user, fetchData }) => {
           Add Weight
         </button>
       )}
+
+      {showForm && content === "pet" && (
+        <form>
+          <button
+            className="form_submit"
+            value="return"
+            onClick={(e) => handleSelect(e)}
+          >
+            return pet
+          </button>
+        </form>
+      )}
+
+      {showForm && content === "data" && (
+        <form>
+          <button
+            className="form_submit"
+            value="return"
+            onClick={(e) => handleSelect(e)}
+          >
+            return data
+          </button>
+        </form>
+      )}
+
       <div id="weight_icon_container">
         <FontAwesomeIcon icon={faWeightHanging} />
       </div>
