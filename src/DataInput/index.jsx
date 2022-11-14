@@ -59,14 +59,28 @@ const DataInput = ({ user, pets, fetchData }) => {
       ? (weightTrans = Math.floor(Number(weight) * 453.6))
       : (weightTrans = Math.floor(Number(weight)));
 
-    // console.log(weightTrans, Date());
     //453.592 grams in a lb
     if (e.target.value === "pet") {
-      console.warn(user, name, weight, unit);
-      //validate name (exists, len, etc) / amount of pets
-      //add this pet name to the db for this user
-      //confirm a weight was given (our schema requires it...)
-      //get date (todays or manual?)
+      //form validation
+      if (pets.includes(name)) {
+        alert("that pet already exists");
+        return;
+      }
+      if (name.length <= 3) {
+        alert("names must be longer than 3 characters");
+        return;
+      }
+      if (pets.length >= 5) {
+        alert("Sorry, we can't handle more than 5 pets right now :(");
+        return;
+      }
+      if (weight === "") {
+        alert("Please enter a weight");
+      }
+      if (unit === "") {
+        alert("Please select a unit");
+      }
+      console.warn(user, name, weightTrans, unit, Date());
     }
 
     if (e.target.value === "data") {
@@ -96,23 +110,22 @@ const DataInput = ({ user, pets, fetchData }) => {
   return (
     <div className="input_form_container">
       {!showForm && content === "main" && (
-        <button
-          className="form_btn"
-          value="pet"
-          onClick={(e) => handleSelect(e)}
-        >
-          Add New Pet
-        </button>
-      )}
-
-      {!showForm && content === "main" && (
-        <button
-          className="form_btn"
-          value="data"
-          onClick={(e) => handleSelect(e)}
-        >
-          Add Weight
-        </button>
+        <>
+          <button
+            className="form_btn"
+            value="pet"
+            onClick={(e) => handleSelect(e)}
+          >
+            Add New Pet
+          </button>
+          <button
+            className="form_btn"
+            value="data"
+            onClick={(e) => handleSelect(e)}
+          >
+            Add Weight
+          </button>
+        </>
       )}
 
       {showForm && content === "pet" && pets.length < 5 && (
