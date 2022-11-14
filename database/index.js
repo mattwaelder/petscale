@@ -11,13 +11,14 @@ const sessionSchema = new mongoose.Schema({
   owner: String,
   name: String,
   weight: Number,
+  unit: String,
   created_at: Date,
 });
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  pets: Array,
-});
+// const userSchema = new mongoose.Schema({
+//   username: String,
+//   pets: Array,
+// });
 
 const PetData = mongoose.model("PetData", sessionSchema);
 
