@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import utils from "../utilities.js";
+import { please } from "../please.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import "./DataInput.css";
@@ -54,10 +55,11 @@ const DataInput = ({ user, pets, fetchData }) => {
     e.preventDefault();
 
     //get weight into grams from lbs, if needed
-    let weightTrans;
-    unit === "lbs"
-      ? (weightTrans = Math.floor(Number(weight) * 453.6))
-      : (weightTrans = Math.floor(Number(weight)));
+
+    // let weightTrans;
+    // unit === "lbs"
+    //   ? (weightTrans = Math.floor(Number(weight) * 453.6))
+    //   : (weightTrans = Math.floor(Number(weight)));
 
     //453.592 grams in a lb
     if (e.target.value === "pet") {
@@ -74,25 +76,37 @@ const DataInput = ({ user, pets, fetchData }) => {
         alert("Sorry, we can't handle more than 5 pets right now :(");
         return;
       }
-      if (weight === "") {
+      if (weight === "" || weight === 0) {
         alert("Please enter a weight");
+        return;
       }
       if (unit === "") {
         alert("Please select a unit");
+        return;
       }
-      console.warn(user, name, weightTrans, unit, Date());
+      please
+        .createPetByUser(user, name, weight, unit)
+        .then((res) => {
+          console.log(res);
+
+          //reset form and states
+          setName("");
+          setWeight("");
+          setUnit("");
+          let form = document.querySelector("#weight_submit_form");
+          form.reset();
+          setShowForm(false);
+        })
+        .catch((err) => console.log(err));
+      console.warn(user, name, weight, unit, Date());
     }
 
     if (e.target.value === "data") {
       if (name.length && Number(weight) > 0 && unit) {
         console.warn("VALID");
-        axios
-          .post(`${utils.API}/users/?user=${user}`, {
-            owner: `${user}`,
-            name: name,
-            weight: weightTrans,
-            created_at: Date(),
-          })
+
+        please
+          .createDataByUser(user, name, weight, unit)
           .then((res) => fetchData(user))
           .then(() => {
             //reset form and states
@@ -101,6 +115,7 @@ const DataInput = ({ user, pets, fetchData }) => {
             setUnit("");
             let form = document.querySelector("#weight_submit_form");
             form.reset();
+            setShowForm(false);
           })
           .catch((err) => console.log(err));
       }
@@ -111,13 +126,16 @@ const DataInput = ({ user, pets, fetchData }) => {
     <div className="input_form_container">
       {!showForm && content === "main" && (
         <>
-          <button
-            className="form_btn"
-            value="pet"
-            onClick={(e) => handleSelect(e)}
-          >
-            Add New Pet
-          </button>
+          {pets.length < 5 && (
+            <button
+              className="form_btn"
+              value="pet"
+              onClick={(e) => handleSelect(e)}
+            >
+              Add New Pet
+            </button>
+          )}
+
           <button
             className="form_btn"
             value="data"
@@ -129,7 +147,7 @@ const DataInput = ({ user, pets, fetchData }) => {
       )}
 
       {showForm && content === "pet" && pets.length < 5 && (
-        <form>
+        <form id="weight_submit_form">
           <button
             className="form_btn form_return"
             value="return"
@@ -181,7 +199,7 @@ const DataInput = ({ user, pets, fetchData }) => {
       )}
 
       {showForm && content === "data" && (
-        <form>
+        <form id="weight_submit_form">
           <button
             className="form_btn form_return"
             value="return"
@@ -200,8 +218,6 @@ const DataInput = ({ user, pets, fetchData }) => {
 };
 
 export default DataInput;
-
-//intend to have a state set for whether we are adding a pet or adding data, if either button is clicked the state goes to true and i should be able to use addPet && xml. either that or i can have modals... which could be easier.
 
 /*
 

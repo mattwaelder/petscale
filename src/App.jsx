@@ -53,14 +53,11 @@ export default App;
 
 ///////////////// post HR
 
-//add endpoint to add new user
-//add endpoint to add new pets (limit?)
 //usernames unique? or find a way to make it so we can search by user id
-//add new user schema to module.exports
 
 //should add confirm email to make sure its your email
 //cant login with email after login with google?
 
-//btn for just add pet / add weight, then when one is clicked propper form takes that components place
-
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
+
+//need to re render page after adding new pet or weight

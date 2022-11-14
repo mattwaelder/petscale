@@ -24,6 +24,11 @@ app.post("/users", (req, res) => {
   controller.postByUser(req, res);
 });
 
+app.post("/users/pet", (req, res) => {
+  console.log("post new pet");
+  controller.postPetByUser(req, res);
+});
+
 app.delete("/entries", (req, res) => {
   console.log("del");
   controller.deleteById(req, res);

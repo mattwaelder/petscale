@@ -14,7 +14,7 @@ import "./App.css";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
@@ -25,7 +25,7 @@ function Dashboard() {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      setName(data.name);
+      setUserName(data.name.split(" ").join(""));
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -43,9 +43,7 @@ function Dashboard() {
   useEffect(() => {
     if (!user) return navigate("/");
     please
-      .fetchDataByUser(
-        user.displayName ? user.displayName.split(" ").join("") : "anon"
-      )
+      .fetchDataByUser(user.displayName ? userName : "anon")
       .then((res) => {
         //gets unique pet values from weight data
         let pets = [...new Set(res.data.map((el) => el.name))];
@@ -80,7 +78,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="dashboard__container">
         Logged in as
-        <div>{name}</div>
+        <div>{userName}</div>
         <div>{user?.email}</div>
         <button className="dashboard__btn" onClick={logout}>
           Logout
@@ -91,7 +89,11 @@ function Dashboard() {
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} />
         ) : null}
-        <DataInput user={name} pets={petList} fetchData={please.fetchData} />
+        <DataInput
+          user={userName}
+          pets={petList}
+          fetchData={please.fetchData}
+        />
       </div>
     </div>
   );
