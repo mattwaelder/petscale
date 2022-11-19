@@ -47,9 +47,19 @@ form {
   flex-direction: row;
 }
 
+#weigh_date {
+  height: 2em;
+  max-width: 20%;
+  border: none;
+  padding: 5px;
+  background: var(--color-glass-transparency);
+  border-radius: 8px;
+}
+
 .form_select {
   background: var(--color-glass-transparency);
   height: 2em;
+  max-width: 20%;
   margin: 1em 0;
   border: none;
   border-radius: 8px;

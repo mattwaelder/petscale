@@ -17,13 +17,13 @@ export const please = {
     return axios.post(`${utils.API}/users/pet/?pet=${name}`, pkg);
   },
 
-  createDataByUser: (user, name, weight, unit) => {
+  createDataByUser: (user, name, weight, unit, date) => {
     let pkg = {
       owner: `${user}`,
       name: name,
       weight: weight,
       unit: unit,
-      created_at: Date(),
+      created_at: date,
     };
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
   },

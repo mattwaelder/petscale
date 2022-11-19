@@ -12,8 +12,10 @@ const DataInput = ({ user, pets, fetchData }) => {
   let [unit, setUnit] = useState("");
   let [showForm, setShowForm] = useState(false);
   let [content, setContent] = useState("main");
+  let [weighDate, setWeighDate] = useState(Date());
 
   const handleChange = (e) => {
+    console.log(e.target.id);
     switch (e.target.id) {
       case "name":
         setName(e.target.value);
@@ -24,12 +26,18 @@ const DataInput = ({ user, pets, fetchData }) => {
       case "unit":
         setUnit(e.target.value);
         break;
+      case "pet_select":
+        setName(pets[e.target.value - 1]);
+        break;
+      case "weigh_date":
+        setWeighDate(e.target.value);
+        break;
       default:
         alert("please fill all selections");
     }
   };
 
-  const handleSelect = (e) => {
+  const handleFormSelect = (e) => {
     e.preventDefault();
     console.log(e.target.value);
     //buttons should be replaced with form
@@ -102,12 +110,12 @@ const DataInput = ({ user, pets, fetchData }) => {
     }
 
     if (e.target.value === "data") {
+      console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
         console.warn("VALID");
 
         please
-          .createDataByUser(user, name, weight, unit)
-          .then((res) => fetchData(user))
+          .createDataByUser(user, name, weight, unit, weighDate)
           .then(() => {
             //reset form and states
             setName("");
@@ -117,6 +125,7 @@ const DataInput = ({ user, pets, fetchData }) => {
             form.reset();
             setShowForm(false);
           })
+          .then(() => please.fetchDataByUser(user))
           .catch((err) => console.log(err));
       }
     }
@@ -130,7 +139,7 @@ const DataInput = ({ user, pets, fetchData }) => {
             <button
               className="form_btn"
               value="pet"
-              onClick={(e) => handleSelect(e)}
+              onClick={(e) => handleFormSelect(e)}
             >
               Add New Pet
             </button>
@@ -139,7 +148,7 @@ const DataInput = ({ user, pets, fetchData }) => {
           <button
             className="form_btn"
             value="data"
-            onClick={(e) => handleSelect(e)}
+            onClick={(e) => handleFormSelect(e)}
           >
             Add Weight
           </button>
@@ -151,7 +160,7 @@ const DataInput = ({ user, pets, fetchData }) => {
           <button
             className="form_btn form_return"
             value="return"
-            onClick={(e) => handleSelect(e)}
+            onClick={(e) => handleFormSelect(e)}
           >
             X
           </button>
@@ -203,9 +212,60 @@ const DataInput = ({ user, pets, fetchData }) => {
           <button
             className="form_btn form_return"
             value="return"
-            onClick={(e) => handleSelect(e)}
+            onClick={(e) => handleFormSelect(e)}
           >
             X
+          </button>
+          <select
+            name="pet_select"
+            onChange={(e) => handleChange(e)}
+            id="pet_select"
+            className="form_select"
+            required
+          >
+            <option value="">--select--</option>
+            {pets[0] && <option value="1">{pets[0]}</option>}
+            {pets[1] && <option value="2">{pets[1]}</option>}
+            {pets[2] && <option value="3">{pets[2]}</option>}
+            {pets[3] && <option value="4">{pets[3]}</option>}
+            {pets[4] && <option value="5">{pets[4]}</option>}
+          </select>
+
+          <input
+            type="date"
+            id="weigh_date"
+            onChange={(e) => handleChange(e)}
+          ></input>
+
+          <input
+            type="text"
+            id="weight"
+            className="formtext"
+            placeholder="weight"
+            onChange={(e) => handleChange(e)}
+            autocomplete="off"
+            required
+          />
+
+          <select
+            name="unit"
+            onChange={(e) => handleChange(e)}
+            id="unit"
+            className="form_select"
+            required
+          >
+            <option value="">--select--</option>
+            <option value="g">g</option>
+            <option value="lbs">lbs</option>
+          </select>
+
+          <button
+            className="form_btn"
+            type="submit"
+            value="data"
+            onClick={(e) => handleSubmit(e)}
+          >
+            ADD
           </button>
         </form>
       )}
