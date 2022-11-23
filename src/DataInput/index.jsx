@@ -5,6 +5,8 @@ import { please } from "../please.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import "./DataInput.css";
+import InputFormData from "./inputFormData";
+import InputFormPet from "./inputFormPet";
 
 const DataInput = ({ user, pets, fetchData }) => {
   let [name, setName] = useState("");
@@ -135,6 +137,13 @@ const DataInput = ({ user, pets, fetchData }) => {
     <div className="input_form_container">
       {!showForm && content === "main" && (
         <>
+          <button
+            className="form_btn"
+            value="data"
+            onClick={(e) => handleFormSelect(e)}
+          >
+            Add Weight
+          </button>
           {pets.length < 5 && (
             <button
               className="form_btn"
@@ -144,130 +153,25 @@ const DataInput = ({ user, pets, fetchData }) => {
               Add New Pet
             </button>
           )}
-
-          <button
-            className="form_btn"
-            value="data"
-            onClick={(e) => handleFormSelect(e)}
-          >
-            Add Weight
-          </button>
         </>
       )}
 
-      {showForm && content === "pet" && pets.length < 5 && (
-        <form id="weight_submit_form">
-          <button
-            className="form_btn form_return"
-            value="return"
-            onClick={(e) => handleFormSelect(e)}
-          >
-            X
-          </button>
-          <input
-            type="text"
-            id="name"
-            className="formtext"
-            placeholder="pet name"
-            minLength="3"
-            onChange={(e) => handleChange(e)}
-            autocomplete="off"
-            required
-          ></input>
-          <div id="weight_container">
-            <input
-              type="text"
-              id="weight"
-              className="formtext"
-              placeholder="weight"
-              onChange={(e) => handleChange(e)}
-              autocomplete="off"
-              required
-            />
-            <select
-              name="unit"
-              onChange={(e) => handleChange(e)}
-              id="unit"
-              className="form_select"
-              required
-            >
-              <option value="">--select--</option>
-              <option value="g">g</option>
-              <option value="lbs">lbs</option>
-            </select>
-          </div>
-          <button
-            className="form_btn"
-            type="submit"
-            value="pet"
-            onClick={(e) => handleSubmit(e)}
-          >
-            ADD
-          </button>
-        </form>
+      {showForm && content === "data" && (
+        <InputFormData
+          pets={pets}
+          handleFormSelect={handleFormSelect}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       )}
 
-      {showForm && content === "data" && (
-        <form id="weight_submit_form">
-          <button
-            className="form_btn form_return"
-            value="return"
-            onClick={(e) => handleFormSelect(e)}
-          >
-            X
-          </button>
-          <select
-            name="pet_select"
-            onChange={(e) => handleChange(e)}
-            id="pet_select"
-            className="form_select"
-            required
-          >
-            <option value="">--select--</option>
-            {pets[0] && <option value="1">{pets[0]}</option>}
-            {pets[1] && <option value="2">{pets[1]}</option>}
-            {pets[2] && <option value="3">{pets[2]}</option>}
-            {pets[3] && <option value="4">{pets[3]}</option>}
-            {pets[4] && <option value="5">{pets[4]}</option>}
-          </select>
-
-          <input
-            type="date"
-            id="weigh_date"
-            onChange={(e) => handleChange(e)}
-          ></input>
-
-          <input
-            type="text"
-            id="weight"
-            className="formtext"
-            placeholder="weight"
-            onChange={(e) => handleChange(e)}
-            autocomplete="off"
-            required
-          />
-
-          <select
-            name="unit"
-            onChange={(e) => handleChange(e)}
-            id="unit"
-            className="form_select"
-            required
-          >
-            <option value="">--select--</option>
-            <option value="g">g</option>
-            <option value="lbs">lbs</option>
-          </select>
-
-          <button
-            className="form_btn"
-            type="submit"
-            value="data"
-            onClick={(e) => handleSubmit(e)}
-          >
-            ADD
-          </button>
-        </form>
+      {showForm && content === "pet" && pets.length < 5 && (
+        <InputFormPet
+          pets={pets}
+          handleFormSelect={handleFormSelect}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       )}
 
       <div id="weight_icon_container">
