@@ -68,7 +68,7 @@ const InputFormData = ({
       </div>
 
       <button
-        className="form_btn"
+        className="form_btn form_btn_add"
         type="submit"
         value="data"
         onClick={(e) => handleSubmit(e)}

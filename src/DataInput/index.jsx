@@ -136,9 +136,9 @@ const DataInput = ({ user, pets, fetchData }) => {
   return (
     <div className="input_form_container">
       {!showForm && content === "main" && (
-        <>
+        <div className="main_btns_container">
           <button
-            className="form_btn"
+            className="form_btn form_btn_main"
             value="data"
             onClick={(e) => handleFormSelect(e)}
           >
@@ -146,14 +146,14 @@ const DataInput = ({ user, pets, fetchData }) => {
           </button>
           {pets.length < 5 && (
             <button
-              className="form_btn"
+              className="form_btn form_btn_main"
               value="pet"
               onClick={(e) => handleFormSelect(e)}
             >
               Add New Pet
             </button>
           )}
-        </>
+        </div>
       )}
 
       {showForm && content === "data" && (

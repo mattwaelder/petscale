@@ -48,7 +48,7 @@ const InputFormPet = ({
         </select>
       </div>
       <button
-        className="form_btn"
+        className="form_btn form_btn_add"
         type="submit"
         value="pet"
         onClick={(e) => handleSubmit(e)}
