@@ -16,16 +16,17 @@ function Reset() {
   }, [user, loading]);
 
   return (
-    <div className="container">
+    <div className="form-signin m-auto text-center mt-5">
+      <h3 className="mb-3">Reset Password</h3>
       <input
         type="text"
-        className="form-control"
+        className="form-control mb-2"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="E-mail Address"
       />
       <button
-        className="btn-danger"
+        className="btn btn-primary mb-3"
         onClick={() => sendPasswordResetEmail(email)}
       >
         Send password reset email

@@ -1,6 +1,7 @@
 import React from "react";
 import "./ListItem.css";
 import utils from "../../utilities.js";
+import { please } from "../../please.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -10,7 +11,7 @@ const ListItem = ({ data, user, fetchData }) => {
     let id = e.target.closest(".trash").id;
     axios
       .delete(`${utils.API}/entries/?entry=${id}`)
-      .then(() => fetchData(user))
+      .then(() => please.fetchDataByUser(user))
       .catch((err) => console.log(err));
   };
 

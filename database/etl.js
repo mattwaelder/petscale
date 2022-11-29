@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { parse } = require("csv-parse");
-const PetData = require("./index.js");
+const { PetData } = require("./index.js");
 
 // fs.readFile(
 //   "/Users/mattwaelder/hackreactor/mvp/petscale/csv/weighty bois - Sheet1.csv",
@@ -26,12 +26,14 @@ fs.createReadStream(
       owner: "mattwaelder",
       name: "cowpig",
       weight: row[1],
+      unit: "g",
       created_at: new Date(row[0]),
     };
     let entryB = {
       owner: "mattwaelder",
       name: "bagel",
       weight: row[2],
+      unit: "g",
       created_at: new Date(row[0]),
     };
     exData.push(entryC, entryB);

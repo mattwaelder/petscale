@@ -12,6 +12,7 @@ module.exports.create = (req) => {
     owner: req.owner,
     name: req.name,
     weight: req.weight,
+    unit: req.unit,
     created_at: req.created_at,
   });
 };

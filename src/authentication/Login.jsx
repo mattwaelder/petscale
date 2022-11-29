@@ -52,14 +52,14 @@ function Login() {
           >
             Sign In
           </button>
-          {/* <span className="m-2">Or</span> */}
           <div className="container">
-            <span>or </span>
+            <span className="me-2">or</span>
             <button
-              className="btn btn-secondary login__btn login__google ms-1"
+              className="btn login__btn login__google ms-1 bg-light text-dark position-relative"
               onClick={signInWithGoogle}
             >
-              <FcGoogle /> Login with Google
+              <FcGoogle className="h4 position-absolute top-30 start-0 ms-1" />
+              <span className="ms-4">Login with Google</span>
             </button>
           </div>
         </div>
@@ -71,40 +71,6 @@ function Login() {
         </div>
       </div>
     </div>
-
-    // <div className="login">
-    //   <div className="login__container">
-    //     <input
-    //       type="text"
-    //       className="login__textBox"
-    //       value={email}
-    //       onChange={(e) => setEmail(e.target.value)}
-    //       placeholder="E-mail Address"
-    //     />
-    //     <input
-    //       type="password"
-    //       className="login__textBox"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       placeholder="Password"
-    //     />
-    //     <button
-    //       className="login__btn"
-    //       onClick={() => logInWithEmailAndPassword(email, password)}
-    //     >
-    //       Login
-    //     </button>
-    //     <button className="login__btn login__google" onClick={signInWithGoogle}>
-    //       Login with Google
-    //     </button>
-    //     <div>
-    //       <Link to="/reset">Forgot Password</Link>
-    //     </div>
-    //     <div>
-    //       Don't have an account? <Link to="/register">Register</Link> now.
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 export default Login;
