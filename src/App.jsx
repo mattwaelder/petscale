@@ -61,3 +61,5 @@ export default App;
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
 //need to re render page after adding new pet or weight
+
+//BUG weight inputs are being gathered by react properly but are being put into the db one day before the day of selection
