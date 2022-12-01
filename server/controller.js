@@ -11,6 +11,7 @@ module.exports.getByUser = (req, res) => {
 
 module.exports.postByUser = (req, res) => {
   console.log("c create");
+  console.log(req.body);
   model
     .create(req.body)
     .then(() => res.sendStatus(201))
