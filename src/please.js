@@ -18,12 +18,16 @@ export const please = {
   },
 
   createDataByUser: (user, name, weight, unit, date) => {
+    let dateArr = date.split("-");
+    //splitting date to array [yyyy, mm, dd] fixes utc issue
+    let newDate = new Date(dateArr);
+    //
     let pkg = {
       owner: `${user}`,
       name: name,
       weight: weight,
       unit: unit,
-      created_at: date,
+      created_at: newDate,
     };
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
   },
