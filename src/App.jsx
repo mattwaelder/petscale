@@ -60,4 +60,6 @@ export default App;
 
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
-//need to re render page after adding new pet or weight
+//graph colors are inverted when you add a new pet
+//should move color obj to utilities for ref within graph & list
+//some sort of issue with dates, dates are showing up properly but placing improperly on the graph... need more testing on this
