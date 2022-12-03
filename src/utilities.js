@@ -8,7 +8,6 @@ const utils = {
   API: `http://localhost:${5050}`,
 
   getFormattedDate: (messyDate) => {
-    console.log(messyDate);
     let dateOptions = {
       year: "numeric",
       month: "long",

@@ -8,7 +8,7 @@ import "./DataInput.css";
 import InputFormData from "./inputFormData";
 import InputFormPet from "./inputFormPet";
 
-const DataInput = ({ user, pets, fetchData }) => {
+const DataInput = ({ user, pets, fetchData, refresh }) => {
   let [name, setName] = useState("");
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
@@ -106,6 +106,7 @@ const DataInput = ({ user, pets, fetchData }) => {
           let form = document.querySelector("#weight_submit_form");
           form.reset();
           setShowForm(false);
+          setContent("main");
         })
         .catch((err) => console.log(err));
       console.warn(user, name, weight, unit, Date());
@@ -126,8 +127,10 @@ const DataInput = ({ user, pets, fetchData }) => {
             let form = document.querySelector("#weight_submit_form");
             form.reset();
             setShowForm(false);
+            setContent("main");
           })
           .then(() => please.fetchDataByUser(user))
+          .then(() => refresh((val) => !val))
           .catch((err) => console.log(err));
       }
     }

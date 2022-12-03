@@ -19,6 +19,8 @@ function Dashboard() {
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
   const [petData, setPetData] = useState([]);
+  //using setRefreshPage as a lifted state to update entire dashboard via effect
+  const [refreshPage, setRefreshPage] = useState(false);
 
   const fetchUserName = async () => {
     try {
@@ -40,6 +42,11 @@ function Dashboard() {
     console.log("user: ", user);
   }, [user, loading]);
 
+  // useEffect(() => {
+  //   //using this as a lifted state to allow subcomponents to refresh sibling components
+  //   console.warn("page refresh called");
+  // }, [refreshPage]);
+
   useEffect(() => {
     if (!user) return navigate("/");
     please
@@ -52,7 +59,7 @@ function Dashboard() {
         setWeightData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [refreshPage]);
 
   useEffect(() => {
     //create datasets for each possible pet
@@ -84,15 +91,21 @@ function Dashboard() {
           Logout
         </button>
       </div>
-      <DataList data={weightData} user={user} fetchData={please.fetchData} />
+      <DataList
+        data={weightData}
+        user={user}
+        fetchData={please.fetchData}
+        refresh={setRefreshPage}
+      />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
-          <LineChart pets={petList} data={petData} />
+          <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
         ) : null}
         <DataInput
           user={userName}
           pets={petList}
           fetchData={please.fetchData}
+          refresh={setRefreshPage}
         />
       </div>
     </div>

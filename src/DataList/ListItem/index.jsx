@@ -6,12 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const ListItem = ({ data, user, fetchData }) => {
+const ListItem = ({ data, user, fetchData, refresh }) => {
   const handleDel = (e) => {
     let id = e.target.closest(".trash").id;
     axios
       .delete(`${utils.API}/entries/?entry=${id}`)
       .then(() => please.fetchDataByUser(user))
+      .then(() => refresh((val) => !val))
       .catch((err) => console.log(err));
   };
 
