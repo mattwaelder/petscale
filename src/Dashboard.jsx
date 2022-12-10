@@ -57,6 +57,7 @@ function Dashboard() {
 
         setPetList(pets);
         setWeightData(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, [refreshPage]);
@@ -95,6 +96,7 @@ function Dashboard() {
           borderColor: `${colorSet[i + 5]}`,
         };
       });
+    console.log(prunedData);
 
     setPetData(prunedData);
   }, [weightData]);

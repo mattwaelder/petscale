@@ -94,8 +94,12 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
         alert("Please select a unit");
         return;
       }
+
+      console.log(name, weight, unit, weighDate);
+
+      //create pet by user needs to have date added
       please
-        .createPetByUser(user, name, weight, unit)
+        .createPetByUser(user, name, weight, unit, weighDate)
         .then((res) => {
           console.log(res);
 
@@ -108,6 +112,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
           setShowForm(false);
           setContent("main");
         })
+        .then(() => refresh((val) => !val))
         .catch((err) => console.log(err));
       console.warn(user, name, weight, unit, Date());
     }
@@ -115,8 +120,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
     if (e.target.value === "data") {
       console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
-        console.warn("VALID");
-
         please
           .createDataByUser(user, name, weight, unit, weighDate)
           .then(() => {
@@ -129,7 +132,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
             setShowForm(false);
             setContent("main");
           })
-          .then(() => please.fetchDataByUser(user))
           .then(() => refresh((val) => !val))
           .catch((err) => console.log(err));
       }
