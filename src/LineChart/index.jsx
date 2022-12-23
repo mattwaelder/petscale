@@ -1,5 +1,14 @@
 import React from "react";
-import { Chart as ChartJS } from "chart.js/auto";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import utils from "../utilities.js";
 import "chartjs-adapter-date-fns";
@@ -15,16 +24,53 @@ const LineChart = ({ pets, data }) => {
   // let data4 = data.datasets ? data.datasets[3] : null;
   // let data5 = data.datasets ? data.datasets[4] : null;
 
+  console.log(data);
+  // let options = {
+  //   scales: { x: { type: "time", time: { year: "YYYY" } } },
+  // };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Chart.js Line Chart",
+      },
+    },
+    scales: { x: { type: "time" } },
+  };
+
+  // const labels = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  // ];
+
+  //for some reason, I am unable to reverse "data" with reverse()
+  //despite it being confirmed to be an array... is this bc react?
   return (
     <div className="chart_container">
       <Line
+        options={options}
         data={{
+          // labels,
           datasets: data,
-          options: {
-            maintainAspectRatio: false,
-            responseive: true,
-            scales: { x: { type: "time" } },
-          },
+          // options: {
+          //   maintainAspectRatio: false,
+          //   responseive: true,
+          //   scales: {
+          //     x: {
+          //       type: "time",
+          //     },
+          //   },
+          // },
         }}
       />
       {/* <Line

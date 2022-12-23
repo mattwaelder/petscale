@@ -3,6 +3,7 @@ import utils from "./utilities.js";
 
 export const please = {
   fetchDataByUser: (user) => {
+    console.log("please get by user", user);
     return axios.get(`${utils.API}/users/?user=${user}`);
   },
 

@@ -27,7 +27,9 @@ function Dashboard() {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      setUserName(data.name.split(" ").join(""));
+      setUserName(
+        data.name.includes(" ") ? data.name.split(" ").join("") : data.name
+      );
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
@@ -49,18 +51,22 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) return navigate("/");
+    console.log("username is ", userName);
     please
-      .fetchDataByUser(user.displayName ? userName : "anon")
+      // .fetchDataByUser(user.displayName ? userName : "anon")
+      .fetchDataByUser(userName)
       .then((res) => {
         //gets unique pet values from weight data
         let pets = [...new Set(res.data.map((el) => el.name))];
 
         setPetList(pets);
         setWeightData(res.data);
-        console.log(res.data);
+        // console.log(res.data);
+        console.log("////////", userName, res.data);
+        res.data.forEach((x) => console.log(x.created_at));
       })
       .catch((err) => console.log(err));
-  }, [refreshPage]);
+  }, [refreshPage, userName]);
 
   useEffect(() => {
     //create datasets for each possible pet
@@ -94,9 +100,10 @@ function Dashboard() {
           data: d,
           backgroundColor: `${colorSet[i]}`,
           borderColor: `${colorSet[i + 5]}`,
+          // options: { scales: { x: { type: "time" } } },
         };
       });
-    console.log(prunedData);
+    // console.log(prunedData);
 
     setPetData(prunedData);
   }, [weightData]);

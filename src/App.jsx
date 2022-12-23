@@ -63,3 +63,10 @@ export default App;
 //graph colors are inverted when you add a new pet
 //should move color obj to utilities for ref within graph & list
 //some sort of issue with dates, dates are showing up properly but placing improperly on the graph... need more testing on this
+
+//i think that the issue with the date is one of 2 things...
+//x axis isnt actually based on dates (lack of logic / setup incorrectly)
+//or
+//something to do with it being a dataset vs data (issue with how its reading the dataset)
+
+//i need to play with the chart.js options so that it not only realizes its time, but that it also realizes its time over more than a few ms
