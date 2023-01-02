@@ -1,6 +1,19 @@
 import React from "react";
+// import {
+//   Chart as ChartJS,
+//   TimeScale,
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+// } from "chart.js/auto";
+
 import {
   Chart as ChartJS,
+  TimeScale, //Import timescale instead of category for X axis
   CategoryScale,
   LinearScale,
   PointElement,
@@ -8,11 +21,23 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js/auto";
+} from "chart.js";
+
 import { Line } from "react-chartjs-2";
 import utils from "../utilities.js";
 import "chartjs-adapter-date-fns";
 import "./LineChart.css";
+
+ChartJS.register(
+  TimeScale, //Register timescale instead of category for X axis
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 //MUST create array of objects to pass in for datasets, then merely assign
 
@@ -40,7 +65,7 @@ const LineChart = ({ pets, data }) => {
         text: "Chart.js Line Chart",
       },
     },
-    scales: { x: { type: "time" } },
+    // scales: { x: { type: "time" } },
   };
 
   // const labels = [

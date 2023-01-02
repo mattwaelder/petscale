@@ -63,7 +63,7 @@ function Dashboard() {
         setWeightData(res.data);
         // console.log(res.data);
         console.log("////////", userName, res.data);
-        res.data.forEach((x) => console.log(x.created_at));
+        // res.data.forEach((x) => console.log(x.created_at));
       })
       .catch((err) => console.log(err));
   }, [refreshPage, userName]);
