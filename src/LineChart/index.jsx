@@ -49,7 +49,7 @@ const LineChart = ({ pets, data }) => {
   // let data4 = data.datasets ? data.datasets[3] : null;
   // let data5 = data.datasets ? data.datasets[4] : null;
 
-  console.log(data);
+  // console.log(data);
   // let options = {
   //   scales: { x: { type: "time", time: { year: "YYYY" } } },
   // };
@@ -59,6 +59,16 @@ const LineChart = ({ pets, data }) => {
     plugins: {
       legend: {
         position: "top",
+      },
+      tooltip: {
+        callbacks: {
+          title: (context) => {
+            let hoverDate = `${context[0].label.split(",")[0]}, ${
+              context[0].label.split(",")[1]
+            }`;
+            return hoverDate;
+          },
+        },
       },
       title: {
         display: true,

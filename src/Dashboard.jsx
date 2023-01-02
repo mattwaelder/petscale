@@ -101,6 +101,17 @@ function Dashboard() {
           backgroundColor: `${colorSet[i]}`,
           borderColor: `${colorSet[i + 5]}`,
           // options: { scales: { x: { type: "time" } } },
+          options: {
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (context) => {
+                    console.log(context);
+                  },
+                },
+              },
+            },
+          },
         };
       });
     // console.log(prunedData);

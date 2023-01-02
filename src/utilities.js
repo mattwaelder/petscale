@@ -22,17 +22,18 @@ const utils = {
   },
 
   getFormattedDateGraph: (messyDate) => {
-    let dateOptions = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      weekday: "long",
-    };
-    //date constructor to apply dateOptions
-    let date = new Date(messyDate).toLocaleDateString("en-US", dateOptions);
-    //removing weekday from date
-    let formattedDate = date.split(", ").slice(1).join(", ");
-    return formattedDate;
+    // let dateOptions = {
+    //   year: "numeric",
+    //   month: "numeric",
+    //   day: "numeric",
+    //   weekday: "long",
+    // };
+    // //date constructor to apply dateOptions
+    // let date = new Date(messyDate).toLocaleDateString("en-US", dateOptions);
+    // //removing weekday from date
+    // let formattedDate = date.split(", ").slice(1).join(", ");
+    // return formattedDate;
+    return messyDate.split("T")[0];
   },
 
   getLineGraphValues: (petList, data, petNum) => {
@@ -40,8 +41,8 @@ const utils = {
       .map((d) =>
         d.name === petList[petNum]
           ? {
-              // x: utils.getFormattedDateGraph(d.created_at),
-              x: d.created_at,
+              x: utils.getFormattedDateGraph(d.created_at),
+              // x: d.created_at,
               y: d.weight,
             }
           : null
