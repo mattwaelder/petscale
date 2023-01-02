@@ -40,7 +40,8 @@ const utils = {
       .map((d) =>
         d.name === petList[petNum]
           ? {
-              x: utils.getFormattedDateGraph(d.created_at),
+              // x: utils.getFormattedDateGraph(d.created_at),
+              x: d.created_at,
               y: d.weight,
             }
           : null

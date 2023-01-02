@@ -65,7 +65,7 @@ const LineChart = ({ pets, data }) => {
         text: "Chart.js Line Chart",
       },
     },
-    // scales: { x: { type: "time" } },
+    scales: { x: { type: "time" } },
   };
 
   // const labels = [
