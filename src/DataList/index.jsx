@@ -15,7 +15,6 @@ const DataList = ({ data, user, fetchData, refresh }) => {
                 user={user}
                 fetchData={fetchData}
                 refresh={refresh}
-                // type={wanted to add prop for if weight was good or bad, but this requires some ref to pet as well, not just index. i think to get this going properly in the future im goin to want a full list of weights by pet in state {pet: "cowpig", weights: [{}, {}]}}
               />
             );
           })

@@ -40,30 +40,21 @@ function Dashboard() {
     if (loading) return;
     if (!user) return navigate("/");
     fetchUserName();
-    //
-    console.log("user: ", user);
   }, [user, loading]);
-
-  // useEffect(() => {
-  //   //using this as a lifted state to allow subcomponents to refresh sibling components
-  //   console.warn("page refresh called");
-  // }, [refreshPage]);
 
   useEffect(() => {
     if (!user) return navigate("/");
     console.log("username is ", userName);
+
+    //get data from db for user
     please
-      // .fetchDataByUser(user.displayName ? userName : "anon")
       .fetchDataByUser(userName)
       .then((res) => {
-        //gets unique pet values from weight data
+        //get unique pet names from weight data
         let pets = [...new Set(res.data.map((el) => el.name))];
-
         setPetList(pets);
+
         setWeightData(res.data);
-        // console.log(res.data);
-        console.log("////////", userName, res.data);
-        // res.data.forEach((x) => console.log(x.created_at));
       })
       .catch((err) => console.log(err));
   }, [refreshPage, userName]);
@@ -78,6 +69,7 @@ function Dashboard() {
 
     let fullSet = [d1, d2, d3, d4, d5];
 
+    //color value obj for graph (0 matches with 5, 1 with 6)
     let colorSet = {
       0: "rgba(200,50,50,0.8)",
       1: "rgba(50,50,200,0.8)",
@@ -90,6 +82,7 @@ function Dashboard() {
       8: "rgba(200,0,200,0.5)",
       9: "rgba(20,20,20,0.5)",
     };
+
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
@@ -100,7 +93,6 @@ function Dashboard() {
           data: d,
           backgroundColor: `${colorSet[i]}`,
           borderColor: `${colorSet[i + 5]}`,
-          // options: { scales: { x: { type: "time" } } },
           options: {
             plugins: {
               tooltip: {
@@ -114,7 +106,6 @@ function Dashboard() {
           },
         };
       });
-    // console.log(prunedData);
 
     setPetData(prunedData);
   }, [weightData]);
@@ -150,40 +141,3 @@ function Dashboard() {
   );
 }
 export default Dashboard;
-
-/*
-
-return(
-  <DataList data={weightData} user={user} fetchData={fetchData} />
-      <div className="graph_input_container">
-        {weightData.length && weightData.length > 0 ? (
-          <LineChart
-            cowpig={weightData
-              .map((d) =>
-                d.name === "cowpig"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-            bagel={weightData
-              .map((d) =>
-                d.name === "bagel"
-                  ? {
-                      x: utils.getFormattedDateGraph(d.created_at),
-                      y: d.weight,
-                    }
-                  : null
-              )
-              .filter((x) => x)
-              .reverse()}
-          />
-        ) : null}
-        <DataInput user={user} fetchData={fetchData} />
-      </div>
-)
-
-*/

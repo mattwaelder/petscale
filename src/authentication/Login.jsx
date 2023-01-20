@@ -8,6 +8,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FcGoogle } from "react-icons/fc";
 // import "./Login.css";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +47,6 @@ function Login() {
         </div>
         <div className="d-grid gap-2 d-md-block mb-3">
           <button
-            // type="submit"
             className="btn btn-primary mb-2"
             onClick={() => logInWithEmailAndPassword(email, password)}
           >

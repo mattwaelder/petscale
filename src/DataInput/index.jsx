@@ -39,10 +39,10 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
     }
   };
 
+  //displays correct form based on event value
   const handleFormSelect = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    //buttons should be replaced with form
+    // console.log(e.target.value);
     switch (e.target.value) {
       case "pet":
         setShowForm(true);
@@ -63,13 +63,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //get weight into grams from lbs, if needed
-
-    // let weightTrans;
-    // unit === "lbs"
-    //   ? (weightTrans = Math.floor(Number(weight) * 453.6))
-    //   : (weightTrans = Math.floor(Number(weight)));
 
     //453.592 grams in a lb
     if (e.target.value === "pet") {
@@ -97,12 +90,10 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
 
       console.log(name, weight, unit, weighDate);
 
-      //create pet by user needs to have date added
+      // update the db
       please
         .createPetByUser(user, name, weight, unit, weighDate)
         .then((res) => {
-          console.log(res);
-
           //reset form and states
           setName("");
           setWeight("");
@@ -110,6 +101,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
           let form = document.querySelector("#weight_submit_form");
           form.reset();
           setShowForm(false);
+          //remove the form
           setContent("main");
         })
         .then(() => refresh((val) => !val))
