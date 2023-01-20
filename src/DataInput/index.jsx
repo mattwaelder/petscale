@@ -8,7 +8,7 @@ import "./DataInput.css";
 import InputFormData from "./inputFormData";
 import InputFormPet from "./inputFormPet";
 
-const DataInput = ({ user, pets, fetchData }) => {
+const DataInput = ({ user, pets, fetchData, refresh }) => {
   let [name, setName] = useState("");
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
@@ -39,10 +39,10 @@ const DataInput = ({ user, pets, fetchData }) => {
     }
   };
 
+  //displays correct form based on event value
   const handleFormSelect = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
-    //buttons should be replaced with form
+    // console.log(e.target.value);
     switch (e.target.value) {
       case "pet":
         setShowForm(true);
@@ -63,13 +63,6 @@ const DataInput = ({ user, pets, fetchData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //get weight into grams from lbs, if needed
-
-    // let weightTrans;
-    // unit === "lbs"
-    //   ? (weightTrans = Math.floor(Number(weight) * 453.6))
-    //   : (weightTrans = Math.floor(Number(weight)));
 
     //453.592 grams in a lb
     if (e.target.value === "pet") {
@@ -94,11 +87,13 @@ const DataInput = ({ user, pets, fetchData }) => {
         alert("Please select a unit");
         return;
       }
-      please
-        .createPetByUser(user, name, weight, unit)
-        .then((res) => {
-          console.log(res);
 
+      console.log(name, weight, unit, weighDate);
+
+      // update the db
+      please
+        .createPetByUser(user, name, weight, unit, weighDate)
+        .then((res) => {
           //reset form and states
           setName("");
           setWeight("");
@@ -106,7 +101,10 @@ const DataInput = ({ user, pets, fetchData }) => {
           let form = document.querySelector("#weight_submit_form");
           form.reset();
           setShowForm(false);
+          //remove the form
+          setContent("main");
         })
+        .then(() => refresh((val) => !val))
         .catch((err) => console.log(err));
       console.warn(user, name, weight, unit, Date());
     }
@@ -114,8 +112,6 @@ const DataInput = ({ user, pets, fetchData }) => {
     if (e.target.value === "data") {
       console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
-        console.warn("VALID");
-
         please
           .createDataByUser(user, name, weight, unit, weighDate)
           .then(() => {
@@ -126,8 +122,9 @@ const DataInput = ({ user, pets, fetchData }) => {
             let form = document.querySelector("#weight_submit_form");
             form.reset();
             setShowForm(false);
+            setContent("main");
           })
-          .then(() => please.fetchDataByUser(user))
+          .then(() => refresh((val) => !val))
           .catch((err) => console.log(err));
       }
     }

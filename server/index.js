@@ -15,7 +15,7 @@ app.use(cors());
 //////////////////////////////////////////////
 
 app.get("/users", (req, res) => {
-  // console.log("fetch", req.query.user);
+  console.log("fetch", req.query.user);
   controller.getByUser(req.query.user, res);
 });
 

@@ -1,11 +1,14 @@
 const model = require("./model.js");
 
 module.exports.getByUser = (req, res) => {
-  console.log("c get all");
+  console.log("c get all", req);
   model
     .getAllByUser(req)
-    .exec()
-    .then((data) => res.send(data))
+    // .exec()
+    .then((data) => {
+      console.log(data);
+      res.send(data);
+    })
     .catch((err) => console.log(err));
 };
 
