@@ -6,7 +6,6 @@ module.exports.getByUser = (req, res) => {
     .getAllByUser(req)
     // .exec()
     .then((data) => {
-      console.log(data);
       res.send(data);
     })
     .catch((err) => console.log(err));
@@ -14,7 +13,6 @@ module.exports.getByUser = (req, res) => {
 
 module.exports.postByUser = (req, res) => {
   console.log("c create");
-  console.log(req.body);
   model
     .create(req.body)
     .then(() => res.sendStatus(201))
@@ -23,7 +21,6 @@ module.exports.postByUser = (req, res) => {
 
 module.exports.postPetByUser = (req, res) => {
   console.log("create new data");
-  console.log(req.body);
   model
     .create(req.body)
     .then(() => res.sendStatus(201))

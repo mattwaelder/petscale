@@ -24,6 +24,8 @@
     var(--color-secondary) 0%,
     rgb(166, 193, 238) 100%
   );
+
+  --modal-bg: rgb(200, 200, 0);
 }
 
 html body {

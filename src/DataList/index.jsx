@@ -6,17 +6,25 @@ import "./DataList.css";
 import ListItem from "./ListItem";
 
 const DataList = ({ data, user, fetchData, refresh }) => {
-  // const handleDel = (e) => {
-  //   console.log(e.target);
-  //   // let id = e.target.closest(".trash").id;
-  //   // console.log(`deleting ${id}`);
-  //   // axios
-  //   //   .delete(`${utils.API}/entries/?entry=${id}`)
-  //   //   .then(() => please.fetchDataByUser(user))
-  //   //   .then(() => refresh((val) => !val))
-  //   //   .catch((err) => console.log(err));
-  // };
-  let [delId, setDelId] = useState();
+  console.log(data);
+
+  const handleDel = () => {
+    // let id = e.target.closest(".trash").id;
+    console.log(delEntry._id);
+
+    axios
+      .delete(`${utils.API}/entries/?entry=${delEntry._id}`)
+      .then(() => please.fetchDataByUser(user))
+      .then(() => refresh((val) => !val))
+      .catch((err) => console.log(err));
+  };
+
+  //obj of selected list item for deletion (used in modal)
+  let [delEntry, setDelEntry] = useState({
+    id: undefined,
+    name: undefined,
+    created_ad: undefined,
+  });
 
   return (
     <div className="data_list_container">
@@ -30,7 +38,7 @@ const DataList = ({ data, user, fetchData, refresh }) => {
                 user={user}
                 fetchData={fetchData}
                 refresh={refresh}
-                setDelId={setDelId}
+                setDelEntry={setDelEntry}
               />
             );
           })
@@ -46,10 +54,10 @@ const DataList = ({ data, user, fetchData, refresh }) => {
         aria-hidden="true"
       >
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content text-dark">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Delete this entry for {`${data.name}`}?
+              <h1 class="modal-title fs-5 " id="exampleModalLabel">
+                Delete this entry for {`${delEntry.name}`}?
               </h1>
               <button
                 type="button"
@@ -58,21 +66,18 @@ const DataList = ({ data, user, fetchData, refresh }) => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">{`${data.weight} ${(data.unit = "g"
-              ? "grams"
-              : "lbs")} on date`}</div>
+            <div class="modal-body text-center fs-5 fw-light">
+              {`
+            ${utils.getFormattedDate(delEntry.created_at)}`}
+              <br></br>
+              {`${delEntry.weight} ${(delEntry.unit = "g" ? "grams" : "lbs")}`}
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
                 class="btn btn-danger"
-                onClick={() => console.log(delId)}
+                data-bs-dismiss="modal"
+                onClick={() => handleDel()}
               >
                 Delete
               </button>

@@ -47,7 +47,7 @@ const LineChart = ({ pets, data }) => {
         },
       },
       title: {
-        display: true,
+        display: false,
         text: "Chart.js Line Chart",
       },
     },

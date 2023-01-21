@@ -37,8 +37,6 @@ export default App;
 //color tied to weight in some way?
 //either that or have red for big drops in weight (or an outline drop shadow etc?)
 
-//add modal to make sure you want to delete an entry to avoid accidents
-
 //filter by pet option for list? maybe tie to graph, too
 
 //add api information about basic weight info for given animals?
@@ -54,3 +52,5 @@ export default App;
 //should move color obj to utilities for ref within graph & list
 
 //handle logged in as X, logout option more gracefully
+
+//bug where weight input and stored in lbs is being returned and displayed in grams only, has to do with lack of conversion i think. conversion even needed? what if i have a pet in lbs and a pet in grams? should i be able to toggle between these?

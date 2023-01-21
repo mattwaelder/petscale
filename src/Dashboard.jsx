@@ -50,6 +50,7 @@ function Dashboard() {
     please
       .fetchDataByUser(userName)
       .then((res) => {
+        console.log("response: ", res);
         //get unique pet names from weight data
         let pets = [...new Set(res.data.map((el) => el.name))];
         setPetList(pets);
@@ -115,7 +116,7 @@ function Dashboard() {
       <div className="dashboard__container">
         Logged in as
         <div>{userName}</div>
-        <div>{user?.email}</div>
+        {/* <div>{user?.email}</div> */}
         <button className="dashboard__btn" onClick={logout}>
           Logout
         </button>
