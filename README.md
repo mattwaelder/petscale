@@ -1,3 +1,10 @@
+## Video Demo
+<details><summary>PetScale</summary>
+
+![petscaledemo](https://user-images.githubusercontent.com/74801942/213841187-246d3707-cac3-497f-a091-5f6fac360de6.gif)
+
+</details>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
