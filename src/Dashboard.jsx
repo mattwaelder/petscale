@@ -73,6 +73,7 @@ function Dashboard() {
     let fullSet = [d1, d2, d3, d4, d5];
 
     //color value obj for graph (0 matches with 5, 1 with 6)
+    //final colors be aqua, blue, pink, darker pink, yellow?
     let colorSet = {
       0: "rgba(200,50,50,0.8)",
       1: "rgba(50,50,200,0.8)",
@@ -116,14 +117,6 @@ function Dashboard() {
   let changeUnit = (e) => {
     setIsLbs((isLbs) => !isLbs);
   };
-
-  useEffect(() => {
-    console.log("is lbs?", isLbs);
-    //when we want to render everything in pounts, we just need to change the unit
-    //I wonder if this is best done by having both ready to go and swapping them out or by doing the transformation for each data point every time the toggle is pressed?
-    //im leaning towards the former...
-    //that way i can use a conditional to render based on isLbs ? x : y
-  }, [isLbs]);
 
   return (
     <div className="dashboard">
