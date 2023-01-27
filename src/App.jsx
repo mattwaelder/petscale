@@ -50,9 +50,6 @@ export default App;
 
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
-//graph colors are inverted when you add a new pet
-//i feel like color reference would need to be stored in db to keep from changing, as is it changes because the order of most recent pet weighed. I could remove the reference in the db to unit as everything is meant to be stored in grams now and replace that with a reference to a color set, like and index or letter
-
 //should move color obj to utilities for ref within graph & list
 
 //handle logged in as X, logout option more gracefully

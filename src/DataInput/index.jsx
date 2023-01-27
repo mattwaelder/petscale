@@ -114,7 +114,14 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
       console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
         please
-          .createDataByUser(user, name, weight, unit, weighDate)
+          .createDataByUser(
+            user,
+            name,
+            weight,
+            unit,
+            pets.indexOf(`${name}`),
+            weighDate
+          )
           .then(() => {
             //reset form and states
             setName("");
