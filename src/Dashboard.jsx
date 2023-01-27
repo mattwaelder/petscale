@@ -52,11 +52,18 @@ function Dashboard() {
     please
       .fetchDataByUser(userName)
       .then((res) => {
-        console.log("response: ", res);
-        //get unique pet names from weight data
-        let pets = [...new Set(res.data.map((el) => el.name))];
-        setPetList(pets);
+        // let pets = [...new Set(res.data.map((el) => el.name))];
+        //get unique pets and order by color
+        let pets = [];
+        res.data.forEach((pet, i) => {
+          if (pet.color === 1) pets[0] = pet.name;
+          if (pet.color === 2) pets[1] = pet.name;
+          if (pet.color === 3) pets[2] = pet.name;
+          if (pet.color === 4) pets[3] = pet.name;
+          if (pet.color === 5) pets[4] = pet.name;
+        });
 
+        setPetList(pets);
         setWeightData(res.data);
       })
       .catch((err) => console.log(err));
@@ -87,6 +94,8 @@ function Dashboard() {
       9: "rgba(20,20,20,0.5)",
     };
 
+    // console.log("...///...", fullSet);
+
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
@@ -110,6 +119,8 @@ function Dashboard() {
           },
         };
       });
+
+    // console.log(prunedData);
 
     setPetData(prunedData);
   }, [weightData, isLbs]);
