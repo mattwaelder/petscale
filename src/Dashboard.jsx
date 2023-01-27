@@ -137,6 +137,7 @@ function Dashboard() {
       </div>
       <DataList
         data={weightData}
+        isLbs={isLbs}
         user={user}
         fetchData={please.fetchData}
         refresh={setRefreshPage}
