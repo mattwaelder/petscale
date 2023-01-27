@@ -6,8 +6,6 @@ import "./DataList.css";
 import ListItem from "./ListItem";
 
 const DataList = ({ data, user, fetchData, refresh }) => {
-  console.log(data);
-
   const handleDel = () => {
     // let id = e.target.closest(".trash").id;
     console.log(delEntry._id);

@@ -54,3 +54,5 @@ export default App;
 //handle logged in as X, logout option more gracefully
 
 //bug where weight input and stored in lbs is being returned and displayed in grams only, has to do with lack of conversion i think. conversion even needed? what if i have a pet in lbs and a pet in grams? should i be able to toggle between these?
+
+//i feel like the form input section is too big (empty) while at default state

@@ -36,8 +36,21 @@ const utils = {
     return messyDate.split("T")[0];
   },
 
-  getLineGraphValues: (petList, data, petNum) => {
-    return data
+  getLineGraphValues: (petList, data, isLbs, petNum) => {
+    // return data
+    //   .map((d) =>
+    //     d.name === petList[petNum]
+    //       ? {
+    //           x: utils.getFormattedDateGraph(d.created_at),
+    //           // x: d.created_at,
+    //           y: d.weight,
+    //         }
+    //       : null
+    //   )
+    //   .filter((x) => x)
+    //   .reverse();
+
+    let dataGrams = data
       .map((d) =>
         d.name === petList[petNum]
           ? {
@@ -49,6 +62,22 @@ const utils = {
       )
       .filter((x) => x)
       .reverse();
+
+    let dataLbs = data
+      .map((d) =>
+        d.name === petList[petNum]
+          ? {
+              x: utils.getFormattedDateGraph(d.created_at),
+              // x: d.created_at,
+              y: (d.weight * 0.00220462).toFixed(2),
+            }
+          : null
+      )
+      .filter((x) => x)
+      .reverse();
+
+    console.log("///", dataGrams[0], dataLbs[0]);
+    return isLbs ? dataLbs : dataGrams;
   },
 };
 

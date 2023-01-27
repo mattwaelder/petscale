@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
+import UnitToggle from "./UnitToggle";
 import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
@@ -19,6 +20,7 @@ function Dashboard() {
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
   const [petData, setPetData] = useState([]);
+  const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
   const [refreshPage, setRefreshPage] = useState(false);
 
@@ -62,11 +64,11 @@ function Dashboard() {
 
   useEffect(() => {
     //create datasets for each possible pet
-    let d1 = utils.getLineGraphValues(petList, weightData, 0);
-    let d2 = utils.getLineGraphValues(petList, weightData, 1);
-    let d3 = utils.getLineGraphValues(petList, weightData, 2);
-    let d4 = utils.getLineGraphValues(petList, weightData, 3);
-    let d5 = utils.getLineGraphValues(petList, weightData, 4);
+    let d1 = utils.getLineGraphValues(petList, weightData, isLbs, 0);
+    let d2 = utils.getLineGraphValues(petList, weightData, isLbs, 1);
+    let d3 = utils.getLineGraphValues(petList, weightData, isLbs, 2);
+    let d4 = utils.getLineGraphValues(petList, weightData, isLbs, 3);
+    let d5 = utils.getLineGraphValues(petList, weightData, isLbs, 4);
 
     let fullSet = [d1, d2, d3, d4, d5];
 
@@ -109,7 +111,19 @@ function Dashboard() {
       });
 
     setPetData(prunedData);
-  }, [weightData]);
+  }, [weightData, isLbs]);
+
+  let changeUnit = (e) => {
+    setIsLbs((isLbs) => !isLbs);
+  };
+
+  useEffect(() => {
+    console.log("is lbs?", isLbs);
+    //when we want to render everything in pounts, we just need to change the unit
+    //I wonder if this is best done by having both ready to go and swapping them out or by doing the transformation for each data point every time the toggle is pressed?
+    //im leaning towards the former...
+    //that way i can use a conditional to render based on isLbs ? x : y
+  }, [isLbs]);
 
   return (
     <div className="dashboard">
@@ -127,6 +141,7 @@ function Dashboard() {
         fetchData={please.fetchData}
         refresh={setRefreshPage}
       />
+      <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
