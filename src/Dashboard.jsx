@@ -53,7 +53,8 @@ function Dashboard() {
       .fetchDataByUser(userName)
       .then((res) => {
         // let pets = [...new Set(res.data.map((el) => el.name))];
-        //get unique pets and order by color
+
+        //get unique pets and order by color index
         let pets = [];
         res.data.forEach((pet, i) => {
           if (pet.color === 1) pets[0] = pet.name;
@@ -79,23 +80,6 @@ function Dashboard() {
 
     let fullSet = [d1, d2, d3, d4, d5];
 
-    //color value obj for graph (0 matches with 5, 1 with 6)
-    //final colors be aqua, blue, pink, darker pink, yellow?
-    let colorSet = {
-      0: "rgba(200,50,50,0.8)",
-      1: "rgba(50,50,200,0.8)",
-      2: "rgba(50,200,50,0.8)",
-      3: "rgba(200,0,200,0.8)",
-      4: "rgba(20,20,20,0.8)",
-      5: "rgba(200,50,50,0.5)",
-      6: "rgba(50,50,200,0.5)",
-      7: "rgba(50,200,50,0.5)",
-      8: "rgba(200,0,200,0.5)",
-      9: "rgba(20,20,20,0.5)",
-    };
-
-    // console.log("...///...", fullSet);
-
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
@@ -104,8 +88,8 @@ function Dashboard() {
         return {
           label: petList[i],
           data: d,
-          backgroundColor: `${colorSet[i]}`,
-          borderColor: `${colorSet[i + 5]}`,
+          backgroundColor: `${utils.colorSet[i]}`,
+          borderColor: `${utils.colorSet[i + 5]}`,
           options: {
             plugins: {
               tooltip: {
@@ -119,8 +103,6 @@ function Dashboard() {
           },
         };
       });
-
-    // console.log(prunedData);
 
     setPetData(prunedData);
   }, [weightData, isLbs]);

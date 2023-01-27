@@ -50,8 +50,6 @@ export default App;
 
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
-//should move color obj to utilities for ref within graph & list
-
 //handle logged in as X, logout option more gracefully
 
 //i feel like the form input section is too big (empty) while at default state

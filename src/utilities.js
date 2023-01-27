@@ -63,6 +63,20 @@ const utils = {
 
     return isLbs ? dataLbs : dataGrams;
   },
+  //color value obj for graph (0 matches with 5, 1 with 6)
+  //final colors be aqua, blue, pink, darker pink, yellow?
+  colorSet: {
+    0: "rgba(200,50,50,0.8)",
+    1: "rgba(50,50,200,0.8)",
+    2: "rgba(50,200,50,0.8)",
+    3: "rgba(200,0,200,0.8)",
+    4: "rgba(20,20,20,0.8)",
+    5: "rgba(200,50,50,0.5)",
+    6: "rgba(50,50,200,0.5)",
+    7: "rgba(50,200,50,0.5)",
+    8: "rgba(200,0,200,0.5)",
+    9: "rgba(20,20,20,0.5)",
+  },
 };
 
 export default utils;
