@@ -5,9 +5,7 @@ import { please } from "../please.js";
 import "./DataList.css";
 import ListItem from "./ListItem";
 
-const DataList = ({ data, user, fetchData, refresh }) => {
-  console.log(data);
-
+const DataList = ({ data, isLbs, user, fetchData, refresh }) => {
   const handleDel = () => {
     // let id = e.target.closest(".trash").id;
     console.log(delEntry._id);
@@ -20,7 +18,7 @@ const DataList = ({ data, user, fetchData, refresh }) => {
   };
 
   //obj of selected list item for deletion (used in modal)
-  let [delEntry, setDelEntry] = useState({
+  const [delEntry, setDelEntry] = useState({
     id: undefined,
     name: undefined,
     created_ad: undefined,
@@ -35,6 +33,7 @@ const DataList = ({ data, user, fetchData, refresh }) => {
               <ListItem
                 key={i}
                 data={entry}
+                isLbs={isLbs}
                 user={user}
                 fetchData={fetchData}
                 refresh={refresh}

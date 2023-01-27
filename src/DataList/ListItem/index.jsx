@@ -7,15 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const ListItem = ({ data, user, fetchData, refresh, setDelEntry }) => {
+const ListItem = ({ data, isLbs, user, fetchData, refresh, setDelEntry }) => {
   return (
     <div className="list_card">
       <div id="card_name">
         <p>{data.name}</p>
       </div>
       <div id="card_weight">
-        <span id="weight_val">{data.weight}</span>{" "}
-        <span id="card_unit">{(data.unit = "g" ? "grams" : "lbs")}</span>
+        <span id="weight_val">
+          {isLbs ? (data.weight * 0.00220462).toFixed(2) : data.weight}
+        </span>{" "}
+        <span id="card_unit">{isLbs ? "lbs" : "grams"}</span>
       </div>
       <div id="card_date">
         <span>{utils.getFormattedDate(data.created_at)}</span>

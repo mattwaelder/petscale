@@ -13,6 +13,7 @@ module.exports.create = (req) => {
     name: req.name,
     weight: req.weight,
     unit: req.unit,
+    color: req.color,
     created_at: req.created_at,
   });
 };

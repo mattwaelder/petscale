@@ -90,9 +90,9 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
 
       console.log(name, weight, unit, weighDate);
 
-      // update the db
+      // update the db w/ new pet
       please
-        .createPetByUser(user, name, weight, unit, weighDate)
+        .createPetByUser(user, name, weight, unit, pets.length, weighDate)
         .then((res) => {
           //reset form and states
           setName("");
@@ -109,11 +109,19 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
       console.warn(user, name, weight, unit, Date());
     }
 
+    //update the db with new data for existing pet
     if (e.target.value === "data") {
       console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
         please
-          .createDataByUser(user, name, weight, unit, weighDate)
+          .createDataByUser(
+            user,
+            name,
+            weight,
+            unit,
+            pets.indexOf(`${name}`),
+            weighDate
+          )
           .then(() => {
             //reset form and states
             setName("");

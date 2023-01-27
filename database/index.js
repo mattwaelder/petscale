@@ -12,6 +12,7 @@ const sessionSchema = new mongoose.Schema({
   name: String,
   weight: Number,
   unit: String,
+  color: Number,
   created_at: Date,
 });
 

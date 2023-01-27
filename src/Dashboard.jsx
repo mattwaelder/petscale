@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
+import UnitToggle from "./UnitToggle";
 import axios from "axios";
 import utils from "./utilities.js";
 import LineChart from "./LineChart";
@@ -19,6 +20,7 @@ function Dashboard() {
   const [weightData, setWeightData] = useState([]);
   const [petList, setPetList] = useState([]);
   const [petData, setPetData] = useState([]);
+  const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
   const [refreshPage, setRefreshPage] = useState(false);
 
@@ -50,11 +52,19 @@ function Dashboard() {
     please
       .fetchDataByUser(userName)
       .then((res) => {
-        console.log("response: ", res);
-        //get unique pet names from weight data
-        let pets = [...new Set(res.data.map((el) => el.name))];
-        setPetList(pets);
+        // let pets = [...new Set(res.data.map((el) => el.name))];
 
+        //get unique pets and order by color index
+        let pets = [];
+        res.data.forEach((pet, i) => {
+          if (pet.color === 1) pets[0] = pet.name;
+          if (pet.color === 2) pets[1] = pet.name;
+          if (pet.color === 3) pets[2] = pet.name;
+          if (pet.color === 4) pets[3] = pet.name;
+          if (pet.color === 5) pets[4] = pet.name;
+        });
+
+        setPetList(pets);
         setWeightData(res.data);
       })
       .catch((err) => console.log(err));
@@ -62,27 +72,13 @@ function Dashboard() {
 
   useEffect(() => {
     //create datasets for each possible pet
-    let d1 = utils.getLineGraphValues(petList, weightData, 0);
-    let d2 = utils.getLineGraphValues(petList, weightData, 1);
-    let d3 = utils.getLineGraphValues(petList, weightData, 2);
-    let d4 = utils.getLineGraphValues(petList, weightData, 3);
-    let d5 = utils.getLineGraphValues(petList, weightData, 4);
+    let d1 = utils.getLineGraphValues(petList, weightData, isLbs, 0);
+    let d2 = utils.getLineGraphValues(petList, weightData, isLbs, 1);
+    let d3 = utils.getLineGraphValues(petList, weightData, isLbs, 2);
+    let d4 = utils.getLineGraphValues(petList, weightData, isLbs, 3);
+    let d5 = utils.getLineGraphValues(petList, weightData, isLbs, 4);
 
     let fullSet = [d1, d2, d3, d4, d5];
-
-    //color value obj for graph (0 matches with 5, 1 with 6)
-    let colorSet = {
-      0: "rgba(200,50,50,0.8)",
-      1: "rgba(50,50,200,0.8)",
-      2: "rgba(50,200,50,0.8)",
-      3: "rgba(200,0,200,0.8)",
-      4: "rgba(20,20,20,0.8)",
-      5: "rgba(200,50,50,0.5)",
-      6: "rgba(50,50,200,0.5)",
-      7: "rgba(50,200,50,0.5)",
-      8: "rgba(200,0,200,0.5)",
-      9: "rgba(20,20,20,0.5)",
-    };
 
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
@@ -92,8 +88,8 @@ function Dashboard() {
         return {
           label: petList[i],
           data: d,
-          backgroundColor: `${colorSet[i]}`,
-          borderColor: `${colorSet[i + 5]}`,
+          backgroundColor: `${utils.colorSet[i]}`,
+          borderColor: `${utils.colorSet[i + 5]}`,
           options: {
             plugins: {
               tooltip: {
@@ -109,7 +105,11 @@ function Dashboard() {
       });
 
     setPetData(prunedData);
-  }, [weightData]);
+  }, [weightData, isLbs]);
+
+  let changeUnit = (e) => {
+    setIsLbs((isLbs) => !isLbs);
+  };
 
   return (
     <div className="dashboard">
@@ -123,10 +123,12 @@ function Dashboard() {
       </div>
       <DataList
         data={weightData}
+        isLbs={isLbs}
         user={user}
         fetchData={please.fetchData}
         refresh={setRefreshPage}
       />
+      <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
