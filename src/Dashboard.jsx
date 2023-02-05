@@ -55,6 +55,7 @@ function Dashboard() {
         // let pets = [...new Set(res.data.map((el) => el.name))];
 
         //get unique pets and order by color index
+        //could be optimized to be less than O(n) linear... break if pets.len >= 5
         let pets = [];
         res.data.forEach((pet, i) => {
           if (pet.color === 1) pets[0] = pet.name;
@@ -127,6 +128,7 @@ function Dashboard() {
         user={user}
         fetchData={please.fetchData}
         refresh={setRefreshPage}
+        pets={petList}
       />
       <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
       <div className="graph_input_container">

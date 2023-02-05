@@ -43,8 +43,6 @@ export default App;
 
 //add api information about basic weight info for given animals?
 
-//add some kind of indication visually in the card list for each pet (image?, color?)
-
 //should add confirm email to make sure its your email
 //cant login with email after login with google?
 
@@ -54,4 +52,6 @@ export default App;
 
 //i feel like the form input section is too big (empty) while at default state
 
+//~~~~~~~~~
 //if i were to redo this I feel like an sql database would make more sense so i could have pets users and datapoints. this would allos for some simplification i feel, think default units... mayber later ill redo the backend.
+//could just also make a new collection in the mongodb with preferences for each user :shrug:

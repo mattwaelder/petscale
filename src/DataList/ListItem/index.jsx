@@ -4,12 +4,28 @@ import "./ListItem.css";
 import utils from "../../utilities.js";
 import { please } from "../../please.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-const ListItem = ({ data, isLbs, user, fetchData, refresh, setDelEntry }) => {
+const ListItem = ({
+  data,
+  isLbs,
+  user,
+  fetchData,
+  refresh,
+  setDelEntry,
+  colorIndex,
+}) => {
   return (
     <div className="list_card">
+      <div
+        className="card_color_tag"
+        style={{
+          backgroundColor: `${utils.colorSet[colorIndex]}`,
+        }}
+      >
+        {/* <FontAwesomeIcon icon={faBookmark} /> */}
+      </div>
       <div id="card_name">
         <p>{data.name}</p>
       </div>
