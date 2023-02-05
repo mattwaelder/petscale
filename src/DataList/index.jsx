@@ -5,7 +5,7 @@ import { please } from "../please.js";
 import "./DataList.css";
 import ListItem from "./ListItem";
 
-const DataList = ({ data, isLbs, user, fetchData, refresh }) => {
+const DataList = ({ data, isLbs, user, fetchData, refresh, pets }) => {
   const handleDel = () => {
     // let id = e.target.closest(".trash").id;
     console.log(delEntry._id);
@@ -38,6 +38,7 @@ const DataList = ({ data, isLbs, user, fetchData, refresh }) => {
                 fetchData={fetchData}
                 refresh={refresh}
                 setDelEntry={setDelEntry}
+                colorIndex={pets.indexOf(entry.name)}
               />
             );
           })
