@@ -17,8 +17,12 @@ function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
+  //weight data is response from server
   const [weightData, setWeightData] = useState([]);
+  //displayed data is filtered version of weightData
+  const [displayedData, setDisplayedData] = useState([]);
   const [petList, setPetList] = useState([]);
+  //petdata = data for chart.js
   const [petData, setPetData] = useState([]);
   const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
@@ -71,6 +75,8 @@ function Dashboard() {
       .catch((err) => console.log(err));
   }, [refreshPage, userName]);
 
+  //
+
   useEffect(() => {
     //create datasets for each possible pet
     let d1 = utils.getLineGraphValues(petList, weightData, isLbs, 0);
@@ -105,11 +111,29 @@ function Dashboard() {
         };
       });
 
+    //update graph
     setPetData(prunedData);
+    //update list
+    setDisplayedData(weightData);
   }, [weightData, isLbs]);
 
-  let changeUnit = (e) => {
+  const changeUnit = (e) => {
     setIsLbs((isLbs) => !isLbs);
+  };
+
+  //filter the displayed data (list)
+  const handleFilter = (e) => {
+    let selectedPet = petList[e.target.value - 1] || null;
+
+    //if no filter, display all & return
+    if (!selectedPet) {
+      setDisplayedData(weightData);
+      return;
+    }
+
+    let tempData = weightData.filter((data, i) => data.name === selectedPet);
+
+    setDisplayedData(tempData);
   };
 
   return (
@@ -123,14 +147,16 @@ function Dashboard() {
         </button>
       </div>
       <DataList
-        data={weightData}
+        data={displayedData}
         isLbs={isLbs}
         user={user}
         fetchData={please.fetchData}
         refresh={setRefreshPage}
         pets={petList}
+        handleFilter={handleFilter}
+        changeUnit={changeUnit}
       />
-      <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
+      {/* <UnitToggle isLbs={isLbs} changeUnit={changeUnit} /> */}
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
