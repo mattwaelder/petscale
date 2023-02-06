@@ -4,8 +4,18 @@ import utils from "../utilities.js";
 import { please } from "../please.js";
 import "./DataList.css";
 import ListItem from "./ListItem";
+import UnitToggle from "../UnitToggle";
 
-const DataList = ({ data, isLbs, user, fetchData, refresh, pets }) => {
+const DataList = ({
+  data,
+  isLbs,
+  user,
+  fetchData,
+  refresh,
+  pets,
+  handleFilter,
+  changeUnit,
+}) => {
   const handleDel = () => {
     // let id = e.target.closest(".trash").id;
     console.log(delEntry._id);
@@ -26,6 +36,29 @@ const DataList = ({ data, isLbs, user, fetchData, refresh, pets }) => {
 
   return (
     <div className="data_list_container">
+      <div className="list_filter_container">
+        <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
+
+        <>
+          <label for="pet_select" className="filter_label">
+            Filter By Pet
+          </label>
+          <select
+            name="pet_select"
+            onChange={(e) => handleFilter(e)}
+            id="list_filter"
+            className="filter_select"
+          >
+            <option value="0">--none--</option>
+            {pets[0] && <option value="1">{pets[0]}</option>}
+            {pets[1] && <option value="2">{pets[1]}</option>}
+            {pets[2] && <option value="3">{pets[2]}</option>}
+            {pets[3] && <option value="4">{pets[3]}</option>}
+            {pets[4] && <option value="5">{pets[4]}</option>}
+          </select>
+        </>
+      </div>
+
       <h2>Past Weigh-Ins</h2>
       {data.length > 0 && data.length
         ? data.map((entry, i) => {
@@ -90,3 +123,25 @@ const DataList = ({ data, isLbs, user, fetchData, refresh, pets }) => {
 };
 
 export default DataList;
+
+/*
+
+      <div className="list_filter_container">
+        <label for="pet_select">Filter By Pet</label>
+
+        <select
+          name="pet_select"
+          onChange={(e) => handleFilter(e)}
+          id="list_filter"
+          className="filter_select"
+        >
+          <option value="">--select--</option>
+          {pets[0] && <option value="1">{pets[0]}</option>}
+          {pets[1] && <option value="2">{pets[1]}</option>}
+          {pets[2] && <option value="3">{pets[2]}</option>}
+          {pets[3] && <option value="4">{pets[3]}</option>}
+          {pets[4] && <option value="5">{pets[4]}</option>}
+        </select>
+      </div>
+
+*/

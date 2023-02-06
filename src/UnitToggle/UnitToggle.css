@@ -1,5 +1,5 @@
 .unit-toggle-container {
-  position: absolute;
+  /* position: absolute;
   display: flex;
   flex-direction: row;
   height: fit-content;
@@ -7,5 +7,14 @@
   top: 0%;
   right: 0%;
   border: 1px solid red;
-  z-index: 5;
+  z-index: 5; */
+
+  position: absolute;
+  left: 0;
+  /* border: 1px solid red; */
+  margin-bottom: 50%;
+}
+
+.unit-toggle-container label {
+  margin-left: 0;
 }
