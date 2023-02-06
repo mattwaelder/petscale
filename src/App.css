@@ -81,3 +81,9 @@ html body {
   left: 0;
   top: 0;
 }
+
+.logout_btn {
+  border: none;
+  padding: 0.33em;
+  border-radius: 5px;
+}

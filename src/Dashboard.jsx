@@ -142,7 +142,7 @@ function Dashboard() {
         Logged in as
         <div>{userName}</div>
         {/* <div>{user?.email}</div> */}
-        <button className="dashboard__btn" onClick={logout}>
+        <button className="dashboard__btn logout_btn" onClick={logout}>
           Logout
         </button>
       </div>
