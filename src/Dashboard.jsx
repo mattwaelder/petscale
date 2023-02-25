@@ -141,7 +141,6 @@ function Dashboard() {
       <div className="dashboard__container">
         Logged in as
         <div>{userName}</div>
-        {/* <div>{user?.email}</div> */}
         <button className="dashboard__btn logout_btn" onClick={logout}>
           Logout
         </button>
@@ -156,7 +155,6 @@ function Dashboard() {
         handleFilter={handleFilter}
         changeUnit={changeUnit}
       />
-      {/* <UnitToggle isLbs={isLbs} changeUnit={changeUnit} /> */}
       <div className="graph_input_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
