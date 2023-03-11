@@ -37,8 +37,6 @@ export default App;
 //color tied to weight in some way?
 //either that or have red for big drops in weight (or an outline drop shadow etc?)
 
-//filter by pet option for list? maybe tie to graph, too
-
 //add support for some kind of automation? IFTTT? google/alexa? smart scale?
 
 //add api information about basic weight info for given animals?
@@ -48,10 +46,10 @@ export default App;
 
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
-//handle logged in as X, logout option more gracefully
+//replace "logged in as x" with icon + name, when icon is clicked a logout button appears
 
 //i feel like the form input section is too big (empty) while at default state
 
 //~~~~~~~~~
-//if i were to redo this I feel like an sql database would make more sense so i could have pets users and datapoints. this would allos for some simplification i feel, think default units... mayber later ill redo the backend.
+
 //could just also make a new collection in the mongodb with preferences for each user :shrug:
