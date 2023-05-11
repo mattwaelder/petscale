@@ -1,11 +1,12 @@
-// require("dotenv").config();
-
 // module.exports = {
 //   API: `http://localhost:${process.env.PORT}`,
 // };
+// console.log("/////////////////////////////////////", process.env.PORT);
 
 const utils = {
-  API: `http://localhost:${5050}`,
+  // API: `http://localhost:${5050}`,
+  // API: `http://localhost:${process.env.SERVER_PORT}`,
+  API: `http://localhost:${3001}`,
 
   getFormattedDate: (messyDate) => {
     let dateOptions = {
