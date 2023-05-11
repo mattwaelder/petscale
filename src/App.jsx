@@ -50,6 +50,12 @@ export default App;
 
 //i feel like the form input section is too big (empty) while at default state
 
+//ability to change colors of animals from the default color or to select color when creating a new pet
+
+//database might need a rethink... maybe
+
+// in the db, mongoURI may need to be moved to .env from database index file
+
 //~~~~~~~~~
 
 //could just also make a new collection in the mongodb with preferences for each user :shrug:

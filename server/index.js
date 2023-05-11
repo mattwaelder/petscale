@@ -36,7 +36,8 @@ app.delete("/entries", (req, res) => {
 
 //////////////////////////////////////////////
 
-let PORT = process.env.PORT || 3456;
+// let PORT = process.env.PORT || 3456;
+let PORT = process.env.SERVER_PORT;
 
 app.listen(PORT);
 console.log(`Listening at port: ${PORT}`);
