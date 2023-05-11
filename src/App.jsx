@@ -58,4 +58,4 @@ export default App;
 
 //~~~~~~~~~
 
-//could just also make a new collection in the mongodb with preferences for each user :shrug:
+//utilities and db (mongouri) are using paths/hard coded ports not referencing env
