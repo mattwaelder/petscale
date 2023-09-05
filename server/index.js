@@ -14,22 +14,22 @@ app.use(cors());
 
 //////////////////////////////////////////////
 
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   console.log("fetch", req.query.user);
   controller.getByUser(req.query.user, res);
 });
 
-app.post("/users", (req, res) => {
+app.post("/api/users", (req, res) => {
   console.log("post");
   controller.postByUser(req, res);
 });
 
-app.post("/users/pet", (req, res) => {
+app.post("/api/users/pet", (req, res) => {
   console.log("post new pet");
   controller.postPetByUser(req, res);
 });
 
-app.delete("/entries", (req, res) => {
+app.delete("/api/entries", (req, res) => {
   console.log("del");
   controller.deleteById(req, res);
 });
@@ -40,4 +40,4 @@ app.delete("/entries", (req, res) => {
 let PORT = process.env.SERVER_PORT || 3030;
 
 app.listen(PORT);
-console.log(`Listening at port: ${PORT}`);
+console.log(`Listening at port: ${PORT}, server port: ${process.env.SERVER_PORT}, port: ${process.env.PORT}, NODE_ENV: ${process.env.NODE_ENV}`);

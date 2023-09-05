@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://localhost:27017/petscaledb";
+//const mongoURI = "mongodb://localhost:27017/petscaledb";
+//mongodb://{USERNAME}:{PASSWORD}@{EC2 INSTANCE IP / HOSTNAME}/{DATABASENAME}
+//db = petscaledb, collection = petdatas... db.collection.find({});
+//const mongoURI = `mongodb://petscale.xyz:27017/petscaledb`;
+const mongoURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@petscale-db-cluster.now8lwu.mongodb.net/petscaledb?retryWrites=true&w=majority`
+
+mongoose.set('strictQuery', false);
 
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
