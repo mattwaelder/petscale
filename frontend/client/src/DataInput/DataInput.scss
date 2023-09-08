@@ -1,3 +1,6 @@
+$tablet: 1000px;
+$mobile: 600px;
+
 .input_form_container {
   /* width: 80%;
   height: 35%; */
@@ -10,6 +13,26 @@
   align-items: center;
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  /* if on mobile, disable desktop menu */
+  @media (max-width: calc($tablet - 1px)) {
+    display: none;
+  }
+}
+
+.input_form_container--mobile {
+  /* if large screen, disable mobile menu */
+  @media (min-width: $tablet) {
+    display: none;
+  }
+
+  #input_add_btn--mobile {
+    height: 2.5em;
+    width: 2.5em;
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+  }
 }
 
 #weight_submit_form {

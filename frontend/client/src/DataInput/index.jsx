@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { FaPlusCircle } from "react-icons/fa";
+import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import utils from "../utilities.js";
 import { please } from "../please.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
-import "./DataInput.css";
+import "./DataInput.scss";
 import InputFormData from "./inputFormData";
 import InputFormPet from "./inputFormPet";
 
@@ -15,6 +17,11 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   let [showForm, setShowForm] = useState(false);
   let [content, setContent] = useState("main");
   let [weighDate, setWeighDate] = useState(Date());
+
+  //handle show-state of mobile data input modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
     console.log(e.target.id);
@@ -139,48 +146,72 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   };
 
   return (
-    <div className="input_form_container">
-      {!showForm && content === "main" && (
-        <div className="main_btns_container">
-          <button
-            className="form_btn form_btn_main"
-            value="data"
-            onClick={(e) => handleFormSelect(e)}
-          >
-            Add Weight
-          </button>
-          {pets.length < 5 && (
+    <div>
+      <div className="input_form_container">
+        {!showForm && content === "main" && (
+          <div className="main_btns_container">
             <button
               className="form_btn form_btn_main"
-              value="pet"
+              value="data"
               onClick={(e) => handleFormSelect(e)}
             >
-              Add New Pet
+              Add Weight
             </button>
-          )}
+            {pets.length < 5 && (
+              <button
+                className="form_btn form_btn_main"
+                value="pet"
+                onClick={(e) => handleFormSelect(e)}
+              >
+                Add New Pet
+              </button>
+            )}
+          </div>
+        )}
+
+        {showForm && content === "data" && (
+          <InputFormData
+            pets={pets}
+            handleFormSelect={handleFormSelect}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        )}
+
+        {showForm && content === "pet" && pets.length < 5 && (
+          <InputFormPet
+            pets={pets}
+            handleFormSelect={handleFormSelect}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        )}
+
+        <div id="weight_icon_container">
+          <FontAwesomeIcon icon={faWeightHanging} />
         </div>
-      )}
+      </div>
+      <div className="input_form_container--mobile">
+        <>
+          <FaPlusCircle id="input_add_btn--mobile" onClick={handleShow} />
 
-      {showForm && content === "data" && (
-        <InputFormData
-          pets={pets}
-          handleFormSelect={handleFormSelect}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-      )}
-
-      {showForm && content === "pet" && pets.length < 5 && (
-        <InputFormPet
-          pets={pets}
-          handleFormSelect={handleFormSelect}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-      )}
-
-      <div id="weight_icon_container">
-        <FontAwesomeIcon icon={faWeightHanging} />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Woohoo, you are reading this text in a modal!
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </div>
     </div>
   );
