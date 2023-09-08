@@ -1,13 +1,11 @@
 .data_list_container {
-  width: 33vw;
   background: var(--color-glass-transparency-lighter);
-  margin: 2em;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  max-height: 100vh;
+  max-height: 90vh;
   overflow-y: auto;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

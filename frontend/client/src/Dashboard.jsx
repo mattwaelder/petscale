@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
 import UnitToggle from "./UnitToggle";
@@ -11,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "./authentication/firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
-import "./App.css";
+import "./App.scss";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -27,6 +29,11 @@ function Dashboard() {
   const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
   const [refreshPage, setRefreshPage] = useState(false);
+
+  //offcanvas login
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const fetchUserName = async () => {
     try {
@@ -138,28 +145,55 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <div className="dashboard__container">
-        Logged in as
-        <div>{userName}</div>
-        <button className="dashboard__btn logout_btn" onClick={logout}>
-          Logout
-        </button>
+      <div className="dashboard__container dashboard__login_container">
+        <>
+          <FaUserCircle
+            id="user_icon_btn"
+            onClick={handleShow}
+            // value={{ className: "react-icons-user" }}
+          />
+
+          <Offcanvas show={show} onHide={handleClose}>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>PetScale</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <>
+                <p>Signed in as {`${userName}`}</p>
+                <button className="dashboard__btn logout_btn" onClick={logout}>
+                  Logout?
+                </button>
+              </>
+            </Offcanvas.Body>
+          </Offcanvas>
+        </>
       </div>
-      <DataList
-        data={displayedData}
-        isLbs={isLbs}
-        user={user}
-        fetchData={please.fetchData}
-        refresh={setRefreshPage}
-        pets={petList}
-        handleFilter={handleFilter}
-        changeUnit={changeUnit}
-      />
-      <div className="graph_input_container">
+      <div className="grid-list_container">
+        <DataList
+          id="grid-list"
+          data={displayedData}
+          isLbs={isLbs}
+          user={user}
+          fetchData={please.fetchData}
+          refresh={setRefreshPage}
+          pets={petList}
+          handleFilter={handleFilter}
+          changeUnit={changeUnit}
+        />
+      </div>
+      <div className="grid-chart_container">
         {weightData.length && weightData.length > 0 ? (
-          <LineChart pets={petList} data={petData} refresh={setRefreshPage} />
-        ) : null}
+          <LineChart
+            id="grid-chart"
+            pets={petList}
+            data={petData}
+            refresh={setRefreshPage}
+          />
+        ) : null}{" "}
+      </div>
+      <div className="grid-input_container">
         <DataInput
+          id="grid-input"
           user={userName}
           pets={petList}
           fetchData={please.fetchData}
