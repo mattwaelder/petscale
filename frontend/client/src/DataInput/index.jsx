@@ -201,12 +201,42 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
             </Modal.Header>
             <Modal.Body>
               <div className="modal_form_select_container">
-                <button className="modal_form_select_button">
-                  New<br></br> Pet
-                </button>
-                <button className="modal_form_select_button">
-                  New<br></br> Weight
-                </button>
+                {!showForm && content === "main" && (
+                  <>
+                    <button
+                      className="modal_form_select_button"
+                      value="pet"
+                      onClick={(e) => handleFormSelect(e)}
+                    >
+                      New<br></br> Pet
+                    </button>
+                    <button
+                      className="modal_form_select_button"
+                      value="data"
+                      onClick={(e) => handleFormSelect(e)}
+                    >
+                      New<br></br> Weight
+                    </button>
+                  </>
+                )}
+
+                {showForm && content === "data" && (
+                  <InputFormData
+                    pets={pets}
+                    handleFormSelect={handleFormSelect}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+
+                {showForm && content === "pet" && pets.length < 5 && (
+                  <InputFormPet
+                    pets={pets}
+                    handleFormSelect={handleFormSelect}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
               </div>
             </Modal.Body>
             <Modal.Footer>

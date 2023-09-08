@@ -57,7 +57,40 @@ $mobile: 600px;
   width: 70%;
   display: flex;
   /* flex-direction: row; */
+
+  @media (max-width: $tablet) {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 0px;
+    grid-template-areas:
+      "pet pet x"
+      "date date ."
+      "weight unit add";
+  }
 }
+
+// #pet_select {
+//   grid-area: pet;
+// }
+// #weigh_date {
+//   grid-area: date;
+// }
+// #weight {
+//   grid-area: weight;
+// }
+// #unit {
+//   grid-area: unit;
+// }
+// .form_btn_add {
+//   grid-area: add;
+// }
+// .form_return {
+//   grid-area: x;
+// }
 
 #form_title {
   font-size: 1.5em;
@@ -84,6 +117,10 @@ form {
   padding: 5px;
   margin: 0.5em;
   border-radius: 8px;
+
+  #name {
+    grid-area: pet;
+  }
 }
 
 #weight_container {
@@ -109,6 +146,10 @@ form {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+
+  #unit {
+    grid-area: unit;
+  }
 }
 
 .main_btns_container {
@@ -141,6 +182,8 @@ form {
   right: 0;
   bottom: 0;
   background: rgba(20, 200, 20, 0.4);
+
+  grid-area: add;
 }
 
 .form_btn:hover {
@@ -155,6 +198,8 @@ form {
   position: absolute;
   right: 0;
   top: 0;
+
+  grid-area: x;
 }
 
 #weight_icon_container {
@@ -178,6 +223,8 @@ form {
   margin: 0.5em;
   /* width: 150px; */
   min-width: 120px;
+
+  grid-area: date;
 }
 
 .form_sub_container {
