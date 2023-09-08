@@ -195,19 +195,23 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
         <>
           <FaPlusCircle id="input_add_btn--mobile" onClick={handleShow} />
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Add New Data</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              Woohoo, you are reading this text in a modal!
+              <div className="modal_form_select_container">
+                <button className="modal_form_select_button">
+                  New<br></br> Pet
+                </button>
+                <button className="modal_form_select_button">
+                  New<br></br> Weight
+                </button>
+              </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleClose}>
-                Save Changes
+              <Button variant="danger" onClick={handleClose}>
+                close
               </Button>
             </Modal.Footer>
           </Modal>
