@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 
 const InputFormData = ({
   pets,
@@ -16,7 +17,7 @@ const InputFormData = ({
         X
       </button>
 
-      <div className="form_sub_container">
+      <div className="form_sub_container form_sub_container-pet">
         <label for="pet_select">Select Pet</label>
         <select
           name="pet_select"
@@ -34,8 +35,8 @@ const InputFormData = ({
         </select>
       </div>
 
-      <div className="form_sub_container">
-        <label for="weigh_date">When?</label>
+      <div className="form_sub_container form_sub_container-date">
+        <label for="weigh_date">Date</label>
         <input
           type="date"
           id="weigh_date"
@@ -43,7 +44,8 @@ const InputFormData = ({
         ></input>
       </div>
 
-      <div className="form_sub_container">
+      <div className="form_sub_container form_sub_container-weight">
+        <label for="weight">Weight</label>
         <input
           type="text"
           id="weight"
@@ -53,7 +55,9 @@ const InputFormData = ({
           autocomplete="off"
           required
         />
-
+      </div>
+      <div className="form_sub_container form_sub_container-weight">
+        <label for="unit">Unit</label>
         <select
           name="unit"
           onChange={(e) => handleChange(e)}
@@ -66,14 +70,13 @@ const InputFormData = ({
           <option value="lbs">lbs</option>
         </select>
       </div>
-
       <button
         className="form_btn form_btn_add"
         type="submit"
         value="data"
         onClick={(e) => handleSubmit(e)}
       >
-        ADD
+        &#65291;
       </button>
     </form>
   );
