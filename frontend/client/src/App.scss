@@ -55,7 +55,9 @@ html body {
   // width: 90vw;
   // height: 100vh;
   // padding: 0 10px 100px 10px;
-  height: auto;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 #user_icon_btn {
@@ -70,8 +72,9 @@ html body {
 }
 
 .dashboard {
-  // width: 90vw;
+  width: 90vw;
   height: auto;
+  min-height: 100vh;
   padding-top: 2em;
   // display: flex;
   // flex-direction: row;
@@ -81,15 +84,13 @@ html body {
 
   grid-template-columns: repeat(4, 1fr);
   // grid-template-rows: repeat(5, auto);
-  grid-gap: 20px;
+  grid-gap: 2em;
 
   grid-template-areas:
     "list chart chart chart"
     "list chart chart chart"
     "list chart chart chart"
-    "list input input input"
     "list input input input";
-
   .grid-list_container {
     grid-area: list;
     justify-self: center;
