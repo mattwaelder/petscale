@@ -1,5 +1,6 @@
 import React from "react";
-import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BsArrowReturnLeft } from "react-icons/bs";
 
 const InputFormData = ({
   pets,
@@ -14,11 +15,11 @@ const InputFormData = ({
         value="return"
         onClick={(e) => handleFormSelect(e)}
       >
-        X
+        <BsArrowReturnLeft />
       </button>
 
       <div className="form_sub_container form_sub_container-pet">
-        <label for="pet_select">Select Pet</label>
+        <label for="pet_select">Select Pet:</label>
         <select
           name="pet_select"
           onChange={(e) => handleChange(e)}
@@ -36,7 +37,7 @@ const InputFormData = ({
       </div>
 
       <div className="form_sub_container form_sub_container-date">
-        <label for="weigh_date">Date</label>
+        <label for="weigh_date">Date:</label>
         <input
           type="date"
           id="weigh_date"
@@ -45,19 +46,20 @@ const InputFormData = ({
       </div>
 
       <div className="form_sub_container form_sub_container-weight">
-        <label for="weight">Weight</label>
+        <label for="weight">Weight:</label>
         <input
           type="text"
           id="weight"
           className="formtext"
-          placeholder="weight"
+          inputMode="numeric"
+          placeholder=""
           onChange={(e) => handleChange(e)}
           autocomplete="off"
           required
         />
       </div>
-      <div className="form_sub_container form_sub_container-weight">
-        <label for="unit">Unit</label>
+      <div className="form_sub_container form_sub_container-unit">
+        <label for="unit">Unit:</label>
         <select
           name="unit"
           onChange={(e) => handleChange(e)}
@@ -76,7 +78,7 @@ const InputFormData = ({
         value="data"
         onClick={(e) => handleSubmit(e)}
       >
-        &#65291;
+        <AiOutlinePlus />
       </button>
     </form>
   );

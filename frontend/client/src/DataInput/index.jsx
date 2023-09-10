@@ -4,8 +4,10 @@ import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import utils from "../utilities.js";
 import { please } from "../please.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
+import { FaWeightScale } from "react-icons/fa6";
+import { PiPawPrintFill } from "react-icons/pi";
 import "./DataInput.scss";
 import InputFormData from "./inputFormData";
 import InputFormPet from "./inputFormPet";
@@ -49,8 +51,8 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   //displays correct form based on event value
   const handleFormSelect = (e) => {
     e.preventDefault();
-    // console.log(e.target.value);
-    switch (e.target.value) {
+    let val = e.target.closest("button").value;
+    switch (val) {
       case "pet":
         setShowForm(true);
         setContent("pet");
@@ -70,9 +72,11 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let val = e.target.closest("button").value;
+    console.log(val);
 
     //453.592 grams in a lb
-    if (e.target.value === "pet") {
+    if (val === "pet") {
       //form validation
       if (pets.includes(name)) {
         alert("that pet already exists");
@@ -117,7 +121,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
     }
 
     //update the db with new data for existing pet
-    if (e.target.value === "data") {
+    if (val === "data") {
       console.log(name, weight, unit, weighDate);
       if (name.length && Number(weight) > 0 && unit) {
         please
@@ -188,35 +192,53 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
         )}
 
         <div id="weight_icon_container">
-          <FontAwesomeIcon icon={faWeightHanging} />
+          {/* <FontAwesomeIcon icon={faWeightHanging} /> */}
         </div>
       </div>
       <div className="input_form_container--mobile">
         <>
           <FaPlusCircle id="input_add_btn--mobile" onClick={handleShow} />
 
-          <Modal show={show} onHide={handleClose} centered>
+          <Modal
+            className="input_modal"
+            show={show}
+            onHide={handleClose}
+            size="md"
+            centered
+          >
             <Modal.Header closeButton>
-              <Modal.Title>Add New Data</Modal.Title>
+              <Modal.Title>
+                {content === "main" && "Add New Data"}
+                {content === "data" && "Add New Weight"}
+                {content === "pet" && "Add New Pet"}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="modal_form_select_container">
                 {!showForm && content === "main" && (
                   <>
-                    <button
-                      className="modal_form_select_button"
-                      value="pet"
-                      onClick={(e) => handleFormSelect(e)}
-                    >
-                      New<br></br> Pet
-                    </button>
-                    <button
-                      className="modal_form_select_button"
-                      value="data"
-                      onClick={(e) => handleFormSelect(e)}
-                    >
-                      New<br></br> Weight
-                    </button>
+                    <div className="modal_form_btn_label_wrapper">
+                      <label htmlFor="pet-btn">Add Pet</label>
+                      <button
+                        className="modal_form_select_button"
+                        value="pet"
+                        id="pet-btn"
+                        onClick={(e) => handleFormSelect(e)}
+                      >
+                        <PiPawPrintFill />
+                      </button>
+                    </div>
+                    <div className="modal_form_btn_label_wrapper">
+                      <label htmlFor="weight-btn">Add Weight</label>
+                      <button
+                        className="modal_form_select_button"
+                        value="data"
+                        id="weight-btn"
+                        onClick={(e) => handleFormSelect(e)}
+                      >
+                        <FaWeightScale />
+                      </button>
+                    </div>
                   </>
                 )}
 
@@ -239,11 +261,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
                 )}
               </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={handleClose}>
-                close
-              </Button>
-            </Modal.Footer>
           </Modal>
         </>
       </div>

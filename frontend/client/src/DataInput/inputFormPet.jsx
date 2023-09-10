@@ -1,4 +1,6 @@
 import React from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BsArrowReturnLeft } from "react-icons/bs";
 
 const InputFormPet = ({
   pets,
@@ -13,28 +15,36 @@ const InputFormPet = ({
         value="return"
         onClick={(e) => handleFormSelect(e)}
       >
-        X
+        <BsArrowReturnLeft />
       </button>
-      <input
-        type="text"
-        id="name"
-        className="formtext"
-        placeholder="pet name"
-        minLength="3"
-        onChange={(e) => handleChange(e)}
-        autocomplete="off"
-        required
-      ></input>
-      <div id="weight_container">
+      <div className="form_sub_container form_sub_container">
+        <label for="name">Pet Name:</label>
+        <input
+          type="text"
+          id="name"
+          className="formtext"
+          placeholder=""
+          minLength="3"
+          onChange={(e) => handleChange(e)}
+          autocomplete="off"
+          required
+        ></input>
+      </div>
+      <div className="form_sub_container form_sub_container-weight">
+        <label for="weight">Weight:</label>
         <input
           type="text"
           id="weight"
           className="formtext"
-          placeholder="weight"
+          inputMode="numeric"
+          placeholder=""
           onChange={(e) => handleChange(e)}
           autocomplete="off"
           required
         />
+      </div>
+      <div className="form_sub_container form_sub_container-unit">
+        <label for="unit">Unit:</label>
         <select
           name="unit"
           onChange={(e) => handleChange(e)}
@@ -50,10 +60,10 @@ const InputFormPet = ({
       <button
         className="form_btn form_btn_add"
         type="submit"
-        value="pet"
+        value="data"
         onClick={(e) => handleSubmit(e)}
       >
-        ADD
+        <AiOutlinePlus />
       </button>
     </form>
   );
