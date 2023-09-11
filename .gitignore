@@ -23,6 +23,7 @@ server/node_modules
 /build
 /dump
 /frontend/build
+/frontend/client/build/static
 
 # misc
 .DS_Store
