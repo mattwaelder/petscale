@@ -15,12 +15,21 @@
   color: var(--color-secondary-darker);
 }
 
+.list_filter_label_container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
 .list_filter_container {
   width: 100%;
+  height: fit-content;
   display: flex;
+  flex-direction: column;
   position: relative;
   /* align-items: center; */
-  justify-content: right;
+  justify-content: center;
+  align-items: end;
   /* border: 1px solid green; */
 }
 
@@ -36,8 +45,7 @@
 .filter_select {
   background: var(--color-glass-transparency);
   height: 2em;
-  width: 100%;
-  max-width: 20%;
+  width: fit-content;
   margin: 0.5em;
   border: none;
   border-radius: 8px;

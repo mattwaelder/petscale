@@ -1,6 +1,7 @@
 .list_card {
   min-height: 6em;
   width: 90%;
+  max-width: 500px;
   background: var(--color-glass-transparency-lighter);
   margin: 0.5em;
   padding: 20px;

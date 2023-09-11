@@ -4,8 +4,8 @@ import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import utils from "../utilities.js";
 import { please } from "../please.js";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import { FaWeightScale } from "react-icons/fa6";
 import { PiPawPrintFill } from "react-icons/pi";
 import "./DataInput.scss";
@@ -152,52 +152,11 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   return (
     <div>
       <div className="input_form_container">
-        {!showForm && content === "main" && (
-          <div className="main_btns_container">
-            <button
-              className="form_btn form_btn_main"
-              value="data"
-              onClick={(e) => handleFormSelect(e)}
-            >
-              Add Weight
-            </button>
-            {pets.length < 5 && (
-              <button
-                className="form_btn form_btn_main"
-                value="pet"
-                onClick={(e) => handleFormSelect(e)}
-              >
-                Add New Pet
-              </button>
-            )}
-          </div>
-        )}
-
-        {showForm && content === "data" && (
-          <InputFormData
-            pets={pets}
-            handleFormSelect={handleFormSelect}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        )}
-
-        {showForm && content === "pet" && pets.length < 5 && (
-          <InputFormPet
-            pets={pets}
-            handleFormSelect={handleFormSelect}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        )}
-
-        <div id="weight_icon_container">
-          {/* <FontAwesomeIcon icon={faWeightHanging} /> */}
-        </div>
-      </div>
-      <div className="input_form_container--mobile">
         <>
-          <FaPlusCircle id="input_add_btn--mobile" onClick={handleShow} />
+          <div className="add-data_and_header_container">
+            <p className="add-data_header">Add New Data</p>
+            <FaPlusCircle id="input_add_btn" onClick={handleShow} />
+          </div>
 
           <Modal
             className="input_modal"

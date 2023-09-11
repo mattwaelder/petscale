@@ -145,6 +145,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
+      <h5 id="header">Petscale</h5>
       <div className="dashboard__container dashboard__login_container">
         <>
           <FaUserCircle
@@ -152,8 +153,9 @@ function Dashboard() {
             onClick={handleShow}
             // value={{ className: "react-icons-user" }}
           />
+          <label htmlFor="user_icon_btn">{userName}</label>
 
-          <Offcanvas show={show} onHide={handleClose}>
+          <Offcanvas id="off_canvas" show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>PetScale</Offcanvas.Title>
             </Offcanvas.Header>

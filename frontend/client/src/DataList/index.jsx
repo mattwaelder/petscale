@@ -39,7 +39,7 @@ const DataList = ({
       <div className="list_filter_container">
         <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
 
-        <>
+        <div className="list_filter_label_container">
           <label for="pet_select" className="filter_label">
             Filter By Pet
           </label>
@@ -56,7 +56,7 @@ const DataList = ({
             {pets[3] && <option value="4">{pets[3]}</option>}
             {pets[4] && <option value="5">{pets[4]}</option>}
           </select>
-        </>
+        </div>
       </div>
 
       <h2>Past Weigh-Ins</h2>

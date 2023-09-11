@@ -15,7 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import utils from "../utilities.js";
 import "chartjs-adapter-date-fns";
-import "./LineChart.css";
+import "./LineChart.scss";
 
 ChartJS.register(
   TimeScale,

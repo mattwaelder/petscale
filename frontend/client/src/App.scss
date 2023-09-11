@@ -60,9 +60,41 @@ html body {
   justify-content: center;
 }
 
+#off_canvas {
+  max-width: 66vw;
+}
+
+#header {
+  font-family: "Shantell Sans", cursive;
+  font-size: 2.5em;
+  position: absolute;
+  top: 10px;
+  right: 5vw;
+  color: var(--color-secondary-darker);
+  // color: rgb(50, 50, 50);
+  font-weight: 400;
+
+  //mobile
+  @media (max-width: calc($tablet - 1px)) {
+    width: 50vw;
+    position: absolute;
+    right: 0px;
+    transform: translateX(-25vw);
+    text-align: center;
+  }
+}
+
 #user_icon_btn {
   height: 2.5em;
   width: 2.5em;
+
+  //large display
+  @media (min-width: $tablet) {
+    color: var(--color-secondary-darker);
+    border: 1px solid white;
+    background: white;
+    border-radius: 50%;
+  }
 }
 
 .react-icons-user {
@@ -72,10 +104,10 @@ html body {
 }
 
 .dashboard {
-  width: 90vw;
+  width: 92vw;
   height: auto;
   min-height: 100vh;
-  padding-top: 2em;
+  padding-top: 65px;
   // display: flex;
   // flex-direction: row;
   // justify-content: space-between;
@@ -87,7 +119,6 @@ html body {
   grid-gap: 2em;
 
   grid-template-areas:
-    "list chart chart chart"
     "list chart chart chart"
     "list chart chart chart"
     "list input input input";
@@ -102,19 +133,26 @@ html body {
     justify-self: center;
     align-self: top;
     width: 90%;
-    height: 90%;
   }
   .grid-input_container {
-    grid-area: input;
-    justify-self: center;
-    align-self: top;
-    width: 60%;
-    max-height: 90%;
+    // grid-area: input;
+    // justify-self: end;
+    // align-self: top;
+    display: flex;
+    justify-content: center;
+    // transform: translateY(-50%);
+    position: fixed;
+    bottom: 0.5em;
+    right: 0.5em;
+
+    //mobile
+    @media (max-width: calc($tablet - 1px)) {
+      transform: none;
+    }
   }
 
+  /* mobile */
   @media (max-width: calc($tablet - 1px)) {
-    border: 2px solid red;
-
     width: 100vw;
     height: auto;
     grid-template-columns: 1fr;
@@ -127,7 +165,7 @@ html body {
       "list";
   }
   .grid-input_container {
-    width: 90%;
+    // width: 90%;
   }
   .grid-chart_container {
     width: 100%;
@@ -156,6 +194,12 @@ html body {
   top: 0.5em;
   left: 0.5em;
   z-index: 2;
+
+  @media (max-width: calc($tablet - 1px)) {
+    label {
+      display: none;
+    }
+  }
 }
 
 .logout_btn {

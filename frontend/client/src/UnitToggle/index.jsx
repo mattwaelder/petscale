@@ -1,5 +1,5 @@
 import React from "react";
-import "./UnitToggle.css";
+import "./UnitToggle.scss";
 
 const UnitToggle = ({ isLbs, changeUnit }) => {
   return (
