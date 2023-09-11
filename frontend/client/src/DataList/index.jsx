@@ -40,7 +40,7 @@ const DataList = ({
         <UnitToggle isLbs={isLbs} changeUnit={changeUnit} />
 
         <div className="list_filter_label_container">
-          <label for="pet_select" className="filter_label">
+          <label htmlFor="pet_select" className="filter_label">
             Filter By Pet
           </label>
           <select
@@ -80,35 +80,35 @@ const DataList = ({
       {/* modal window to delete entry */}
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="deleteEntryModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content text-dark">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 " id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content text-dark">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5 " id="exampleModalLabel">
                 Delete this entry for {`${delEntry.name}`}?
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body text-center fs-5 fw-light">
+            <div className="modal-body text-center fs-5 fw-light">
               {`
             ${utils.getFormattedDate(delEntry.created_at)}`}
               <br></br>
               {`${delEntry.weight} ${(delEntry.unit = "g" ? "grams" : "lbs")}`}
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-danger"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
                 onClick={() => handleDel()}
               >

@@ -3,15 +3,15 @@ import "./UnitToggle.scss";
 
 const UnitToggle = ({ isLbs, changeUnit }) => {
   return (
-    <div class="form-check form-switch unit-toggle-container">
+    <div className="form-check form-switch unit-toggle-container">
       <input
-        class="form-check-input"
+        className="form-check-input"
         type="checkbox"
         role="switch"
         id="flexSwitchCheckDefault"
         onChange={(e) => changeUnit(e)}
       ></input>
-      <label class="form-check-label" for="flexSwitchCheckDefault">
+      <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
         lbs
       </label>
     </div>

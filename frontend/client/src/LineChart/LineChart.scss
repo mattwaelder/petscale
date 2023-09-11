@@ -33,4 +33,8 @@ $mobile: 600px;
   transform: scale(1) rotate(0deg);
   opacity: 0.15;
   z-index: -1;
+  @media (max-width: calc($tablet - 1px)) {
+    top: 0px;
+    scale: 1;
+  }
 }

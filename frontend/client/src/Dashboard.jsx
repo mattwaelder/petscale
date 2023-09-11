@@ -145,7 +145,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <h5 id="header">Petscale</h5>
+      <h5 id="header">PetScale</h5>
       <div className="dashboard__container dashboard__login_container">
         <>
           <FaUserCircle
