@@ -22,6 +22,7 @@ server/node_modules
 # production
 /build
 /dump
+/frontend/build
 
 # misc
 .DS_Store
