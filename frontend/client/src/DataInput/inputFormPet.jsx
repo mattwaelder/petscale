@@ -18,7 +18,7 @@ const InputFormPet = ({
         <BsArrowReturnLeft />
       </button>
       <div className="form_sub_container form_sub_container">
-        <label for="name">Pet Name:</label>
+        <label htmlFor="name">Pet Name:</label>
         <input
           type="text"
           id="name"
@@ -26,12 +26,12 @@ const InputFormPet = ({
           placeholder=""
           minLength="3"
           onChange={(e) => handleChange(e)}
-          autocomplete="off"
+          autoComplete="off"
           required
         ></input>
       </div>
       <div className="form_sub_container form_sub_container-weight">
-        <label for="weight">Weight:</label>
+        <label htmlFor="weight">Weight:</label>
         <input
           type="text"
           id="weight"
@@ -39,12 +39,12 @@ const InputFormPet = ({
           inputMode="numeric"
           placeholder=""
           onChange={(e) => handleChange(e)}
-          autocomplete="off"
+          autoComplete="off"
           required
         />
       </div>
       <div className="form_sub_container form_sub_container-unit">
-        <label for="unit">Unit:</label>
+        <label htmlFor="unit">Unit:</label>
         <select
           name="unit"
           onChange={(e) => handleChange(e)}

@@ -12,7 +12,7 @@ import "./DataInput.scss";
 import InputFormData from "./inputFormData";
 import InputFormPet from "./inputFormPet";
 
-const DataInput = ({ user, pets, fetchData, refresh }) => {
+const DataInput = ({ user, pets, petCount, fetchData, refresh }) => {
   let [name, setName] = useState("");
   let [weight, setWeight] = useState("");
   let [unit, setUnit] = useState("");
@@ -26,7 +26,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
-    console.log(e.target.id);
     switch (e.target.id) {
       case "name":
         setName(e.target.value);
@@ -85,7 +84,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
         alert("names must be longer than 3 characters");
         return;
       }
-      if (pets.length >= 5) {
+      if (petCount >= 5) {
         alert("Sorry, we can't handle more than 5 pets right now :(");
         return;
       }
@@ -102,7 +101,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
 
       // update the db w/ new pet
       please
-        .createPetByUser(user, name, weight, unit, pets.length, weighDate)
+        .createPetByUser(user, name, weight, unit, pets, petCount, weighDate)
         .then((res) => {
           //reset form and states
           setName("");
@@ -118,7 +117,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
         })
         .then(() => refresh((val) => !val))
         .catch((err) => console.log(err));
-      console.warn(user, name, weight, unit, Date());
+      console.log(user, name, weight, unit, Date());
     }
 
     //update the db with new data for existing pet
@@ -151,7 +150,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
       }
     }
   };
-  console.log(pets.length);
 
   return (
     <div>
@@ -180,7 +178,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
               <div className="modal_form_select_container">
                 {!showForm && content === "main" && (
                   <>
-                    {pets.length < 5 && (
+                    {petCount < 5 && (
                       <div className="modal_form_btn_label_wrapper">
                         <label htmlFor="pet-btn">Add Pet</label>
                         <button
@@ -216,7 +214,7 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
                   />
                 )}
 
-                {showForm && content === "pet" && pets.length < 5 && (
+                {showForm && content === "pet" && petCount < 5 && (
                   <InputFormPet
                     pets={pets}
                     handleFormSelect={handleFormSelect}

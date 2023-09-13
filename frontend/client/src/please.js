@@ -7,7 +7,7 @@ export const please = {
     return axios.get(`${utils.API}/users/?user=${user}`);
   },
 
-  createPetByUser: (user, name, weight, unit, petsLen, date) => {
+  createPetByUser: (user, name, weight, unit, pets, petCount, date) => {
     //default state for date is set for now, so this works
     //splitting date to array [yyyy, mm, dd] fixes utc issue
     let yourDate = new Date();
@@ -19,8 +19,15 @@ export const please = {
     //store all weight in grams
     let weightInGrams =
       unit === "lbs" ? (Number(weight) * 453.592).toFixed(2) : Number(weight);
-    //if there are no pets, set this to be color 1
-    let colorIndex = petsLen ? petsLen + 1 : 1;
+    //if there are no pets, set this to be color 1 in req
+    let colorIndex;
+    //set color index to be first un-occupied space in arr
+    for (let i = 0; i < pets.length; i++) {
+      if (!pets[i]) {
+        colorIndex = i + 1;
+        break;
+      }
+    }
 
     let pkg = {
       // owner: user.slice(" "),
@@ -28,7 +35,7 @@ export const please = {
       name: name,
       weight: weightInGrams,
       unit: unit,
-      color: colorIndex,
+      color: colorIndex || 1,
       created_at: newDate,
     };
     console.log("please post new pet:", name);

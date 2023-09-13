@@ -19,7 +19,7 @@ const InputFormData = ({
       </button>
 
       <div className="form_sub_container form_sub_container-pet">
-        <label for="pet_select">Select Pet:</label>
+        <label htmlFor="pet_select">Select Pet:</label>
         <select
           name="pet_select"
           onChange={(e) => handleChange(e)}
@@ -37,7 +37,7 @@ const InputFormData = ({
       </div>
 
       <div className="form_sub_container form_sub_container-date">
-        <label for="weigh_date">Date:</label>
+        <label htmlFor="weigh_date">Date:</label>
         <input
           type="date"
           id="weigh_date"
@@ -46,7 +46,7 @@ const InputFormData = ({
       </div>
 
       <div className="form_sub_container form_sub_container-weight">
-        <label for="weight">Weight:</label>
+        <label htmlFor="weight">Weight:</label>
         <input
           type="text"
           id="weight"
@@ -54,12 +54,12 @@ const InputFormData = ({
           inputMode="numeric"
           placeholder=""
           onChange={(e) => handleChange(e)}
-          autocomplete="off"
+          autoComplete="off"
           required
         />
       </div>
       <div className="form_sub_container form_sub_container-unit">
-        <label for="unit">Unit:</label>
+        <label htmlFor="unit">Unit:</label>
         <select
           name="unit"
           onChange={(e) => handleChange(e)}

@@ -24,6 +24,7 @@ function Dashboard() {
   //displayed data is filtered version of weightData
   const [displayedData, setDisplayedData] = useState([]);
   const [petList, setPetList] = useState([]);
+  const [petCount, setPetCount] = useState(0);
   //petdata = data for chart.js
   const [petData, setPetData] = useState([]);
   const [isLbs, setIsLbs] = useState(false);
@@ -56,6 +57,10 @@ function Dashboard() {
   }, [user, loading]);
 
   useEffect(() => {
+    setPetCount(petList.filter((pet) => pet).length);
+  }, [petList]);
+
+  useEffect(() => {
     if (!user) return navigate("/");
     console.log("username is:", userName);
 
@@ -67,8 +72,7 @@ function Dashboard() {
 
         //get unique pets and order by color index
         //could be optimized to be less than O(n) linear... break if pets.len > 5
-        let pets = [];
-        console.log(res.data);
+        let pets = [null, null, null, null, null];
         res.data.forEach((pet, i) => {
           if (pet.color && pet.color === 1) pets[0] = pet.name;
           if (pet.color && pet.color === 2) pets[1] = pet.name;
@@ -94,12 +98,10 @@ function Dashboard() {
     let d5 = utils.getLineGraphValues(petList, weightData, isLbs, 4);
 
     let fullSet = [d1, d2, d3, d4, d5];
-    console.warn("fullset:", fullSet);
 
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
-      .filter((x) => x)
       .map((d, i) => {
         return {
           label: petList[i],
@@ -121,8 +123,7 @@ function Dashboard() {
       });
 
     //update graph
-    console.warn(prunedData);
-    setPetData(prunedData);
+    setPetData(prunedData.filter((x) => x.label !== null));
     //update list
     setDisplayedData(weightData);
   }, [weightData, isLbs]);
@@ -200,6 +201,7 @@ function Dashboard() {
           id="grid-input"
           user={userName}
           pets={petList}
+          petCount={petCount}
           fetchData={please.fetchData}
           refresh={setRefreshPage}
         />

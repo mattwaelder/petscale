@@ -20,7 +20,7 @@ import {
 } from "firebase/firestore";
 import firebaseConfig from "../firebaseOptions.js";
 
-console.warn(firebaseConfig);
+// console.warn(firebaseConfig);
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
