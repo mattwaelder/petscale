@@ -153,12 +153,18 @@ const DataInput = ({ user, pets, petCount, fetchData, refresh }) => {
 
   return (
     <div>
-      <div className="input_form_container">
+      <div
+        className={`input_form_container ${petCount === 0 ? "no-pets" : ""}`}
+      >
         <>
           <div className="add-data_and_header_container">
             <p className="add-data_header">Add New Data</p>
             <FaPlusCircle id="input_add_btn" onClick={handleShow} />
           </div>
+
+          <p className={`${petCount === 0 ? "no_pets" : "hide"}`}>
+            No data to display<br></br>Press the "+" to add a new pet
+          </p>
 
           <Modal
             className="input_modal"
@@ -191,17 +197,20 @@ const DataInput = ({ user, pets, petCount, fetchData, refresh }) => {
                         </button>
                       </div>
                     )}
-                    <div className="modal_form_btn_label_wrapper">
-                      <label htmlFor="weight-btn">Add Weight</label>
-                      <button
-                        className="modal_form_select_button"
-                        value="data"
-                        id="weight-btn"
-                        onClick={(e) => handleFormSelect(e)}
-                      >
-                        <FaWeightScale />
-                      </button>
-                    </div>
+
+                    {petCount > 0 && (
+                      <div className="modal_form_btn_label_wrapper">
+                        <label htmlFor="weight-btn">Add Weight</label>
+                        <button
+                          className="modal_form_select_button"
+                          value="data"
+                          id="weight-btn"
+                          onClick={(e) => handleFormSelect(e)}
+                        >
+                          <FaWeightScale />
+                        </button>
+                      </div>
+                    )}
                   </>
                 )}
 

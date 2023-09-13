@@ -173,19 +173,21 @@ function Dashboard() {
           </Offcanvas>
         </>
       </div>
-      <div className="grid-list_container">
-        <DataList
-          id="grid-list"
-          data={displayedData}
-          isLbs={isLbs}
-          user={user}
-          fetchData={please.fetchData}
-          refresh={setRefreshPage}
-          pets={petList}
-          handleFilter={handleFilter}
-          changeUnit={changeUnit}
-        />
-      </div>
+      {petCount > 0 && (
+        <div className="grid-list_container">
+          <DataList
+            id="grid-list"
+            data={displayedData}
+            isLbs={isLbs}
+            user={user}
+            fetchData={please.fetchData}
+            refresh={setRefreshPage}
+            pets={petList}
+            handleFilter={handleFilter}
+            changeUnit={changeUnit}
+          />
+        </div>
+      )}
       <div className="grid-chart_container">
         {weightData.length && weightData.length > 0 ? (
           <LineChart

@@ -70,6 +70,13 @@ function Login() {
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
       </div>
+      <div className="position-fixed fixed-bottom align-bottom w-100 center">
+        <small>
+          Firebase does not provide me (the developer) with any means of
+          accessing user passwords. If you have any questions, suggestions, or
+          concerns, email me at mattwaelderdev@gmail.com. Thanks!
+        </small>
+      </div>
     </div>
   );
 }

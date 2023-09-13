@@ -72,6 +72,29 @@ $mobile: 600px;
   }
 }
 
+/* if no pets, put + button front and center */
+.no_pets {
+  position: fixed;
+  left: calc(50vw - 150px);
+  top: 50%;
+
+  //mobile
+  @media (max-width: calc($tablet - 1px)) {
+    // color: rgba(20, 200, 20, 0.4);
+    // position: initial;
+    // top: initial;
+    // background: white;
+    // border: 2px solid white;
+    // border-radius: 50%;
+    width: 100vw;
+    display: fixed;
+    top: 40vw;
+    left: 0;
+    text-align: center;
+    padding: 0 10% 0 10%;
+  }
+}
+
 .input_modal .modal-content {
   background-color: white;
 }
@@ -247,4 +270,8 @@ $mobile: 600px;
 label {
   margin-right: 1em;
   margin-left: 1em;
+}
+
+.hide {
+  display: none;
 }
