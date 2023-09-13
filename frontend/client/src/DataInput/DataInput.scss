@@ -73,26 +73,22 @@ $mobile: 600px;
 }
 
 /* if no pets, put + button front and center */
-.no_pets {
-  position: fixed;
-  left: calc(50vw - 150px);
-  top: 50%;
-
-  //mobile
-  @media (max-width: calc($tablet - 1px)) {
-    // color: rgba(20, 200, 20, 0.4);
-    // position: initial;
-    // top: initial;
-    // background: white;
-    // border: 2px solid white;
-    // border-radius: 50%;
-    width: 100vw;
-    display: fixed;
-    top: 40vw;
-    left: 0;
-    text-align: center;
-    padding: 0 10% 0 10%;
+.no_pets-btn {
+  @media (min-width: $tablet) {
+    position: fixed;
+    left: calc(50vw - 150px);
+    top: 50%;
   }
+}
+
+/* if no pets, show paragraph in the middle */
+.no_pets-para {
+  width: 100vw;
+  position: fixed;
+  top: 30vh;
+  left: 0px;
+  text-align: center;
+  padding: 0 10% 0 10%;
 }
 
 .input_modal .modal-content {
