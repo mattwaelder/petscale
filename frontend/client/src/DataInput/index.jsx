@@ -73,7 +73,6 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let val = e.target.closest("button").value;
-    console.log(val);
 
     //453.592 grams in a lb
     if (val === "pet") {
@@ -114,6 +113,8 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
           setShowForm(false);
           //remove the form
           setContent("main");
+          //close modal
+          setShow(false);
         })
         .then(() => refresh((val) => !val))
         .catch((err) => console.log(err));
@@ -142,12 +143,15 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
             form.reset();
             setShowForm(false);
             setContent("main");
+            //close modal
+            setShow(false);
           })
           .then(() => refresh((val) => !val))
           .catch((err) => console.log(err));
       }
     }
   };
+  console.log(pets.length);
 
   return (
     <div>
@@ -176,17 +180,19 @@ const DataInput = ({ user, pets, fetchData, refresh }) => {
               <div className="modal_form_select_container">
                 {!showForm && content === "main" && (
                   <>
-                    <div className="modal_form_btn_label_wrapper">
-                      <label htmlFor="pet-btn">Add Pet</label>
-                      <button
-                        className="modal_form_select_button"
-                        value="pet"
-                        id="pet-btn"
-                        onClick={(e) => handleFormSelect(e)}
-                      >
-                        <PiPawPrintFill />
-                      </button>
-                    </div>
+                    {pets.length < 5 && (
+                      <div className="modal_form_btn_label_wrapper">
+                        <label htmlFor="pet-btn">Add Pet</label>
+                        <button
+                          className="modal_form_select_button"
+                          value="pet"
+                          id="pet-btn"
+                          onClick={(e) => handleFormSelect(e)}
+                        >
+                          <PiPawPrintFill />
+                        </button>
+                      </div>
+                    )}
                     <div className="modal_form_btn_label_wrapper">
                       <label htmlFor="weight-btn">Add Weight</label>
                       <button

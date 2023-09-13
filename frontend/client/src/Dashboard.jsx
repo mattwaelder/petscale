@@ -57,7 +57,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) return navigate("/");
-    console.log("username is ", userName);
+    console.log("username is:", userName);
 
     //get data from db for user
     please
@@ -66,14 +66,15 @@ function Dashboard() {
         // let pets = [...new Set(res.data.map((el) => el.name))];
 
         //get unique pets and order by color index
-        //could be optimized to be less than O(n) linear... break if pets.len >= 5
+        //could be optimized to be less than O(n) linear... break if pets.len > 5
         let pets = [];
+        console.log(res.data);
         res.data.forEach((pet, i) => {
-          if (pet.color === 1) pets[0] = pet.name;
-          if (pet.color === 2) pets[1] = pet.name;
-          if (pet.color === 3) pets[2] = pet.name;
-          if (pet.color === 4) pets[3] = pet.name;
-          if (pet.color === 5) pets[4] = pet.name;
+          if (pet.color && pet.color === 1) pets[0] = pet.name;
+          if (pet.color && pet.color === 2) pets[1] = pet.name;
+          if (pet.color && pet.color === 3) pets[2] = pet.name;
+          if (pet.color && pet.color === 4) pets[3] = pet.name;
+          if (pet.color && pet.color === 5) pets[4] = pet.name;
         });
 
         setPetList(pets);
@@ -93,6 +94,7 @@ function Dashboard() {
     let d5 = utils.getLineGraphValues(petList, weightData, isLbs, 4);
 
     let fullSet = [d1, d2, d3, d4, d5];
+    console.warn("fullset:", fullSet);
 
     //prune by pet count and format arr to be what chart.js expects
     let prunedData = fullSet
@@ -119,6 +121,7 @@ function Dashboard() {
       });
 
     //update graph
+    console.warn(prunedData);
     setPetData(prunedData);
     //update list
     setDisplayedData(weightData);
@@ -142,7 +145,6 @@ function Dashboard() {
 
     setDisplayedData(tempData);
   };
-
   return (
     <div className="dashboard">
       <h5 id="header">PetScale</h5>

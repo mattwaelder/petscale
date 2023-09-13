@@ -3,7 +3,7 @@ import utils from "./utilities.js";
 
 export const please = {
   fetchDataByUser: (user) => {
-    console.log("please get by user", user);
+    console.log("please get by user:", user);
     return axios.get(`${utils.API}/users/?user=${user}`);
   },
 
@@ -31,7 +31,7 @@ export const please = {
       color: colorIndex,
       created_at: newDate,
     };
-	console.log("please post new pet", name);
+    console.log("please post new pet:", name);
     return axios.post(`${utils.API}/users/pet/?pet=${name}`, pkg);
   },
 
@@ -50,7 +50,7 @@ export const please = {
       color: colorIndex + 1,
       created_at: newDate,
     };
-	console.log("please create data for pet", name);
+    console.log("please create data for pet:", name);
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
   },
 };
