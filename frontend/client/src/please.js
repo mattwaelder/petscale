@@ -19,6 +19,10 @@ export const please = {
     let dateArr = formattedDate.replace(/-/g, "/").split("/");
 
     let newDate = new Date(dateArr);
+    console.warn(newDate);
+    //catch for if date is null for some reason (safari)
+    if (!newDate) newDate = Date();
+    // if (!newDate) newDate = "200"
 
     //store all weight in grams
     let weightInGrams =
@@ -48,9 +52,11 @@ export const please = {
 
   createDataByUser: (user, name, weight, unit, colorIndex, date) => {
     let dateArr = date.replace(/-/g, "/").split("/");
-    console.warn(dateArr);
     //splitting date to array [yyyy, mm, dd] fixes utc issue
     let newDate = new Date(dateArr);
+    //catch for if date is null for some reason (safari)
+    if (!newDate) newDate = Date();
+
     let weightInGrams =
       unit === "lbs" ? (Number(weight) * 453.592).toFixed(2) : Number(weight);
 

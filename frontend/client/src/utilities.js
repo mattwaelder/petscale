@@ -28,6 +28,9 @@ const utils = {
     let date = new Date(messyDate).toLocaleDateString("en-US", dateOptions);
     //removing weekday from date
     let formattedDate = date.split(", ").slice(1).join(", ");
+
+    //if the date is null replace it with "???"
+    if (!formattedDate) formattedDate = "???";
     return formattedDate;
   },
 
