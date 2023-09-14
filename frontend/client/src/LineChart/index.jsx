@@ -29,6 +29,7 @@ ChartJS.register(
 );
 
 const LineChart = ({ pets, data }) => {
+  // console.log({ ...data }[0].data[0]);
   //chart options
   const options = {
     responsive: true,

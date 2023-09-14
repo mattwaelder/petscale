@@ -9,9 +9,9 @@ const utils = {
   // API: `http://localhost:${5050}`,
   // API: `http://localhost:${process.env.SERVER_PORT}`,
   // API: `http://localhost:${3001}`,
-  
-	//CANNOT REQUIRE('DOTENV') WEBPACK CONFIG ISSUE BIG YIKES
-	//everythign should go to /api/xx/yy for nginx config routing
+
+  //CANNOT REQUIRE('DOTENV') WEBPACK CONFIG ISSUE BIG YIKES
+  //everythign should go to /api/xx/yy for nginx config routing
   API:
     process.env.NODE_ENV === "production"
       ? `http://petscale.xyz/api`
@@ -43,7 +43,9 @@ const utils = {
     // //removing weekday from date
     // let formattedDate = date.split(", ").slice(1).join(", ");
     // return formattedDate;
-    return messyDate.split("T")[0];
+
+    //if date cant be split for some reason, default to y2k
+    return messyDate.split("T")[0] || "2000-01-01";
   },
 
   getLineGraphValues: (petList, data, isLbs, petNum) => {

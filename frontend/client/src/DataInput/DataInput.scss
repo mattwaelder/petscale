@@ -173,7 +173,7 @@ $mobile: 600px;
 
 .form_select {
   background: var(--color-glass-transparency-dark);
-
+  color: black;
   height: 2em;
   width: fit-content;
   margin: 0.5em;
@@ -190,6 +190,7 @@ $mobile: 600px;
 
 .form_btn {
   border: none;
+  color: black;
   // margin: 1em;
   // padding: 5px;
   border-radius: 8px;

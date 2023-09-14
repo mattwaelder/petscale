@@ -14,8 +14,12 @@ export const please = {
     const offset = yourDate.getTimezoneOffset();
     let today = new Date(yourDate.getTime() - offset * 60 * 1000);
     let formattedDate = today.toISOString().split("T")[0];
-    let dateArr = formattedDate.split("-");
+
+    // let dateArr = formattedDate.split("-");
+    let dateArr = formattedDate.replace(/-/g, "/").split("/");
+
     let newDate = new Date(dateArr);
+
     //store all weight in grams
     let weightInGrams =
       unit === "lbs" ? (Number(weight) * 453.592).toFixed(2) : Number(weight);
@@ -43,7 +47,8 @@ export const please = {
   },
 
   createDataByUser: (user, name, weight, unit, colorIndex, date) => {
-    let dateArr = date.split("-");
+    let dateArr = date.replace(/-/g, "/").split("/");
+    console.warn(dateArr);
     //splitting date to array [yyyy, mm, dd] fixes utc issue
     let newDate = new Date(dateArr);
     let weightInGrams =
