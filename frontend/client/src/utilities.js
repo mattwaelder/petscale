@@ -24,13 +24,17 @@ const utils = {
       day: "numeric",
       weekday: "long",
     };
+
+    //catch if there is an issue with the incoming date values
+    if (!messyDate || messyDate.length === 0) {
+      return "DATE ERROR";
+    }
+
     //date constructor to apply dateOptions
     let date = new Date(messyDate).toLocaleDateString("en-US", dateOptions);
     //removing weekday from date
     let formattedDate = date.split(", ").slice(1).join(", ");
 
-    //if the date is null replace it with "???"
-    if (!formattedDate) formattedDate = "???";
     return formattedDate;
   },
 
@@ -48,7 +52,12 @@ const utils = {
     // return formattedDate;
 
     //if date cant be split for some reason, default to y2k
-    return messyDate.split("T")[0] || "2000-01-01";
+    // return messyDate.split("T")[0] || "2000-01-01";
+    if (messyDate !== null) {
+      return messyDate.split("T")[0];
+    } else {
+      return "2000-01-01";
+    }
   },
 
   getLineGraphValues: (petList, data, isLbs, petNum) => {
