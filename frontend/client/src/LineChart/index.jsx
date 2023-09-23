@@ -31,8 +31,11 @@ ChartJS.register(
 const LineChart = ({ pets, data }) => {
   // console.log({ ...data }[0].data[0]);
   //chart options
+  console.log(data);
   const options = {
     responsive: true,
+    pointRadius: window.innerWidth < 600 ? 2 : undefined,
+    borderWidth: window.innerWidth < 600 ? 1 : undefined,
     plugins: {
       legend: {
         position: "top",
