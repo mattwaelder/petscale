@@ -29,31 +29,9 @@ ChartJS.register(
   Legend
 );
 
-//should move to utils
-
-const trimData = (dataObj, num = 20) => {
-  //trim the data arr to most recent by num
-  let trimmedDataArr = dataObj.data.filter(
-    (d, i) => i >= dataObj.data.length - num
-  );
-  //reapply data arr to data object
-  dataObj.data = trimmedDataArr;
-  return dataObj;
-};
-
-const LineChart = ({ pets, data }) => {
+const LineChart = ({ pets, data, trimmedData, limit, setLimit }) => {
+  console.warn("incomming data", limit, data, trimmedData);
   //data is an array of objects one for each pet, each index has a data array with all the xy values
-
-  const [limit, setLimit] = useState(0);
-
-  useEffect(() => {
-    console.log("limit changed to", limit);
-  }, [limit]);
-
-  const handleDataTrim = (el) => {
-    let num = el.target.value;
-    setLimit(num);
-  };
 
   //chart options
   const options = {
@@ -83,38 +61,30 @@ const LineChart = ({ pets, data }) => {
   };
 
   return (
-    limit >= 0 && (
-      <div className="chart_container">
-        <div className="list_trim_label_container">
-          <label htmlFor="data_trim" className="">
-            Limit Results:
-          </label>
-          <select
-            name="data_trim"
-            onChange={(e) => handleDataTrim(e)}
-            id="data_trim"
-            className=""
-          >
-            <option value="0">--Show All--</option>
-            <option value="10">Last 10</option>
-            <option value="20">Last 20</option>
-            <option value="30">Last 30</option>
-            <option value="40">Last 40</option>
-            <option value="50">Last 50</option>
-          </select>
-        </div>
-        <Line
-          options={options}
-          data={
-            limit > 0
-              ? { datasets: data.map((d) => trimData(d, limit)) }
-              : {
-                  datasets: data,
-                }
-          }
-        />
+    <div className="chart_container">
+      <div className="list_trim_label_container">
+        <label htmlFor="data_trim" className="">
+          Limit Results:
+        </label>
+        <select
+          name="data_trim"
+          onChange={(e) => setLimit(e.target.value)}
+          id="data_trim"
+          className=""
+        >
+          <option value="none">--Show All--</option>
+          <option value="10">Last 10</option>
+          <option value="20">Last 20</option>
+          <option value="30">Last 30</option>
+          <option value="40">Last 40</option>
+          <option value="50">Last 50</option>
+        </select>
       </div>
-    )
+      <Line
+        options={options}
+        data={limit >= 0 ? { datasets: trimmedData } : { datasets: data }}
+      />
+    </div>
   );
 };
 

@@ -27,6 +27,9 @@ function Dashboard() {
   const [petCount, setPetCount] = useState(0);
   //petdata = data for chart.js
   const [petData, setPetData] = useState([]);
+  const [limit, setLimit] = useState("none");
+  const [trimmedData, setTrimmedData] = useState([]);
+
   const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
   const [refreshPage, setRefreshPage] = useState(false);
@@ -146,6 +149,26 @@ function Dashboard() {
 
     setDisplayedData(tempData);
   };
+
+  //should move to utils
+
+  const trimData = () => {
+    console.log("TRIM FUNCTION CALLED");
+    //trim full petdata into subset with only data for num -> petData[i].data.length
+    //set trimmed data state to subset of petdata
+  };
+
+  //when limit is updated
+  useEffect(() => {
+    console.log("LIMIT EFFECT", limit);
+    trimData();
+    //when limit is updated
+    //if limit is "show all"
+    //return
+    //if limit is (#)
+    //set trimmed data state to be petdatas.data but trimmed to (#) (calling fn trimData?)
+  }, [limit]);
+
   return (
     <div className="dashboard">
       <h5 id="header">PetScale</h5>
@@ -194,6 +217,9 @@ function Dashboard() {
             id="grid-chart"
             pets={petList}
             data={petData}
+            trimmedData={trimmedData}
+            limit={limit}
+            setLimit={setLimit}
             refresh={setRefreshPage}
           />
         ) : null}{" "}
