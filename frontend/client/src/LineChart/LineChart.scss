@@ -38,3 +38,21 @@ $mobile: 600px;
     scale: 1;
   }
 }
+
+.list_trim_label_container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  label {
+    margin-right: 0px;
+  }
+}
+.filter_select {
+  background: var(--color-glass-transparency);
+  height: 1.5em;
+  width: fit-content;
+  border: none;
+  border-radius: 8px;
+  margin-right: 5px;
+  cursor: pointer;
+}

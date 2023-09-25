@@ -65,7 +65,7 @@ const LineChart = ({ pets, data, trimmedData, limit, setLimit }) => {
           name="data_trim"
           onChange={(e) => setLimit(e.target.value)}
           id="data_trim"
-          className=""
+          className="filter_select"
         >
           <option value="none">--Show All--</option>
           <option value="10">Last 10</option>
