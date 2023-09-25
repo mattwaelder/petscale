@@ -103,6 +103,33 @@ const utils = {
   //   9: "rgba(20,20,20,0.5)",
   // },
 
+  //trim graph data to most recent based on user selected limit
+  trimData: (petData, limit) => {
+    //if no limit
+    if (limit === "none") {
+      return;
+    }
+
+    //if limit
+    if (limit !== "none") {
+      //deep copy of petData
+      let petDataCopy = JSON.parse(JSON.stringify(petData));
+
+      for (let index in petDataCopy) {
+        //the obj for current pet
+        let petObj = petDataCopy[index];
+        //full length of data for data array
+        let fullDataLength = petData[index].data.length;
+        //trim full data array to trimmed array
+        let newArr = petObj.data.filter((el, i) => i >= fullDataLength - limit);
+        //replace full array with trimmed array
+        petDataCopy[index].data = newArr;
+      }
+
+      return petDataCopy;
+    }
+  },
+
   colorSet: {
     0: "rgba(200,0,200,1)",
     1: "rgba(0,120,200,1)",

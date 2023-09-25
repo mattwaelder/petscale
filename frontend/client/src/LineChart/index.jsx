@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
 import {
   Chart as ChartJS,
@@ -14,7 +13,6 @@ import {
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
-import utils from "../utilities.js";
 import "chartjs-adapter-date-fns";
 import "./LineChart.scss";
 
@@ -30,9 +28,6 @@ ChartJS.register(
 );
 
 const LineChart = ({ pets, data, trimmedData, limit, setLimit }) => {
-  console.warn("incomming data", limit, data, trimmedData);
-  //data is an array of objects one for each pet, each index has a data array with all the xy values
-
   //chart options
   const options = {
     responsive: true,
@@ -82,15 +77,12 @@ const LineChart = ({ pets, data, trimmedData, limit, setLimit }) => {
       </div>
       <Line
         options={options}
-        data={limit >= 0 ? { datasets: trimmedData } : { datasets: data }}
+        data={
+          Number(limit) >= 0 ? { datasets: trimmedData } : { datasets: data }
+        }
       />
     </div>
   );
 };
 
 export default LineChart;
-
-//not sure if i want to raise all of this up a level or figure out a use effect hook method to re render the page. i should
-//do some work to find out of the data array and its data.data arrays are being actually changed by my trimData method
-//that could explain why i can move down in count successfully but not back up
-//may need a second trimmed state for what is passed down to this component OR a trimmed state held w/ing this component
