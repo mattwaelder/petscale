@@ -16,6 +16,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 import "./App.scss";
 
 function Dashboard() {
+  //////////////////  STATES  /////////////////////////
   const [user, loading, error] = useAuthState(auth);
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
@@ -27,14 +28,18 @@ function Dashboard() {
   const [petCount, setPetCount] = useState(0);
   //petdata = data for chart.js
   const [petData, setPetData] = useState([]);
+  const [limit, setLimit] = useState("none");
+  //trimmed version of petData using limit state
+  const [trimmedData, setTrimmedData] = useState([]);
   const [isLbs, setIsLbs] = useState(false);
   //using setRefreshPage as a lifted state to update entire dashboard via effect
   const [refreshPage, setRefreshPage] = useState(false);
-
   //offcanvas login
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //////////////////////////////////////////
 
   const fetchUserName = async () => {
     try {
@@ -49,6 +54,8 @@ function Dashboard() {
       alert("An error occured while fetching user data");
     }
   };
+
+  //////////////  EFFECT HOOKS  //////////////
 
   useEffect(() => {
     if (loading) return;
@@ -86,8 +93,6 @@ function Dashboard() {
       })
       .catch((err) => console.log(err));
   }, [refreshPage, userName]);
-
-  //
 
   useEffect(() => {
     //create datasets for each possible pet
@@ -128,6 +133,15 @@ function Dashboard() {
     setDisplayedData(weightData);
   }, [weightData, isLbs]);
 
+  //when limit is updated
+  useEffect(() => {
+    //trim petData to limit --> setTrimmedData
+    setTrimmedData(utils.trimData(petData, limit));
+  }, [limit, petData]);
+
+  //////////////////////////////////////////
+
+  //change lbs <--> grams
   const changeUnit = (e) => {
     setIsLbs((isLbs) => !isLbs);
   };
@@ -135,17 +149,15 @@ function Dashboard() {
   //filter the displayed data (list)
   const handleFilter = (e) => {
     let selectedPet = petList[e.target.value - 1] || null;
-
     //if no filter, display all & return
     if (!selectedPet) {
       setDisplayedData(weightData);
       return;
     }
-
     let tempData = weightData.filter((data, i) => data.name === selectedPet);
-
     setDisplayedData(tempData);
   };
+
   return (
     <div className="dashboard">
       <h5 id="header">PetScale</h5>
@@ -194,6 +206,9 @@ function Dashboard() {
             id="grid-chart"
             pets={petList}
             data={petData}
+            trimmedData={trimmedData}
+            limit={limit}
+            setLimit={setLimit}
             refresh={setRefreshPage}
           />
         ) : null}{" "}
