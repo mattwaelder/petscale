@@ -48,8 +48,6 @@ export default App;
 
 //replace "logged in as x" with icon + name, when icon is clicked a logout button appears
 
-//i feel like the form input section is too big (empty) while at default state
-
 //ability to change colors of animals from the default color or to select color when creating a new pet
 
 //database might need a rethink... maybe
@@ -59,3 +57,10 @@ export default App;
 //~~~~~~~~~
 
 //utilities and db (mongouri) are using paths/hard coded ports not referencing env
+
+// NEW //
+//pull data into downloadable csv
+//upload data from csv
+//ability to remove pets (do recommend that they get csv first)
+//new background
+//ai assistant for questions regarding health? is that even ethical?
