@@ -144,19 +144,16 @@ const utils = {
   },
 
   createCsvByPet: (fileName, data) => {
-    console.log("CREATE CSV FOR", fileName, data);
-    // petData = array of objects
-    // each obj has label for pet name and data array of objects
-    // those look like {x: 'yyy-mm-dd', y: value}
+    if (!fileName) {
+      return;
+    }
 
+    //filter petData for specified pet
     let dataForPet = data.filter((el) => el.label === fileName);
-    // console.log(dataForPet[0].data);
-    //parse data to make it csv friendly
-
     //make headers
-    let csvRows = ["date,weight"];
+    let csvRows = ["date,weight (g)"];
 
-    //iterate over data to add all of it to csv
+    //iterate/parse data and add to array
     for (let entry of dataForPet[0].data) {
       csvRows.push(`${entry.x},${entry.y}`);
     }

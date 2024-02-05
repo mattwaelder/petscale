@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
+import CsvModal from "./CsvModal";
 import UnitToggle from "./UnitToggle";
 import axios from "axios";
 import utils from "./utilities.js";
@@ -180,12 +181,13 @@ function Dashboard() {
                 <button className="dashboard__btn logout_btn" onClick={logout}>
                   Logout?
                 </button>
-                <button
+                {/* <button
                   className="dashboard__btn logout_btn"
                   onClick={() => utils.createCsvByPet(`bagel`, petData)}
                 >
                   download csv
-                </button>
+                </button> */}
+                <CsvModal petList={petList} petData={petData} />
               </>
             </Offcanvas.Body>
           </Offcanvas>
