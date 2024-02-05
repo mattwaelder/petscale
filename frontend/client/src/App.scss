@@ -73,6 +73,31 @@ html body {
   justify-content: space-between;
 }
 
+.warningModal {
+  width: 60vw;
+  height: 60vh;
+  background: white;
+  color: darkred;
+  border: none;
+  border-radius: 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(30vw, 30vh);
+  //mobile
+  @media (max-width: calc($tablet - 1px)) {
+    width: 90vw;
+    height: 50vh;
+    text-align: center;
+  }
+}
+
+.confirmDeleteModal {
+  background: white;
+  width: 50vw;
+  height: 80vh;
+}
+
 #header {
   font-family: "Shantell Sans", cursive;
   font-size: 2.5em;

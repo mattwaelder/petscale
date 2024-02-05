@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
 import CsvModal from "./CsvModal";
+import DeleteModal from "./DeleteModal";
 import UnitToggle from "./UnitToggle";
 import axios from "axios";
 import utils from "./utilities.js";
@@ -192,7 +193,7 @@ function Dashboard() {
                   <CsvModal petList={petList} petData={petData} />
                 </div>
                 <div>
-                  <Button variant="danger">Delete Data</Button>
+                  <DeleteModal petList={petList} />
                 </div>
               </div>
             </Offcanvas.Body>
