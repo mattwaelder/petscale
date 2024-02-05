@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { FaUserCircle } from "react-icons/fa";
+// import { FaUserCircle } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import Button from "react-bootstrap/Button";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
 import CsvModal from "./CsvModal";
@@ -164,7 +166,7 @@ function Dashboard() {
       <h5 id="header">PetScale</h5>
       <div className="dashboard__container dashboard__login_container">
         <>
-          <FaUserCircle
+          <FaBars
             id="user_icon_btn"
             onClick={handleShow}
             // value={{ className: "react-icons-user" }}
@@ -176,19 +178,23 @@ function Dashboard() {
               <Offcanvas.Title>PetScale</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <>
-                <p>Signed in as {`${userName}`}</p>
-                <button className="dashboard__btn logout_btn" onClick={logout}>
-                  Logout?
-                </button>
-                {/* <button
-                  className="dashboard__btn logout_btn"
-                  onClick={() => utils.createCsvByPet(`bagel`, petData)}
-                >
-                  download csv
-                </button> */}
-                <CsvModal petList={petList} petData={petData} />
-              </>
+              <div className="offCanvasBody">
+                <div>
+                  <p>Signed in as {`${userName}`}</p>
+                  <button
+                    className="dashboard__btn logout_btn"
+                    onClick={logout}
+                  >
+                    Logout?
+                  </button>
+                </div>
+                <div>
+                  <CsvModal petList={petList} petData={petData} />
+                </div>
+                <div>
+                  <Button variant="danger">Delete Data</Button>
+                </div>
+              </div>
             </Offcanvas.Body>
           </Offcanvas>
         </>

@@ -59,8 +59,8 @@ export default App;
 //utilities and db (mongouri) are using paths/hard coded ports not referencing env
 
 // NEW //
-//pull data into downloadable csv
 //upload data from csv
 //ability to remove pets (do recommend that they get csv first)
+//ability to remove all pets / data
 //new background
 //ai assistant for questions regarding health? is that even ethical?

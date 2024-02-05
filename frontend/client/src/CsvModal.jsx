@@ -22,7 +22,7 @@ function CsvModal({ petList, petData }) {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        download CSV
+        Download CSV
       </Button>
 
       <Modal show={show} onHide={handleClose} centered size="md">
