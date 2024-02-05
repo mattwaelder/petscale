@@ -53,13 +53,14 @@ function CsvModal({ petList, petData }) {
             )}
           </select>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button
             variant="primary"
             onClick={() => handleSubmit(selectedPet, petData)}
+            disabled={selectedPet ? false : true}
           >
             Download CSV
           </Button>

@@ -72,7 +72,7 @@ function DeleteModal({ petList }) {
           </select>
           {/* {showWarning && <div className="warningModal"></div>} */}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
