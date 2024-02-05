@@ -142,6 +142,38 @@ const utils = {
     8: "rgba(200,0,50,0.5)",
     9: "rgba(230,130,0,0.5)",
   },
+
+  createCsvByPet: (fileName, data) => {
+    console.log("CREATE CSV FOR", fileName, data);
+    // petData = array of objects
+    // each obj has label for pet name and data array of objects
+    // those look like {x: 'yyy-mm-dd', y: value}
+
+    let dataForPet = data.filter((el) => el.label === fileName);
+    // console.log(dataForPet[0].data);
+    //parse data to make it csv friendly
+
+    //make headers
+    let csvRows = ["date,weight"];
+
+    //iterate over data to add all of it to csv
+    for (let entry of dataForPet[0].data) {
+      csvRows.push(`${entry.x},${entry.y}`);
+    }
+
+    let csvRaw = csvRows.join("\n");
+
+    //create fake anchor tag to allow for download of csv
+    const element = document.createElement("a");
+
+    element.setAttribute("href", `data:text/csv;charset=utf-8,${csvRaw}`);
+    element.setAttribute("download", fileName);
+    element.style.display = "none";
+
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  },
 };
 
 export default utils;

@@ -180,6 +180,12 @@ function Dashboard() {
                 <button className="dashboard__btn logout_btn" onClick={logout}>
                   Logout?
                 </button>
+                <button
+                  className="dashboard__btn logout_btn"
+                  onClick={() => utils.createCsvByPet(`bagel`, petData)}
+                >
+                  download csv
+                </button>
               </>
             </Offcanvas.Body>
           </Offcanvas>

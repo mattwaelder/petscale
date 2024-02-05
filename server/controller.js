@@ -1,4 +1,5 @@
 const model = require("./model.js");
+// const fs = require("fs");
 
 module.exports.getByUser = (req, res) => {
   console.log("c get all", req);
@@ -34,3 +35,11 @@ module.exports.deleteById = (req, res) => {
     .then(() => res.sendStatus(200))
     .catch((err) => console.log(err));
 };
+
+// module.exports.createCsv = (req, res) => {
+//   console.log("c csv", req.body.petName, req.body.data);
+//   fs.writeFile(req.body.petName, req.body.data, function (err) {
+//     if (err) throw err;
+//     console.log("csv made");
+//   });
+// };

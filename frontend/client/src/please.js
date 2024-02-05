@@ -73,4 +73,10 @@ export const please = {
     console.log("please create data for pet:", name);
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
   },
+
+  // createCsvByPet: (petName, data) => {
+  //   console.log("please create csv file for pet:", petName, data);
+  //   let pkg = { petName: petName, data: data };
+  //   return axios.post(`${utils.API}/csv`, pkg);
+  // },
 };
