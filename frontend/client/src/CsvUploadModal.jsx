@@ -31,11 +31,20 @@ function CsvUploadModal({ userName, petCount }) {
     // let formData = new FormData();
     // formData.append("file", csv);
 
-    console.log("upload this formData", csv);
-    please
-      .uploadCsv(userName, "newpet", csv)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // console.log("upload this formData", csv);
+    // please
+    //   .uploadCsv(userName, "newpet", csv)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const text = e.target.result;
+      // console.log(text);
+      let csvRows = text.split("\n").slice(1);
+      console.log(csvRows);
+    };
+    reader.readAsText(csv);
   };
 
   return (
