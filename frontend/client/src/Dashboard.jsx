@@ -5,7 +5,8 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
-import CsvModal from "./CsvModal";
+import CsvDownloadModal from "./CsvDownloadModal";
+import CsvUploadModal from "./CsvUploadModal";
 import DeleteModal from "./DeleteModal";
 import UnitToggle from "./UnitToggle";
 import axios from "axios";
@@ -189,8 +190,9 @@ function Dashboard() {
                     Logout?
                   </button>
                 </div>
-                <div>
-                  <CsvModal petList={petList} petData={petData} />
+                <div className="csv_btn_wrapper">
+                  <CsvDownloadModal petList={petList} petData={petData} />
+                  <CsvUploadModal userName={userName} petCount={petCount} />
                 </div>
                 <div>
                   <DeleteModal petList={petList} />

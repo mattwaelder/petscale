@@ -73,6 +73,13 @@ html body {
   justify-content: space-between;
 }
 
+.csv_btn_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .warningModal {
   width: 60vw;
   height: 60vh;

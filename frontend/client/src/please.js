@@ -79,4 +79,21 @@ export const please = {
   //   let pkg = { petName: petName, data: data };
   //   return axios.post(`${utils.API}/csv`, pkg);
   // },
+
+  uploadCsv: (user, name, file) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    console.log("please upload file for ", name);
+    let pkg = {
+      user: user,
+      pet: name,
+      file: file,
+    };
+    console.log("sending file: ", file);
+    return axios.post(`${utils.API}/upload`, pkg);
+  },
 };
