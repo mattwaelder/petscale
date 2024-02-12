@@ -59,8 +59,11 @@ export default App;
 //utilities and db (mongouri) are using paths/hard coded ports not referencing env
 
 // NEW //
-//upload data from csv
-//ability to remove pets (do recommend that they get csv first)
-//ability to remove all pets / data
+//make csv upload more robust
+//limit names allowed to not be same as existing names etz
+//if the package doesnt parse right return an error
+//re-render page after file upload and close modals
+//ensure its handling headers ok
+
 //new background
 //ai assistant for questions regarding health? is that even ethical?

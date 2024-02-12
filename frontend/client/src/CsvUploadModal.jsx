@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { please } from "./please.js";
+import utils from "./utilities.js";
 
 function CsvUploadModal({ userName, petCount }) {
   const [show, setShow] = useState(false);
@@ -9,7 +10,19 @@ function CsvUploadModal({ userName, petCount }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [parsed, setParsed] = useState([]);
+
   const [csv, setCsv] = useState("");
+  const [petName, setPetName] = useState("");
+
+  ///////////////////
+
+  useEffect(() => {
+    console.log("EFFECTED");
+    if (parsed.length < 1) return;
+    let colorIndex = petCount + 1;
+    please.uploadCsv(userName, colorIndex, petName, parsed);
+  }, [parsed]);
 
   const handleChange = (e) => {
     console.log(e.target.files[0]);
@@ -20,31 +33,46 @@ function CsvUploadModal({ userName, petCount }) {
 
     setCsv(file);
   };
-  const handleUpload = (e) => {
-    // console.log("upload this csv", csv);
-    // please.uploadCsv(userName, "newpet", csv).then((res) => console.log(res));
+
+  const handleNameUpdate = (e) => {
+    setPetName(e.target.value);
   };
+
+  // const sendData = (userName, colorIndex, petName, parsed) => {
+  //   console.log("now sending data ////////////////", parsed);
+  //   please.uploadCsv(userName, colorIndex, petName, parsed);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // let formData = new FormData();
-    // formData.append("file", csv);
-
-    // console.log("upload this formData", csv);
-    // please
-    //   .uploadCsv(userName, "newpet", csv)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+    let colorIndex = petCount + 1;
+    let parsedData = [];
 
     const reader = new FileReader();
+
     reader.onload = function (e) {
       const text = e.target.result;
-      // console.log(text);
       let csvRows = text.split("\n").slice(1);
-      console.log(csvRows);
+
+      csvRows.forEach((r, i) => {
+        let [date, weight] = r.split(",");
+        date = utils.getFormattedDateDB(date);
+        weight = parseInt(weight);
+        parsedData.push({ date, weight });
+      });
+
+      setParsed(parsedData);
     };
+
     reader.readAsText(csv);
+
+    // reader.addEventListener(
+    //   "loadend",
+    //   sendData(userName, colorIndex, petName, parsedData)
+    // );
+
+    please.uploadCsv(userName, colorIndex, petName, parsed);
   };
 
   return (
@@ -76,7 +104,11 @@ function CsvUploadModal({ userName, petCount }) {
           </p>
           <form encType="multipart/form-data">
             <label htmlFor="newPetName">Name: </label>
-            <input type="text" id="newPetName"></input>
+            <input
+              type="text"
+              id="newPetName"
+              onChange={(e) => handleNameUpdate(e)}
+            ></input>
             <input
               type="file"
               accept=".csv"

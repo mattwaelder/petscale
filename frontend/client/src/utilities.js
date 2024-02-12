@@ -60,6 +60,18 @@ const utils = {
     }
   },
 
+  //date for putting into db ('2020-12-25') -> ('12/25/2020')
+  getFormattedDateDB: (messyDate) => {
+    let dateArr = messyDate.replace(/-/g, "/").split("/");
+    //splitting date to array [yyyy, mm, dd] fixes utc issue
+
+    //for safari "mm/dd/yyyy"
+    dateArr.push(dateArr.shift());
+
+    let newDate = dateArr.join("/");
+    return newDate;
+  },
+
   getLineGraphValues: (petList, data, isLbs, petNum) => {
     let dataGrams = data
       .map((d) =>

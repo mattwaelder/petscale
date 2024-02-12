@@ -1,29 +1,67 @@
 const model = require("./model.js");
-const fs = require("fs");
-const { parse } = require("csv-parse");
-const multer = require("multer");
 
 module.exports.uploadCsv = (req, res) => {
-  console.log("c csv upload");
-  console.log(req.files);
-  const data = [];
+  console.log("c csv upload ");
+
+  if (
+    !Array.isArray(req.body.data) ||
+    !req.body.data ||
+    req.body.data.length < 1
+  ) {
+    res.sendStatus(204);
+    return;
+  }
+
+  //body = { owner, name, color, data };
+  //color is index, data is object like {date, weight}
+
+  // return PetData.create({
+  //   owner: req.owner,
+  //   name: req.name,
+  //   weight: req.weight,
+  //   unit: req.unit,
+  //   color: req.color,
+  //   created_at: req.created_at,
+  // });
+
+  // console.log("/////", Array.isArray(req.body.data));
+
+  req.body?.data?.forEach(({ date, weight }, i) => {
+    let pkg = {};
+
+    pkg.owner = req.body.owner;
+    pkg.name = req.body.name;
+    pkg.color = req.body.color;
+    pkg.weight = weight;
+    pkg.unit = "g";
+    pkg.created_at = date;
+
+    if (!pkg.weight || !pkg.created_at) {
+      return;
+    }
+
+    model
+      .create(pkg)
+      .then(() => res.sendStatus(201))
+      .catch((err) => console.log(err));
+  });
 
   // fs.readFile(req.files.file.path, function (err, data) {
   //   console.log(data);
   // });
 
-  fs.createReadStream(req.files)
-    .pipe(parse({ delimiter: ",", from_line: 2 }))
-    .on("data", (row) => {
-      console.log(row);
-      data.push(row);
-    })
-    .on("end", () => {
-      console.log(data);
-    })
-    .on("error", function (error) {
-      console.log(error.message);
-    });
+  // fs.createReadStream(req.files)
+  //   .pipe(parse({ delimiter: ",", from_line: 2 }))
+  //   .on("data", (row) => {
+  //     console.log(row);
+  //     data.push(row);
+  //   })
+  //   .on("end", () => {
+  //     console.log(data);
+  //   })
+  //   .on("error", function (error) {
+  //     console.log(error.message);
+  //   });
 
   // model
   //   .uploadCsv()

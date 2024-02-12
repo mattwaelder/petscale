@@ -13,8 +13,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-app.use(multer({ dest: "./uploads/" }).single("uploaded_file"));
-
 // Require the upload middleware
 // const upload = require("./upload");
 
@@ -32,7 +30,12 @@ app.get("/users", (req, res) => {
 
 app.post("/upload", (req, res) => {
   console.log("post from csv");
-  console.log(req.file);
+  // console.log(req.body);
+
+  // let body = req.body;
+  // body.data = JSON.parse(req.body.data);
+  // console.log(body);
+
   controller.uploadCsv(req, res);
 });
 

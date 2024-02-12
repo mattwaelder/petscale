@@ -23,6 +23,7 @@ module.exports.deleteById = (req) => {
   return PetData.deleteOne({ _id: req });
 };
 
-module.exports.uploadCsv = () => {
+module.exports.uploadCsv = (req) => {
   console.log("m csv upload");
+  console.log("adding: ", req);
 };

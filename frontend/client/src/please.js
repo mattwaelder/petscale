@@ -15,13 +15,7 @@ export const please = {
     let today = new Date(yourDate.getTime() - offset * 60 * 1000);
     let formattedDate = today.toISOString().split("T")[0];
 
-    // let dateArr = formattedDate.split("-");
-    let dateArr = formattedDate.replace(/-/g, "/").split("/");
-
-    //for safari "mm/dd/yyyy"
-    dateArr.push(dateArr.shift());
-
-    let newDate = dateArr.join("/");
+    let newDate = utils.getFormattedDateDB(formattedDate);
 
     //store all weight in grams
     let weightInGrams =
@@ -50,15 +44,6 @@ export const please = {
   },
 
   createDataByUser: (user, name, weight, unit, colorIndex, date) => {
-    let dateArr = date.replace(/-/g, "/").split("/");
-    //splitting date to array [yyyy, mm, dd] fixes utc issue
-    // let newDate = new Date(dateArr);
-
-    //for safari "mm/dd/yyyy"
-    dateArr.push(dateArr.shift());
-
-    let newDate = dateArr.join("/");
-
     let weightInGrams =
       unit === "lbs" ? (Number(weight) * 453.592).toFixed(2) : Number(weight);
 
@@ -68,7 +53,7 @@ export const please = {
       weight: weightInGrams,
       unit: unit,
       color: colorIndex + 1,
-      created_at: newDate,
+      created_at: utils.getFormattedDateDB(date),
     };
     console.log("please create data for pet:", name);
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
@@ -80,20 +65,36 @@ export const please = {
   //   return axios.post(`${utils.API}/csv`, pkg);
   // },
 
-  uploadCsv: (user, name, file) => {
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
+  uploadCsv: (user, color, petName, data) => {
+    console.log("please upload file for ", petName, data);
+
+    /*
+          headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
       },
+    }
+    */
+
+    let pkg = {
+      owner: user,
+      name: petName,
+      color: color,
+      data: data,
     };
 
-    console.log("please upload file for ", name);
-    let pkg = {
-      user: user,
-      pet: name,
-      file: file,
-    };
-    console.log("sending file: ", file);
-    return axios.post(`${utils.API}/upload`, pkg);
+    // const bodyFormData = new FormData();
+    // data.forEach((item) => {
+    //   bodyFormData.append("data[]", item);
+    // });
+    // console.log(bodyFormData);
+
+    // return axios.post(`${utils.API}/upload`, pkg);
+
+    axios({
+      url: `/upload`,
+      method: "post",
+      baseURL: `${utils.API}`,
+      data: pkg,
+    });
   },
 };
