@@ -5,7 +5,7 @@ import utils from "./utilities.js";
 
 import ConfirmDelete from "./ConfirmDeleteModal.jsx";
 
-function DeleteModal({ petList }) {
+function DeleteModal({ userName, petList, refresh }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -76,7 +76,11 @@ function DeleteModal({ petList }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <ConfirmDelete pet={selectedPet} />
+          <ConfirmDelete
+            userName={userName}
+            pet={selectedPet}
+            refresh={refresh}
+          />
         </Modal.Footer>
       </Modal>
     </>

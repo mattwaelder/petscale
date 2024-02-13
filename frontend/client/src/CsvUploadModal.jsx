@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { please } from "./please.js";
 import utils from "./utilities.js";
 
-function CsvUploadModal({ userName, petCount }) {
+function CsvUploadModal({ userName, petCount, refresh }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -72,7 +72,9 @@ function CsvUploadModal({ userName, petCount }) {
     //   sendData(userName, colorIndex, petName, parsedData)
     // );
 
-    please.uploadCsv(userName, colorIndex, petName, parsed);
+    please
+      .uploadCsv(userName, colorIndex, petName, parsed)
+      .then(() => refresh((val) => !val));
   };
 
   return (

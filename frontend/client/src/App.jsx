@@ -64,6 +64,7 @@ export default App;
 //if the package doesnt parse right return an error
 //re-render page after file upload and close modals
 //ensure its handling headers ok
+//disallow use of word "all" as a pet name
 
 //new background
 //ai assistant for questions regarding health? is that even ethical?

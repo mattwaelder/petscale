@@ -20,11 +20,7 @@ const DataList = ({
     // let id = e.target.closest(".trash").id;
     console.log(delEntry._id);
 
-    axios
-      .delete(`${utils.API}/entries/?entry=${delEntry._id}`)
-      .then(() => please.fetchDataByUser(user))
-      .then(() => refresh((val) => !val))
-      .catch((err) => console.log(err));
+    please.deleteById(user, delEntry, refresh);
   };
 
   //obj of selected list item for deletion (used in modal)

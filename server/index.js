@@ -54,6 +54,11 @@ app.delete("/entries", (req, res) => {
   controller.deleteById(req, res);
 });
 
+app.delete("/delete/pets/", (req, res) => {
+  console.log("del pet data");
+  controller.deleteByPet(req, res);
+});
+
 //////////////////////////////////////////////
 
 // let PORT = process.env.PORT || 3456;

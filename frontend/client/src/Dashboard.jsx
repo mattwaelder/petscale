@@ -75,6 +75,7 @@ function Dashboard() {
   useEffect(() => {
     if (!user) return navigate("/");
     console.log("username is:", userName);
+    handleClose();
 
     //get data from db for user
     please
@@ -191,11 +192,23 @@ function Dashboard() {
                   </button>
                 </div>
                 <div className="csv_btn_wrapper">
-                  <CsvDownloadModal petList={petList} petData={petData} />
-                  <CsvUploadModal userName={userName} petCount={petCount} />
+                  <CsvDownloadModal
+                    petList={petList}
+                    petData={petData}
+                    refresh={setRefreshPage}
+                  />
+                  <CsvUploadModal
+                    userName={userName}
+                    petCount={petCount}
+                    refresh={setRefreshPage}
+                  />
                 </div>
                 <div>
-                  <DeleteModal petList={petList} />
+                  <DeleteModal
+                    userName={userName}
+                    petList={petList}
+                    refresh={setRefreshPage}
+                  />
                 </div>
               </div>
             </Offcanvas.Body>

@@ -18,12 +18,22 @@ module.exports.create = (req) => {
   });
 };
 
+module.exports.uploadCsv = (req) => {
+  console.log("m upload from csv");
+  return PetData.insertMany(req.body);
+};
+
 module.exports.deleteById = (req) => {
   console.log("m del");
   return PetData.deleteOne({ _id: req });
 };
 
-module.exports.uploadCsv = (req) => {
-  console.log("m csv upload");
-  console.log("adding: ", req);
+module.exports.deleteByPet = (req) => {
+  console.log("m del by pet");
+  return PetData.deleteMany({ owner: req.body.owner, name: req.body.name });
+};
+
+module.exports.deleteByUser = (req) => {
+  console.log("m del all for user");
+  return PetData.deleteMany({ owner: req.body.owner });
 };

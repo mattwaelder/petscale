@@ -67,33 +67,40 @@ export const please = {
 
   uploadCsv: (user, color, petName, data) => {
     console.log("please upload file for ", petName, data);
+    let pkg = [];
 
-    /*
-          headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    }
-    */
+    data.forEach(({ date, weight }) => {
+      if (date.length === 0 || !weight) return;
 
-    let pkg = {
-      owner: user,
-      name: petName,
-      color: color,
-      data: data,
-    };
+      let dataPoint = {
+        owner: user,
+        name: petName,
+        color: color,
+        weight: weight,
+        unit: "g",
+        created_at: date,
+      };
 
-    // const bodyFormData = new FormData();
-    // data.forEach((item) => {
-    //   bodyFormData.append("data[]", item);
-    // });
-    // console.log(bodyFormData);
+      pkg.push(dataPoint);
+    });
 
-    // return axios.post(`${utils.API}/upload`, pkg);
+    return axios.post(`${utils.API}/upload`, pkg);
+    // .then(() => please.fetchDataByUser(user));
+  },
 
-    axios({
-      url: `/upload`,
-      method: "post",
-      baseURL: `${utils.API}`,
+  deleteById: (user, delEntry, refresh) => {
+    axios
+      .delete(`${utils.API}/entries/?entry=${delEntry._id}`)
+      .then(() => please.fetchDataByUser(user))
+      .then(() => refresh((val) => !val))
+      .catch((err) => console.log(err));
+  },
+
+  deleteData: (userName, petName, isFullWipe) => {
+    console.log("delete data for ", petName);
+    let pkg = { owner: userName, name: petName, isFullWipe: isFullWipe };
+
+    return axios.delete(`${utils.API}/delete/pets/?pet=${petName}`, {
       data: pkg,
     });
   },

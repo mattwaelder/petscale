@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import utils from "./utilities.js";
 
-function CsvDownloadModal({ petList, petData }) {
+function CsvDownloadModal({ petList, petData, refresh }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -17,6 +17,7 @@ function CsvDownloadModal({ petList, petData }) {
     utils.createCsvByPet(selectedPet, petData);
     setSelectedPet("");
     handleClose();
+    refresh((val) => !val);
   };
 
   return (

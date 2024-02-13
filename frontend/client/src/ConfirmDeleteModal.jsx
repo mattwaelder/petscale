@@ -1,12 +1,33 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { please } from "./please.js";
 
-function ConfirmDelete({ pet }) {
+function ConfirmDelete({ userName, pet, refresh }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //delete all data for selected pet
+  const handleDeleteData = (userName, pet) => {
+    let isFullWipe = false;
+
+    //catch any issues before handing off
+    if (!pet || !userName) {
+      console.log(
+        "error handling delete request, missing username or pet name"
+      );
+      return;
+    }
+
+    //if deleting all pets, set boolean to true
+    if (pet === "all") isFullWipe = true;
+
+    please
+      .deleteData(userName, pet, isFullWipe)
+      .then(() => refresh((val) => !val));
+  };
 
   return (
     <>
@@ -35,7 +56,11 @@ function ConfirmDelete({ pet }) {
           </h5>
         </Modal.Body>
         <Modal.Footer className="justify-content-between">
-          <Button variant="danger" className="col-3">
+          <Button
+            variant="danger"
+            className="col-3"
+            onClick={() => handleDeleteData(userName, pet)}
+          >
             Yes, Delete
           </Button>
           <Button variant="secondary" className="col-3" onClick={handleClose}>
