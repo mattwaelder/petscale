@@ -81,6 +81,7 @@ function CsvUploadModal({ userName, petCount, refresh }) {
     <>
       <Button
         variant="primary"
+        className="csv-btn"
         onClick={handleShow}
         disabled={petCount >= 5 ? true : false}
       >

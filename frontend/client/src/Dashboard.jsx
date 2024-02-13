@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 // import { FaUserCircle } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
+import { BsFiletypeCsv } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import DataInput from "./DataInput";
@@ -191,17 +192,20 @@ function Dashboard() {
                     Logout?
                   </button>
                 </div>
-                <div className="csv_btn_wrapper">
-                  <CsvDownloadModal
-                    petList={petList}
-                    petData={petData}
-                    refresh={setRefreshPage}
-                  />
-                  <CsvUploadModal
-                    userName={userName}
-                    petCount={petCount}
-                    refresh={setRefreshPage}
-                  />
+                <div className="csv_btn_container">
+                  <BsFiletypeCsv className="csvIcon" />
+                  <div className="csv_btn_wrapper">
+                    <CsvDownloadModal
+                      petList={petList}
+                      petData={petData}
+                      refresh={setRefreshPage}
+                    />
+                    <CsvUploadModal
+                      userName={userName}
+                      petCount={petCount}
+                      refresh={setRefreshPage}
+                    />
+                  </div>
                 </div>
                 <div>
                   <DeleteModal
