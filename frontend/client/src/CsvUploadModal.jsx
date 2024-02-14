@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { please } from "./please.js";
 import utils from "./utilities.js";
 
-function CsvUploadModal({ userName, petCount, refresh }) {
+function CsvUploadModal({ userName, petList, petCount, refresh }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,12 +19,20 @@ function CsvUploadModal({ userName, petCount, refresh }) {
 
   useEffect(() => {
     if (parsed.length < 1) return;
-    let colorIndex = petCount + 1;
-    please.uploadCsv(userName, colorIndex, petName, parsed);
+
+    let colorIndex;
+    if (petList.includes(petName)) {
+      colorIndex = petList.indexOf(petName);
+    } else {
+      colorIndex = petCount + 1;
+    }
+
+    please
+      .uploadCsv(userName, colorIndex, petName, parsed)
+      .then(() => refresh((val) => !val));
   }, [parsed]);
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     let file = e.target.files[0];
 
     const formData = new FormData();
@@ -37,57 +45,43 @@ function CsvUploadModal({ userName, petCount, refresh }) {
     setPetName(e.target.value);
   };
 
-  // const sendData = (userName, colorIndex, petName, parsed) => {
-  //   console.log("now sending data ////////////////", parsed);
-  //   please.uploadCsv(userName, colorIndex, petName, parsed);
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    let colorIndex = petCount + 1;
     let parsedData = [];
-
     const reader = new FileReader();
 
     reader.onload = function (e) {
       try {
         const text = e.target.result;
+        //split into rows (exclude headers)
         let csvRows = text.split("\n").slice(1);
 
+        //for every row, parse data and push to parsedData
         csvRows.forEach((r, i) => {
-          console.log(r, i);
           let [date, weight] = r.split(",");
           date = utils.getFormattedDateDB(date);
           weight = parseInt(weight);
-          console.log(date, weight, typeof weight);
 
+          //if date or weight are invalid, throw error
           if (date === "error" || weight <= 0) {
             let err = `Error. CSV data for row ${i + 1} is invalid\n
             Expected: yyyy-mm-dd,NATURAL_NUMBER(g)\n
             Got: ${r}`;
-
             throw new Error(err);
           }
           parsedData.push({ date, weight });
         });
 
+        //parsed update causes effect hook which posts data to server
         setParsed(parsedData);
+
+        //catch and alert erros w/ csv file
       } catch (error) {
         alert(error);
       }
     };
 
     reader.readAsText(csv);
-
-    // reader.addEventListener(
-    //   "loadend",
-    //   sendData(userName, colorIndex, petName, parsedData)
-    // );
-
-    please
-      .uploadCsv(userName, colorIndex, petName, parsed)
-      .then(() => refresh((val) => !val));
   };
 
   return (

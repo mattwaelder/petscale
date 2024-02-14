@@ -65,8 +65,8 @@ export const please = {
   //   return axios.post(`${utils.API}/csv`, pkg);
   // },
 
-  uploadCsv: (user, color, petName, data) => {
-    console.log("please upload file for ", petName, data);
+  uploadCsv: (user, colorIndex, petName, data) => {
+    console.log("please upload file for ", petName);
     let pkg = [];
 
     data.forEach(({ date, weight }) => {
@@ -75,7 +75,7 @@ export const please = {
       let dataPoint = {
         owner: user,
         name: petName,
-        color: color,
+        color: colorIndex,
         weight: weight,
         unit: "g",
         created_at: date,

@@ -75,7 +75,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) return navigate("/");
-    console.log("username is:", userName);
+    // console.log("username is:", userName);
     handleClose();
 
     //get data from db for user
@@ -202,6 +202,7 @@ function Dashboard() {
                     />
                     <CsvUploadModal
                       userName={userName}
+                      petList={petList}
                       petCount={petCount}
                       refresh={setRefreshPage}
                     />
