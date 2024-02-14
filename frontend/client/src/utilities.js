@@ -65,6 +65,11 @@ const utils = {
     let dateArr = messyDate.replace(/-/g, "/").split("/");
     //splitting date to array [yyyy, mm, dd] fixes utc issue
 
+    //catch issues w/ date formatting
+    if (dateArr.length !== 3 || dateArr.join("").length !== 8) {
+      return "error";
+    }
+
     //for safari "mm/dd/yyyy"
     dateArr.push(dateArr.shift());
 

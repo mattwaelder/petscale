@@ -18,7 +18,6 @@ function CsvUploadModal({ userName, petCount, refresh }) {
   ///////////////////
 
   useEffect(() => {
-    console.log("EFFECTED");
     if (parsed.length < 1) return;
     let colorIndex = petCount + 1;
     please.uploadCsv(userName, colorIndex, petName, parsed);
@@ -52,17 +51,31 @@ function CsvUploadModal({ userName, petCount, refresh }) {
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      const text = e.target.result;
-      let csvRows = text.split("\n").slice(1);
+      try {
+        const text = e.target.result;
+        let csvRows = text.split("\n").slice(1);
 
-      csvRows.forEach((r, i) => {
-        let [date, weight] = r.split(",");
-        date = utils.getFormattedDateDB(date);
-        weight = parseInt(weight);
-        parsedData.push({ date, weight });
-      });
+        csvRows.forEach((r, i) => {
+          console.log(r, i);
+          let [date, weight] = r.split(",");
+          date = utils.getFormattedDateDB(date);
+          weight = parseInt(weight);
+          console.log(date, weight, typeof weight);
 
-      setParsed(parsedData);
+          if (date === "error" || weight <= 0) {
+            let err = `Error. CSV data for row ${i + 1} is invalid\n
+            Expected: yyyy-mm-dd,NATURAL_NUMBER(g)\n
+            Got: ${r}`;
+
+            throw new Error(err);
+          }
+          parsedData.push({ date, weight });
+        });
+
+        setParsed(parsedData);
+      } catch (error) {
+        alert(error);
+      }
     };
 
     reader.readAsText(csv);
