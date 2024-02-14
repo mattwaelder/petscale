@@ -179,11 +179,13 @@ function Dashboard() {
 
           <Offcanvas id="off_canvas" show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>PetScale</Offcanvas.Title>
+              <Offcanvas.Title>
+                <h2 id="offCanvasHeader">PetScale</h2>
+              </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <div className="offCanvasBody">
-                <div>
+                <div className="offCanvasChild">
                   <p>Signed in as {`${userName}`}</p>
                   <button
                     className="dashboard__btn logout_btn"
@@ -192,7 +194,7 @@ function Dashboard() {
                     Logout?
                   </button>
                 </div>
-                <div className="csv_btn_container">
+                <div className="csv_btn_container offCanvasChild">
                   <BsFiletypeCsv className="csvIcon" />
                   <div className="csv_btn_wrapper">
                     <CsvDownloadModal
@@ -208,7 +210,7 @@ function Dashboard() {
                     />
                   </div>
                 </div>
-                <div>
+                <div className="offCanvasChild">
                   <DeleteModal
                     userName={userName}
                     petList={petList}
