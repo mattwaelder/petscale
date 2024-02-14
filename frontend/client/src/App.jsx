@@ -59,14 +59,6 @@ export default App;
 //utilities and db (mongouri) are using paths/hard coded ports not referencing env
 
 // NEW //
-//make csv upload more robust
-//limit names allowed to not be same as existing names etz
-//if the package doesnt parse right return an error
-//ensure its handling headers ok
-//disallow use of word "all" as a pet name
-//disable upload button or throw err if nothing to send
-//fix modals up for csv and delete (including white background on delete modal)
-//include example csv or show formatting?
 
 //new background
 //ai assistant for questions regarding health? is that even ethical?

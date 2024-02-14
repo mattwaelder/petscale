@@ -80,8 +80,8 @@ const DataInput = ({ user, pets, petCount, fetchData, refresh }) => {
         alert("that pet already exists");
         return;
       }
-      if (name.length <= 3) {
-        alert("names must be longer than 3 characters");
+      if (name.length < 3) {
+        alert("names must be longer than 2 characters");
         return;
       }
       if (petCount >= 5) {

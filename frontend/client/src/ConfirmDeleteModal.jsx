@@ -51,9 +51,15 @@ function ConfirmDelete({ userName, pet, refresh }) {
           <Modal.Title>Are You Sure?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h5>
-            Really delete all data{`${pet === "all" ? "" : ` for ${pet}`}?`}
-          </h5>
+          {pet === "all" ? (
+            <h5>
+              Really delete <b>all</b> data?
+            </h5>
+          ) : (
+            <h5>
+              Really Delete all data for <b>{pet.toUpperCase()}</b>
+            </h5>
+          )}
         </Modal.Body>
         <Modal.Footer className="justify-content-between">
           <Button
@@ -63,7 +69,7 @@ function ConfirmDelete({ userName, pet, refresh }) {
           >
             Yes, Delete
           </Button>
-          <Button variant="secondary" className="col-3" onClick={handleClose}>
+          <Button variant="primary" className="col-3" onClick={handleClose}>
             No
           </Button>
         </Modal.Footer>

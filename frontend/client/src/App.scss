@@ -105,6 +105,11 @@ html body {
   z-index: -1;
 }
 
+input,
+#myFile {
+  margin: 1em 0 0 3%;
+}
+
 .warningModal {
   width: 60vw;
   height: 60vh;
@@ -125,7 +130,7 @@ html body {
 }
 
 .confirmDeleteModal {
-  background: white;
+  background: rgb(135, 30, 30);
   width: 50vw;
   height: 80vh;
 }

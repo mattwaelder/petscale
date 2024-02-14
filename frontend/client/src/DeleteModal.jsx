@@ -7,27 +7,16 @@ import ConfirmDelete from "./ConfirmDeleteModal.jsx";
 
 function DeleteModal({ userName, petList, refresh }) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [showWarning, setShowWarning] = useState(false);
   const [selectedPet, setSelectedPet] = useState("");
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setSelectedPet(e.target.value);
-  };
-
-  const handleWarning = (pet) => {
-    console.log(pet);
-    setShowWarning(!showWarning);
-  };
-
-  const handleSubmit = (selectedPet) => {
-    console.log(selectedPet);
-    // utils.deleteData(selectedPet);
+  const handleClose = () => {
     setSelectedPet("");
-    handleClose();
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
+
+  const handleChange = (e) => {
+    setSelectedPet(e.target.value);
   };
 
   return (

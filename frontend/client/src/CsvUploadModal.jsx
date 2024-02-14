@@ -6,14 +6,15 @@ import utils from "./utilities.js";
 
 function CsvUploadModal({ userName, petList, petCount, refresh }) {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const [parsed, setParsed] = useState([]);
-
   const [csv, setCsv] = useState("");
   const [petName, setPetName] = useState("");
+
+  const handleClose = () => {
+    setCsv("");
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
 
   ///////////////////
 
@@ -45,13 +46,31 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
     setPetName(e.target.value);
   };
 
+  const nameValidation = (name) => {
+    let nameArr = name.split("");
+    const invalid = ["\\", "/", "<", ">", "`", "%", "$", "."];
+    return nameArr.some((char) => invalid.includes(char));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let parsedData = [];
     const reader = new FileReader();
 
     reader.onload = function (e) {
       try {
+        //if name is invalid, throw error
+        if (
+          petName.length < 3 ||
+          nameValidation(petName) ||
+          petName.toLowerCase() === "all"
+        ) {
+          throw new Error(
+            "The name you've entered is not valid\nNames must be longer than 2 characters and not include special characters."
+          );
+        }
+
         const text = e.target.result;
         //split into rows (exclude headers)
         let csvRows = text.split("\n").slice(1);
@@ -64,7 +83,7 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
 
           //if date or weight are invalid, throw error
           if (date === "error" || weight <= 0) {
-            let err = `Error. CSV data for row ${i + 1} is invalid\n
+            let err = `CSV DATA FOR ROW ${i + 1} IS INVALID\n
             Expected: yyyy-mm-dd,NATURAL_NUMBER(g)\n
             Got: ${r}`;
             throw new Error(err);
@@ -107,17 +126,21 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
           <Modal.Title>Upload CSV Data</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            Data should be for a single pet and should have only two columns:
-            date, and weight <i>in grams</i>. Please ensure that you have
-            formatted your CSV file accordingly.
-          </p>
+          <ul>
+            <li>Data should be for a single pet</li>
+            <li>Data should have only 2 columns, Date & Weight</li>
+            <li>Format date as follows: yyyy-mm-dd</li>
+            <li>Weight is expected in grams</li>
+          </ul>
           <form encType="multipart/form-data">
-            <label htmlFor="newPetName">Name: </label>
+            <label htmlFor="newPetName">Pet name: </label>
             <input
               type="text"
               id="newPetName"
+              autoComplete="off"
+              minLength="3"
               onChange={(e) => handleNameUpdate(e)}
+              required
             ></input>
             <input
               type="file"
@@ -125,7 +148,6 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
               id="myFile"
               name="uploaded_file"
               onChange={(e) => handleChange(e)}
-              onSubmit={(e) => handleSubmit(e)}
             ></input>
           </form>
         </Modal.Body>
@@ -136,6 +158,7 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
           <Button
             variant="primary"
             className="col-3"
+            disabled={csv && petName ? false : true}
             onClick={(e) => handleSubmit(e)}
           >
             Upload
