@@ -46,11 +46,7 @@ export default App;
 
 // FIREBASE MAY NEED RULES UPDATED BEFORE HOSTING FOR SECURITY
 
-//replace "logged in as x" with icon + name, when icon is clicked a logout button appears
-
 //ability to change colors of animals from the default color or to select color when creating a new pet
-
-//database might need a rethink... maybe
 
 // in the db, mongoURI may need to be moved to .env from database index file
 
@@ -66,5 +62,13 @@ export default App;
 //in order to keep things on par w/ what they are now, id have to delete the data for that pet, and adjust all the color indeces for each pet w/ a higher index than the deleted pet. that would require a loop over all pets, deleting old pet data from the db, and adding all of it back. very costly....
 //swapping to sql wouldnt be too bad, if the site wasnt already deployed i'd have to update the live environment to work in a sql world instead and that sounds like hell :)
 //i should just disallow csv upload of existing pet names :(
+
+//deleting pets is still an issue, though, and must be resolved...
+//deleting needs to be more involved. maybe i can make a schema for a user and add a list of pets to that user. ive tried this in the past, but abanoned it
+
+//MAKE NEW COLLECTION FOR PET OWNER WITH 1 TO N RELATIONSHIP W/ PETDATA
+//petOwner.insertOne({username:"mattwaelder",petList:"1,2,3"})
+//petList can either be a csv string or a proper list,whatever is easier.
+//how much of this can be done withing ATLAS?
 
 //ai assistant for questions regarding health? is that even ethical?
