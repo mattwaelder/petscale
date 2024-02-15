@@ -35,9 +35,11 @@ $mobile: 600px;
       position: initial;
       display: block;
       cursor: pointer;
-      color: var(--color-primary-darker);
-      border: 1px solid white;
-      background: white;
+      // color: var(--color-primary-darker);
+      color: var(--color-secondary-darker);
+
+      // border: 1px solid white;
+      // background: white;
       border-radius: 50%;
     }
   }
@@ -64,6 +66,7 @@ $mobile: 600px;
       position: fixed;
       top: 0.5em;
       right: 0.5em;
+      color: var(--color-secondary-darker);
 
       .add-data_header {
         display: none;

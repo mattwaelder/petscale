@@ -7,12 +7,16 @@ $mobile: 600px;
   --color-tertiary: rgb(200, 200, 200);
   --color-accent: rgb(253, 255, 143);
   --color-primary-darker: rgb(90, 140, 190);
-  --color-secondary-darker: rgb(167, 102, 102);
-  /* --color-secondary-darker: rgb(147, 55, 55); */
+  // --color-secondary-darker: rgb(167, 102, 102);
+  --color-secondary-darker: rgb(150, 100, 150);
   --color-primary-lighter: rgb(188, 217, 247);
   --color-secondary-lighter: rgb(253, 223, 244);
   --color-glass-transparency: rgba(255, 255, 255, 0.5);
-  --color-glass-transparency-lighter: rgba(255, 255, 255, 0.2);
+  // --color-glass-transparency-lighter: rgba(255, 255, 255, 0.2);
+  // --color-glass-transparency-lighter: rgba(180, 180, 180, 0.4);
+  // --color-glass-transparency-lighter: rgba(220, 220, 220, 0.25);
+  --color-glass-transparency-lighter: rgba(235, 235, 235, 0.5);
+
   --color-glass-transparency-less: rgba(255, 255, 255, 0.75);
   --color-glass-transparency-dark: rgba(0, 0, 0, 0.1);
 
@@ -27,8 +31,6 @@ $mobile: 600px;
     var(--color-secondary) 0%,
     rgb(166, 193, 238) 100%
   );
-
-  --modal-bg: rgb(200, 200, 0);
 }
 
 html body {
@@ -37,7 +39,10 @@ html body {
   width: 100vw;
   overflow-x: hidden;
   font-family: "Poppins", sans-serif;
-  background: var(--gradient-body);
+  // background: var(--gradient-body);
+  background-image: url("../public/background_clouds.webp");
+  background-size: cover;
+  background-position-y: 0%;
   color: rgb(80, 80, 80);
 }
 
@@ -63,18 +68,31 @@ html body {
 
 #off_canvas {
   max-width: 66vw;
+  background-image: url("../public/background_clouds.webp");
+  background-size: cover;
 }
 
 #offCanvasHeader {
   font-family: "Shantell Sans", cursive;
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: 400;
   color: var(--color-secondary-darker);
 
   //mobile
   @media (max-width: calc($tablet - 1px)) {
     font-size: 2.5em;
+    margin-bottom: 0;
   }
+}
+
+#signedInAs {
+  font-size: 1.2em;
+  color: rgb(85, 85, 85);
+}
+
+#welcomeUser {
+  font-size: 1em;
+  color: rgb(85, 85, 85);
 }
 
 .offCanvasBody {
@@ -88,7 +106,7 @@ html body {
   .offCanvasChild {
     width: 100%;
     padding-top: 1em;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid var(--color-primary-darker);
   }
 }
 
@@ -137,6 +155,18 @@ html body {
   }
 }
 
+.deleteDataBtn {
+  margin-bottom: 2em;
+}
+
+#backgroundCitation {
+  position: absolute;
+  bottom: 0px;
+  left: 5px;
+  width: 100%;
+  text-align: left;
+}
+
 input,
 #myFile {
   margin: 1em 0 0 3%;
@@ -169,7 +199,7 @@ input,
 
 #header {
   font-family: "Shantell Sans", cursive;
-  font-size: 2.5em;
+  font-size: 3.5em;
   position: absolute;
   top: 10px;
   right: 5vw;
@@ -191,6 +221,7 @@ input,
   height: 2.5em;
   width: 2.5em;
   cursor: pointer;
+  color: var(--color-secondary-darker);
 
   //large display
   @media (min-width: $tablet) {
@@ -306,6 +337,6 @@ input,
 .logout_btn {
   border: none;
   color: black;
-  padding: 0.33em;
+  padding: 0.4em 0.5em;
   border-radius: 5px;
 }

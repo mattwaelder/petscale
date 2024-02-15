@@ -60,5 +60,11 @@ export default App;
 
 // NEW //
 
-//new background
+//i have some kind of bug where colorIndex gets bugged when i delete a pets data when pets with higher indexes exist....
+//maybe just make it so you can upload new pets only? :((((
+//best thing to do would be to swap to sql and put a petlist in user schema and link to pet data
+//in order to keep things on par w/ what they are now, id have to delete the data for that pet, and adjust all the color indeces for each pet w/ a higher index than the deleted pet. that would require a loop over all pets, deleting old pet data from the db, and adding all of it back. very costly....
+//swapping to sql wouldnt be too bad, if the site wasnt already deployed i'd have to update the live environment to work in a sql world instead and that sounds like hell :)
+//i should just disallow csv upload of existing pet names :(
+
 //ai assistant for questions regarding health? is that even ethical?

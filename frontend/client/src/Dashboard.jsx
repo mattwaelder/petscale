@@ -175,7 +175,9 @@ function Dashboard() {
             onClick={handleShow}
             // value={{ className: "react-icons-user" }}
           />
-          <label htmlFor="user_icon_btn">{userName}</label>
+          <label htmlFor="user_icon_btn" id="welcomeUser">
+            <p>Hey, {userName}</p>
+          </label>
 
           <Offcanvas id="off_canvas" show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
@@ -186,13 +188,14 @@ function Dashboard() {
             <Offcanvas.Body>
               <div className="offCanvasBody">
                 <div className="offCanvasChild">
-                  <p>Signed in as {`${userName}`}</p>
-                  <button
+                  <p id="signedInAs">Signed in as {`${userName}`}</p>
+                  <Button
                     className="dashboard__btn logout_btn"
+                    variant="secondary"
                     onClick={logout}
                   >
-                    Logout?
-                  </button>
+                    Log Out?
+                  </Button>
                 </div>
                 <div className="csv_btn_container offCanvasChild">
                   <BsFiletypeCsv className="csvIcon" />
@@ -210,7 +213,7 @@ function Dashboard() {
                     />
                   </div>
                 </div>
-                <div className="offCanvasChild">
+                <div className="offCanvasChild deleteDataBtn">
                   <DeleteModal
                     userName={userName}
                     petList={petList}
@@ -218,6 +221,9 @@ function Dashboard() {
                   />
                 </div>
               </div>
+              <small id="backgroundCitation">
+                Image by rawpixel.com on Freepik
+              </small>
             </Offcanvas.Body>
           </Offcanvas>
         </>
