@@ -86,17 +86,17 @@ function Dashboard() {
 
         //get unique pets and order by color index
         //could be optimized to be less than O(n) linear... break if pets.len > 5
-        let pets = [null, null, null, null, null];
-        res.data.forEach((pet, i) => {
-          if (pet.color && pet.color === 1) pets[0] = pet.name;
-          if (pet.color && pet.color === 2) pets[1] = pet.name;
-          if (pet.color && pet.color === 3) pets[2] = pet.name;
-          if (pet.color && pet.color === 4) pets[3] = pet.name;
-          if (pet.color && pet.color === 5) pets[4] = pet.name;
-        });
+        // let pets = [null, null, null, null, null];
+        // res.data.forEach((pet, i) => {
+        //   if (pet.color && pet.color === 1) pets[0] = pet.name;
+        //   if (pet.color && pet.color === 2) pets[1] = pet.name;
+        //   if (pet.color && pet.color === 3) pets[2] = pet.name;
+        //   if (pet.color && pet.color === 4) pets[3] = pet.name;
+        //   if (pet.color && pet.color === 5) pets[4] = pet.name;
+        // });
 
-        setPetList(pets);
-        setWeightData(res.data);
+        setPetList(res.data.ownerData[0].pets);
+        setWeightData(res.data.petData);
       })
       .catch((err) => console.log(err));
   }, [refreshPage, userName]);
@@ -110,8 +110,10 @@ function Dashboard() {
     let d5 = utils.getLineGraphValues(petList, weightData, isLbs, 4);
 
     let fullSet = [d1, d2, d3, d4, d5];
+    console.log(fullSet);
 
     //prune by pet count and format arr to be what chart.js expects
+
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
       .map((d, i) => {
@@ -135,7 +137,7 @@ function Dashboard() {
       });
 
     //update graph
-    setPetData(prunedData.filter((x) => x.label !== null));
+    setPetData(prunedData.filter((x) => x.label));
     //update list
     setDisplayedData(weightData);
   }, [weightData, isLbs]);
@@ -164,6 +166,8 @@ function Dashboard() {
     let tempData = weightData.filter((data, i) => data.name === selectedPet);
     setDisplayedData(tempData);
   };
+
+  console.log(petData);
 
   return (
     <div className="dashboard">
@@ -270,3 +274,15 @@ function Dashboard() {
   );
 }
 export default Dashboard;
+
+//when adding new pet
+//upsert owner object w/ pet list (array or string)
+
+//when deleting, make sure to filter the db arr or str to remove the pet, too
+
+//when deleting by id, if there are no more entries for that pet remove the pet from pet list???? (edge)
+
+//remove colorindex from petData entries
+
+//removing colorindex changes the schema... which will ened to be changed on live
+//hopefully atlas helps w/ this

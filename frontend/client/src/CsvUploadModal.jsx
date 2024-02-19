@@ -21,15 +21,15 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
   useEffect(() => {
     if (parsed.length < 1) return;
 
-    let colorIndex;
-    if (petList.includes(petName)) {
-      colorIndex = petList.indexOf(petName);
-    } else {
-      colorIndex = petCount + 1;
-    }
+    // let colorIndex;
+    // if (petList.includes(petName)) {
+    //   colorIndex = petList.indexOf(petName);
+    // } else {
+    //   colorIndex = petCount + 1;
+    // }
 
     please
-      .uploadCsv(userName, colorIndex, petName, parsed)
+      .uploadCsv(userName, petName, parsed)
       .then(() => refresh((val) => !val));
   }, [parsed]);
 

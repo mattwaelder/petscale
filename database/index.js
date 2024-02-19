@@ -23,12 +23,14 @@ const sessionSchema = new mongoose.Schema({
   created_at: Date,
 });
 
-// const userSchema = new mongoose.Schema({
-//   username: String,
-//   pets: Array,
-// });
+const userSchema = new mongoose.Schema({
+  owner: { type: String },
+  pets: [String],
+});
 
 const PetData = mongoose.model("PetData", sessionSchema);
+
+const PetOwner = mongoose.model("PetOwner", userSchema);
 
 db.then((db) => console.log(`Connected to: ${mongoURI}`)).catch((err) => {
   console.log(`There was a problem connecting to mongo at: ${mongoURI}`);
@@ -40,4 +42,5 @@ console.log(mongoose.connection.readyState);
 // db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // module.exports = db;
+module.exports.PetOwner = PetOwner;
 module.exports.PetData = PetData;

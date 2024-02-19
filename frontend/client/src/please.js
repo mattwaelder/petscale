@@ -21,14 +21,14 @@ export const please = {
     let weightInGrams =
       unit === "lbs" ? (Number(weight) * 453.592).toFixed(2) : Number(weight);
     //if there are no pets, set this to be color 1 in req
-    let colorIndex;
-    //set color index to be first un-occupied space in arr
-    for (let i = 0; i < pets.length; i++) {
-      if (!pets[i]) {
-        colorIndex = i + 1;
-        break;
-      }
-    }
+    // let colorIndex;
+    // //set color index to be first un-occupied space in arr
+    // for (let i = 0; i < pets.length; i++) {
+    //   if (!pets[i]) {
+    //     colorIndex = i + 1;
+    //     break;
+    //   }
+    // }
 
     let pkg = {
       // owner: user.slice(" "),
@@ -36,7 +36,7 @@ export const please = {
       name: name,
       weight: weightInGrams,
       unit: unit,
-      color: colorIndex || 1,
+      // color: colorIndex || 1,
       created_at: newDate,
     };
     console.log("please post new pet:", name);
@@ -52,20 +52,14 @@ export const please = {
       name: name,
       weight: weightInGrams,
       unit: unit,
-      color: colorIndex + 1,
+      // color: colorIndex + 1,
       created_at: utils.getFormattedDateDB(date),
     };
     console.log("please create data for pet:", name);
     return axios.post(`${utils.API}/users/?user=${user}`, pkg);
   },
 
-  // createCsvByPet: (petName, data) => {
-  //   console.log("please create csv file for pet:", petName, data);
-  //   let pkg = { petName: petName, data: data };
-  //   return axios.post(`${utils.API}/csv`, pkg);
-  // },
-
-  uploadCsv: (user, colorIndex, petName, data) => {
+  uploadCsv: (user, petName, data) => {
     console.log("please upload file for ", petName);
     let pkg = [];
 
@@ -75,7 +69,7 @@ export const please = {
       let dataPoint = {
         owner: user,
         name: petName,
-        color: colorIndex,
+        // color: colorIndex,
         weight: weight,
         unit: "g",
         created_at: date,
@@ -89,8 +83,11 @@ export const please = {
   },
 
   deleteById: (user, delEntry, refresh) => {
+    console.log(delEntry.owner, delEntry.name);
     axios
-      .delete(`${utils.API}/entries/?entry=${delEntry._id}`)
+      .delete(`${utils.API}/entries/?entry=${delEntry._id}`, {
+        params: delEntry,
+      })
       .then(() => please.fetchDataByUser(user))
       .then(() => refresh((val) => !val))
       .catch((err) => console.log(err));
