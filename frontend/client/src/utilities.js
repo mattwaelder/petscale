@@ -102,8 +102,6 @@ const utils = {
       .filter((x) => x)
       .reverse();
 
-    console.log(dataGrams);
-
     return isLbs ? dataLbs : dataGrams;
   },
   //color value obj for graph (0 matches with 5, 1 with 6)

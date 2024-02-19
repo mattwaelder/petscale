@@ -18,9 +18,11 @@ const DataList = ({
 }) => {
   const handleDel = () => {
     // let id = e.target.closest(".trash").id;
-    console.log(delEntry._id);
 
-    please.deleteById(user, delEntry, refresh);
+    let isLastEntry =
+      data.filter((d) => d.name === delEntry.name).length === 1 ? true : false;
+
+    please.deleteById(user, delEntry, refresh, isLastEntry);
   };
 
   //obj of selected list item for deletion (used in modal)

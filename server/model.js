@@ -9,23 +9,6 @@ module.exports.getAllByUser = (req) => {
     PetOwner.findOneAndUpdate({ owner: req }, { owner: req }, { upsert: true });
   }
 
-  // let getOwnerData = () => {
-  //   return PetOwner.find({ owner: req });
-  // };
-  // let getPetData = () => {
-  //   return PetData.find({ owner: req }).sort({ created_at: -1 });
-  // };
-
-  // let DATA_owner = getOwnerData();
-  // let DATA_pet = getPetData();
-
-  // let promiseArr = [DATA_owner, DATA_pet];
-
-  // Promise.all(promiseArr).then((val) => console.log(val, ";;;;;;;;;;;"));
-
-  //add pets list to the output object and return it
-
-  // Promise.all([dataPets, dataOwner]);
   return PetData.find({ owner: req }).sort({ created_at: -1 });
 };
 
@@ -48,15 +31,6 @@ module.exports.create = (req) => {
 
 module.exports.createPet = (req) => {
   console.log("m create pet", req);
-  //add pet to owner collection
-  // PetOwner.findOneAndUpdate(
-  //   {
-  //     owner: req.owner,
-  //   },
-  //   { owner: req.owner },
-  //   { $push: { pets: req.name } },
-  //   { upsert: true }
-  // );
 
   //add data to data collection
   return PetData.create({
@@ -69,9 +43,7 @@ module.exports.createPet = (req) => {
 };
 
 module.exports.updateUser = (req) => {
-  console.log("//////// CREATE OWNER THINGY", req.currUser, req.currPet);
-
-  //user is new collection like:
+  console.log("update owner collection");
   //{owner: '', pets: []}
   return PetOwner.findOneAndUpdate(
     { owner: req.currUser },
@@ -90,11 +62,17 @@ module.exports.deleteById = (req) => {
   return PetData.deleteOne({ _id: req });
 };
 
-module.exports.removePetFromOwner = (req) => {
-  console.log("removing final pet from owner", req.query.owner, req.query.name);
+module.exports.removePetFromOwner = ({ currOwner, currPet }) => {
+  console.log("removing final pet from owner", currOwner, currPet);
+  return PetOwner.updateOne({ owner: currOwner }, { $pull: { pets: currPet } });
+};
+
+module.exports.removeAllPetsFromOwner = (owner) => {
+  console.log("remove all pets from owner ", owner);
   return PetOwner.updateOne(
-    { owner: req.query.owner },
-    { $pull: { pets: req.query.name } }
+    { owner: owner },
+    { $set: { pets: [] } },
+    { multi: true }
   );
 };
 

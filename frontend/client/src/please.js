@@ -82,11 +82,10 @@ export const please = {
     // .then(() => please.fetchDataByUser(user));
   },
 
-  deleteById: (user, delEntry, refresh) => {
-    console.log(delEntry.owner, delEntry.name);
+  deleteById: (user, delEntry, refresh, isLastEntry) => {
     axios
       .delete(`${utils.API}/entries/?entry=${delEntry._id}`, {
-        params: delEntry,
+        params: { ...delEntry, isLastEntry },
       })
       .then(() => please.fetchDataByUser(user))
       .then(() => refresh((val) => !val))

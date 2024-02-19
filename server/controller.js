@@ -19,18 +19,13 @@ module.exports.uploadCsv = (req, res) => {
   model
     .uploadCsv(req)
     .then(() => {
-      model.updateUser(currUser, currPet);
+      return model.updateUser({ currUser, currPet });
     })
     .then(() => res.sendStatus(201))
     .catch((err) => {
       res.sendStatus(500);
       console.log(err);
     });
-
-  let pkg = {};
-  pkg.owner = req.body.owner;
-  pkg.name = req.body.name;
-  pkg.color = req.body.color;
 };
 
 module.exports.getByUser = (req, res) => {
@@ -46,9 +41,7 @@ module.exports.getByUser = (req, res) => {
       // res.send(data);
       response.petData = data;
     })
-    .then((currUser) => {
-      return model.getOwnerInfo(req);
-    })
+    .then((currUser) => model.getOwnerInfo(req))
     .then((data) => {
       response.ownerData = data;
     })
@@ -79,10 +72,19 @@ module.exports.postPetByUser = (req, res) => {
 };
 
 module.exports.deleteById = (req, res) => {
-  console.log("c del", req.query.name);
+  console.log("c del", req.query);
+  let isLastEntry = req.query.isLastEntry === "true";
   model
     .deleteById(req.query.entry)
-    .then(() => model.removePetFromOwner(req))
+    .then(() => {
+      if (isLastEntry) {
+        console.log("final entry, remove pet from owner");
+        return model.removePetFromOwner({
+          currOwner: req.query.owner,
+          currPet: req.query.name,
+        });
+      }
+    })
     .then(() => res.sendStatus(200))
     .catch((err) => {
       res.sendStatus(500);
@@ -94,10 +96,15 @@ module.exports.deleteByPet = (req, res) => {
   console.log("c del by pet");
   console.log(req.body);
 
+  let currOwner = req.body.owner;
+  let currPet = req.body.name;
+
   //if wiping all pet data for the user
+
   if (req.body.isFullWipe) {
     model
       .deleteByUser(req)
+      .then(() => model.removeAllPetsFromOwner(currOwner))
       .then(() => res.sendStatus(200))
       .catch((err) => {
         res.sendStatus(500);
@@ -107,6 +114,9 @@ module.exports.deleteByPet = (req, res) => {
     //if wiping only the data for a single pet
     model
       .deleteByPet(req)
+      .then(() =>
+        model.removePetFromOwner({ currOwner: currOwner, currPet: currPet })
+      )
       .then(() => res.sendStatus(200))
       .catch((err) => {
         res.sendStatus(500);
