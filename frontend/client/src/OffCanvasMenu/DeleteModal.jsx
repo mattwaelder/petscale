@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import utils from "./utilities.js";
 
 import ConfirmDelete from "./ConfirmDeleteModal.jsx";
 
@@ -15,6 +14,7 @@ function DeleteModal({ userName, petList, refresh }) {
   };
   const handleShow = () => setShow(true);
 
+  //pet to delete, or "all"
   const handleChange = (e) => {
     setSelectedPet(e.target.value);
   };
@@ -59,7 +59,6 @@ function DeleteModal({ userName, petList, refresh }) {
             )}
             <option value="all">All Data</option>
           </select>
-          {/* {showWarning && <div className="warningModal"></div>} */}
         </Modal.Body>
         <Modal.Footer className="justify-content-between">
           <Button variant="secondary" onClick={handleClose}>

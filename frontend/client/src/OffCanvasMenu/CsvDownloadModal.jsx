@@ -1,18 +1,22 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import utils from "./utilities.js";
+import utils from "../utilities.js";
 
 function CsvDownloadModal({ petList, petData, refresh }) {
+  //modal states
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const [selectedPet, setSelectedPet] = useState("");
 
+  //hanlde pet selection
   const handleChange = (e) => {
     setSelectedPet(e.target.value);
   };
 
+  //create & dl csv, reset
   const handleSubmit = (selectedPet, petData) => {
     utils.createCsvByPet(selectedPet, petData);
     setSelectedPet("");

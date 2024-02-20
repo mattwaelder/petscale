@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { please } from "./please.js";
-import utils from "./utilities.js";
+import { please } from "../please.js";
+import utils from "../utilities.js";
 
 function CsvUploadModal({ userName, petList, petCount, refresh }) {
   const [show, setShow] = useState(false);
@@ -18,40 +18,46 @@ function CsvUploadModal({ userName, petList, petCount, refresh }) {
 
   ///////////////////
 
+  //effect call sends csv to server
   useEffect(() => {
+    //if no info in csv, return
     if (parsed.length < 1) return;
+    //init new pet bool
+    let isNewPet = true;
 
-    // let colorIndex;
-    // if (petList.includes(petName)) {
-    //   colorIndex = petList.indexOf(petName);
-    // } else {
-    //   colorIndex = petCount + 1;
-    // }
+    //if the csv pet matches an existing pet, update new pet bool
+    if (petList.includes(petName)) {
+      isNewPet = false;
+    }
 
+    //send csv data to server
     please
-      .uploadCsv(userName, petName, parsed)
+      .uploadCsv(userName, petName, parsed, isNewPet)
       .then(() => refresh((val) => !val));
   }, [parsed]);
 
+  //handle when file updates
   const handleChange = (e) => {
     let file = e.target.files[0];
-
     const formData = new FormData();
     formData.append("file", file);
 
     setCsv(file);
   };
 
+  //input of pet name
   const handleNameUpdate = (e) => {
     setPetName(e.target.value);
   };
 
+  //helper function which returns bool
   const nameValidation = (name) => {
     let nameArr = name.split("");
     const invalid = ["\\", "/", "<", ">", "`", "%", "$", "."];
     return nameArr.some((char) => invalid.includes(char));
   };
 
+  //submit csv
   const handleSubmit = (e) => {
     e.preventDefault();
 

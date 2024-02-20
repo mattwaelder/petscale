@@ -6,9 +6,9 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/Button";
 import DataInput from "./DataInput";
 import DataList from "./DataList";
-import CsvDownloadModal from "./CsvDownloadModal";
-import CsvUploadModal from "./CsvUploadModal";
-import DeleteModal from "./DeleteModal";
+import CsvDownloadModal from "./OffCanvasMenu/CsvDownloadModal";
+import CsvUploadModal from "./OffCanvasMenu/CsvUploadModal";
+import DeleteModal from "./OffCanvasMenu/DeleteModal";
 import UnitToggle from "./UnitToggle";
 import axios from "axios";
 import utils from "./utilities.js";
@@ -82,19 +82,6 @@ function Dashboard() {
     please
       .fetchDataByUser(userName)
       .then((res) => {
-        // let pets = [...new Set(res.data.map((el) => el.name))];
-
-        //get unique pets and order by color index
-        //could be optimized to be less than O(n) linear... break if pets.len > 5
-        // let pets = [null, null, null, null, null];
-        // res.data.forEach((pet, i) => {
-        //   if (pet.color && pet.color === 1) pets[0] = pet.name;
-        //   if (pet.color && pet.color === 2) pets[1] = pet.name;
-        //   if (pet.color && pet.color === 3) pets[2] = pet.name;
-        //   if (pet.color && pet.color === 4) pets[3] = pet.name;
-        //   if (pet.color && pet.color === 5) pets[4] = pet.name;
-        // });
-
         setWeightData(res.data.petData);
         if (res.data.ownerData[0]?.pets.length) {
           setPetList(res.data.ownerData[0].pets);
@@ -114,7 +101,6 @@ function Dashboard() {
     let fullSet = [d1, d2, d3, d4, d5];
 
     //prune by pet count and format arr to be what chart.js expects
-
     let prunedData = fullSet
       .map((d) => (d.length > 0 ? d : null))
       .map((d, i) => {
@@ -173,11 +159,7 @@ function Dashboard() {
       <h5 id="header">PetScale</h5>
       <div className="dashboard__container dashboard__login_container">
         <>
-          <FaBars
-            id="user_icon_btn"
-            onClick={handleShow}
-            // value={{ className: "react-icons-user" }}
-          />
+          <FaBars id="user_icon_btn" onClick={handleShow} />
           <label htmlFor="user_icon_btn" id="welcomeUser">
             <p>Hey, {userName}</p>
           </label>
@@ -273,3 +255,5 @@ function Dashboard() {
   );
 }
 export default Dashboard;
+
+//dont forget to make the website app friendly by adding icon and name for installing on android

@@ -13,13 +13,13 @@ module.exports.uploadCsv = (req, res) => {
   console.log("c csv upload ");
   let currUser = req.body[0].owner;
   let currPet = req.body[0].name;
-
-  console.log(req.body);
+  let isNewPet = req.body.pop();
 
   model
     .uploadCsv(req)
     .then(() => {
-      return model.updateUser({ currUser, currPet });
+      //if pet is new, add it to owner petlist
+      if (isNewPet) return model.updateUser({ currUser, currPet });
     })
     .then(() => res.sendStatus(201))
     .catch((err) => {
