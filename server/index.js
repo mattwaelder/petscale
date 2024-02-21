@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const multer = require("multer");
 const path = require("path");
 const controller = require("./controller");
 
@@ -13,9 +12,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-// Require the upload middleware
-// const upload = require("./upload");
-
 //////////////////////////////////////////////
 
 app.get("/users", (req, res) => {
@@ -23,19 +19,8 @@ app.get("/users", (req, res) => {
   controller.getByUser(req.query.user, res);
 });
 
-// app.post("/csv", (req, res) => {
-//   // console.log("csv", req);
-//   controller.createCsv(req, res);
-// });
-
 app.post("/upload", (req, res) => {
   console.log("post from csv");
-  // console.log(req.body);
-
-  // let body = req.body;
-  // body.data = JSON.parse(req.body.data);
-  // console.log(body);
-
   controller.uploadCsv(req, res);
 });
 
