@@ -255,5 +255,3 @@ function Dashboard() {
   );
 }
 export default Dashboard;
-
-//dont forget to make the website app friendly by adding icon and name for installing on android

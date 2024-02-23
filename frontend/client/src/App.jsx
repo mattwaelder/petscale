@@ -56,19 +56,6 @@ export default App;
 
 // NEW //
 
-//i have some kind of bug where colorIndex gets bugged when i delete a pets data when pets with higher indexes exist....
-//maybe just make it so you can upload new pets only? :((((
-//best thing to do would be to swap to sql and put a petlist in user schema and link to pet data
-//in order to keep things on par w/ what they are now, id have to delete the data for that pet, and adjust all the color indeces for each pet w/ a higher index than the deleted pet. that would require a loop over all pets, deleting old pet data from the db, and adding all of it back. very costly....
-//swapping to sql wouldnt be too bad, if the site wasnt already deployed i'd have to update the live environment to work in a sql world instead and that sounds like hell :)
-//i should just disallow csv upload of existing pet names :(
-
-//deleting pets is still an issue, though, and must be resolved...
-//deleting needs to be more involved. maybe i can make a schema for a user and add a list of pets to that user. ive tried this in the past, but abanoned it
-
-//MAKE NEW COLLECTION FOR PET OWNER WITH 1 TO N RELATIONSHIP W/ PETDATA
-//petOwner.insertOne({username:"mattwaelder",petList:"1,2,3"})
-//petList can either be a csv string or a proper list,whatever is easier.
-//how much of this can be done withing ATLAS?
+//when new user, dom is alerted that there was an error getting data (add additional conditions to this alert or get rid of it).
 
 //ai assistant for questions regarding health? is that even ethical?
