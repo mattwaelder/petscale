@@ -3,7 +3,11 @@ An application for visualizing and tracking the weight of your pets over time.
 
 * Live site available at: https://petscale.xyz
 
-<img width="600" alt="petscale" src="https://github.com/mattwaelder/petscale/assets/74801942/859eae17-3396-4937-8818-d5905a490d37">
+<img width="200" alt="Screenshot 2024-02-23 at 12 02 36 AM" src="https://github.com/mattwaelder/petscale/assets/74801942/2fb2c302-c8ac-445a-99d3-f380c4254169">
+
+<img width="800" alt="Screenshot 2024-02-23 at 12 00 54 AM" src="https://github.com/mattwaelder/petscale/assets/74801942/4e3e4ed5-b681-42a2-ba2a-77ddc5429168">
+
+
 
 ## Background
 
@@ -20,13 +24,15 @@ This project was originally an MVP (minimum viable project) I created during my 
     - Database security concerns drove me to remove the database from the AWS instance and move it to a MongoDB Atlas hosted database. Moving the db to a 3rd party was a good move for security and potential scaling
     - Rewriting the CSS to allow for a good user experience on mobile.
     - The above rewrite illuminated flaws in my css, and so multiple components needed to have their flex-based styling replaced with grid styling.
+    - Implementing the ability to download data from the application in the form of a CSV file (which lead to adding data via CSV as well).
+    - While implementing these CSV features I found a bug that prevented me from cleanly downloading data, this required a moderate rewrite to my database well after the fact, which is always something to avoid... Thankfully it went relatively well thanks to sepperation of labor in the backend. I solved my problem by adding a new collection which housed information based on the user and not the pet. This also opens up the door for future preference settings if I like.
 
 ## How does the app work?
 
   * Behind the scenes:
     
     - Authentication is handled through Firebase, with user data being stored by Googles Firebase and mostly obscured to me (this is great for security).
-    - After auth, a request is made by the express server to the database which returns all the data for that user.
+    - After auth, a request is made by the express server to the database which returns all the necessary data for that user.
     - The response from the server provides data which is manipulated and stored in React states which govern the components on the DOM.
     - Nginx is used to direct traffic to the domain either to the React frontend or the Express server.
       
